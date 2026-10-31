@@ -19,11 +19,11 @@ The power of AeroSpace, with native dwindle splits, integrated window borders, a
 
 ---
 
-## Sagrada 0.3.0
+## Sagrada 0.3.1
 
-**[Download Sagrada 0.3.0](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.0/Sagrada-v0.3.0.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.3.0) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.0/Sagrada-v0.3.0.zip.sha256)
+**[Download Sagrada 0.3.1](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.1/Sagrada-v0.3.1.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.3.1) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.1/Sagrada-v0.3.1.zip.sha256)
 
-One universal download for **Apple Silicon and Intel**, with native Dwindle splits, bundled **JankyBorders 1.9.0**, and **Caffeinate** controls. Version 0.3.0 gives Caffeinate the same native selection indicator as Appearance and English menu items: **Off**, **Keep Awake**, and **Keep Screen Awake**.
+One universal download for **Apple Silicon and Intel**, with native Dwindle splits, bundled **JankyBorders 1.9.0**, and **Caffeinate** controls. Version 0.3.1 brings **Omarchy-style window swaps**, **follow-window workspace shortcuts**, and a complete keybinding reference with Omarchy equivalents.
 
 ## Your next window, already in place
 
@@ -65,6 +65,8 @@ With a horizontal root and each newly opened window focused, the layout grows li
 **Focus decides where the next split happens.** Return to window 1 before opening another window, and that tile splits instead. The first pair follows the workspace orientation; subsequent splits alternate vertically and horizontally.
 
 Dwindle is an **insertion policy, not a forced reflow**. Manually edited layouts remain yours. Floating windows and accordion containers keep their existing behavior.
+
+**Omarchy-style rearranging:** `⌘ ⇧` + arrow keys swaps the focused window with a neighboring tile, keeping the split tree and tile sizes intact. This mirrors Omarchy's `SUPER SHIFT` + arrows (`swapwindow`), with Cmd replacing SUPER. AeroSpace's `move` command instead edits the tree and can turn two columns into three; it remains available through the CLI.
 
 ## Get started
 
@@ -135,6 +137,25 @@ cp docs/config-examples/default-config.toml "$HOME/.sagrada.toml"
 
 Choose **Reload config** from the Sagrada menu.
 
+**Existing configs:** to adopt only Omarchy-style rearranging, replace the four `cmd-shift-<arrow> = 'move <direction>'` bindings in your config with:
+
+```toml
+# Inside [mode.main.binding]
+cmd-shift-left = 'swap left'
+cmd-shift-down = 'swap down'
+cmd-shift-up = 'swap up'
+cmd-shift-right = 'swap right'
+```
+
+For `⌘ ⇧` + `1`–`9` to follow the window to its destination as in Omarchy, add `--focus-follows-window` to each numbered binding, for example:
+
+```toml
+cmd-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+# Repeat for 2–9 with the corresponding workspace number.
+```
+
+Then reload the config. No app rebuild is needed for these binding changes; the commands are already supported.
+
 When using the downloaded release instead of a source checkout, substitute `config/workspace-layout.sh` and `config/default-config.toml` for the two source paths above.
 
 - **Workspace floating:** the helper provides the workspace-wide floating toggle and stores state in `~/.local/state/aerospace/workspace-layout`. It needs this fork’s CLI on `PATH`. Remove its callback and shortcut if you do not use it.
@@ -144,20 +165,71 @@ When using the downloaded release instead of a source checkout, substitute `conf
 
 ## At your fingertips
 
-These shortcuts belong to the **bundled config**, not upstream defaults.
+All active shortcuts in the [bundled config](docs/config-examples/default-config.toml) are listed below, including service mode. Your own config may differ; installing or updating Sagrada does not overwrite it.
 
-| Shortcut | Action |
-| :--- | :--- |
-| `⌘` + arrow keys | Focus a window |
-| `⌘ ⇧` + arrow keys | Move a window |
-| `⌘` + `1`–`9` | Switch workspace |
-| `⌘ ⇧` + `1`–`9` | Move a window to a workspace |
-| `⌥ Tab` | Return to the previous workspace |
-| `⌥ ⇧ Tab` | Move the workspace to the next monitor |
-| `⌘ ⇧ -` / `⌘ ⇧ =` | Shrink / grow a tile |
-| `⌘ ⌥ F` | Toggle the focused window between floating and tiling |
-| `⌘ ⌥ ⇧ F` | Toggle floating for the workspace (helper required) |
-| `⌘ Return` | Open Ghostty (must be installed) |
+**Notation:** `⌘` = Cmd, `⌥` = Option/Alt, `⇧` = Shift, `⌃` = Control. Omarchy's `SUPER` is typically the Windows/Linux-logo key. Directions and number ranges represent each individual key. Punctuation names refer to the configured keys (`slash`, `comma`, `minus`, `equal`, `semicolon`), not necessarily the printed character on every keyboard layout.
+
+**Comparison baseline:** [Omarchy v3.0.0 tiling bindings](https://github.com/omacom/omarchy/blob/v3.0.0/default/hypr/bindings/tiling.conf), [application bindings](https://github.com/omacom/omarchy/blob/v3.0.0/config/hypr/bindings.conf), and [media bindings](https://github.com/omacom/omarchy/blob/v3.0.0/default/hypr/bindings/media.conf). Omarchy defaults can change between versions. “Similar” means a related action, not identical behavior; “—” means no direct default equivalent in that baseline. These are comparisons, not additional bindings installed by Sagrada.
+
+### Focus, workspaces, and window placement
+
+| Sagrada shortcut | Action | Omarchy equivalent |
+| :--- | :--- | :--- |
+| `⌘` + `←` / `↓` / `↑` / `→` | Focus a window in that direction | `SUPER` + corresponding arrow |
+| `⌘ ⇧` + `←` / `↓` / `↑` / `→` | Swap with a neighboring tile; preserve splits and sizes | `SUPER SHIFT` + corresponding arrow (`swapwindow`) |
+| `⌘` + `1`–`9` | Switch to workspace 1–9 | `SUPER` + `1`–`9` |
+| `⌘ ⇧` + `1`–`9` | Move the window to workspace 1–9 and follow it | `SUPER SHIFT` + `1`–`9` (`movetoworkspace`) |
+| `⌥ Tab` | Return to the previously focused workspace | `SUPER CTRL Tab`; Omarchy's `ALT Tab` cycles windows instead |
+| `⌥ ⇧ Tab` | Move the current workspace to the next monitor, wrapping around | — |
+| `⌘ ⇧ -` | Shrink a tile by 50 points on its smart axis | Similar: `SUPER -` shrinks horizontally; `SUPER SHIFT -` shrinks vertically, in 100-pixel steps |
+| `⌘ ⇧ =` | Grow a tile by 50 points on its smart axis | Similar: `SUPER =` grows horizontally; `SUPER SHIFT =` grows vertically, in 100-pixel steps |
+
+### Layout controls
+
+| Sagrada shortcut | Action | Omarchy equivalent |
+| :--- | :--- | :--- |
+| `⌘ ⇧ /` | Select tiles layout; cycle horizontal/vertical orientation | Similar: `SUPER J` toggles the Dwindle split direction; not a tiles/accordion selector |
+| `⌘ ⇧ ,` | Select accordion layout; cycle horizontal/vertical orientation | — (no direct accordion equivalent) |
+| `⌘ ⌥ F` | Toggle the focused window between floating and tiling | `SUPER V` |
+| `⌘ ⌥ ⇧ F` | Toggle floating for the entire workspace | —; Sagrada requires the [workspace-layout helper](script/workspace-layout.sh) |
+| `⌘ ⌃ ←` / `⌘ ⌃ →` | Join the focused window with the nearest node on that side under a common split container | — (not the same as Hyprland window groups) |
+| `⌘ ⇧ ;` | Enter service mode (see below) | — |
+
+### Application launchers
+
+Apps must be installed. Omarchy equivalents below match the **purpose**, not necessarily the application or launch/focus behavior.
+
+| Sagrada shortcut | Opens | Omarchy equivalent |
+| :--- | :--- | :--- |
+| `⌘ Return` | A new Ghostty instance | `SUPER Return` — configured terminal |
+| `⌘ ⇧ F` | Finder | `SUPER F` — file manager (Nautilus) |
+| `⌘ ⇧ C` | Visual Studio Code | `SUPER N` — configured editor |
+| `⌘ ⇧ M` | Mail | `SUPER E` — email (HEY web app) |
+| `⌘ ⇧ K` | Calendar | `SUPER C` — calendar (HEY web app) |
+| `⌘ ⇧ W` | Microsoft Word | — |
+| `⌘ ⇧ B` | Zen | `SUPER B` — configured browser; Omarchy's `SUPER SHIFT B` opens a **private** browser window |
+| `⌘ ⇧ O` | Obsidian | `SUPER O` — launch or focus Obsidian |
+| `⌘ ⇧ P` | Strongbox | `SUPER /` — password manager (1Password) |
+
+### Service mode
+
+First press `⌘ ⇧ ;`, then use one of these bindings. All actions below return to main mode **except** plain `↑` and `↓`, which keep service mode active. Main-mode bindings do not apply while in service mode.
+
+| Key in service mode | Action | Omarchy equivalent |
+| :--- | :--- | :--- |
+| `Esc` | Reload configuration and return to main mode | No matching binding; Hyprland normally reloads its config automatically |
+| `R` | Flatten the workspace tree and return to main mode | — |
+| `F` | Toggle the focused window between floating and tiling; return to main mode | `SUPER V` (no service mode required) |
+| `Backspace` | Close all windows on the current workspace except the focused one; return to main mode | —; Omarchy's `CTRL ALT Delete` closes **all** windows, not “all but current” |
+| `⌘ ⇧ H` | Join with the node to the left; return to main mode | — |
+| `⌘ ⇧ J` | Join with the node below; return to main mode | — |
+| `⌘ ⇧ K` | Join with the node above; return to main mode | — |
+| `⌘ ⇧ L` | Join with the node to the right; return to main mode | — |
+| `↓` | Lower volume; remain in service mode | Volume-down media key (no service mode required) |
+| `↑` | Raise volume; remain in service mode | Volume-up media key (no service mode required) |
+| `⇧ ↓` | Set volume to zero and return to main mode | Similar: mute media key **toggles mute** rather than setting volume to zero |
+
+`⌘ Backspace` is deliberately **not bound**, leaving Finder's Move to Trash shortcut free. The commented-out sticky binding is not active or supported.
 
 Find the full command surface in the [AeroSpace command reference](https://nikitabobko.github.io/AeroSpace/commands).
 

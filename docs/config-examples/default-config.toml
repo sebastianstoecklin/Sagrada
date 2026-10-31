@@ -136,11 +136,13 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     cmd-ctrl-left ='join-with left'
     cmd-ctrl-right ='join-with right'
 
-    # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    cmd-shift-left = 'move left'
-    cmd-shift-down = 'move down'
-    cmd-shift-up = 'move up'
-    cmd-shift-right = 'move right'
+    # Omarchy's SUPER SHIFT + arrows uses swapwindow; Cmd replaces SUPER here.
+    # Swap tiles without pulling windows out of Dwindle splits or adding columns.
+    # The tree-editing `move` command remains available through the CLI.
+    cmd-shift-left = 'swap left'
+    cmd-shift-down = 'swap down'
+    cmd-shift-up = 'swap up'
+    cmd-shift-right = 'swap right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
     cmd-shift-minus = 'resize smart -50'
@@ -158,15 +160,16 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     cmd-9 = 'workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-    cmd-shift-1 = 'move-node-to-workspace 1'
-    cmd-shift-2 = 'move-node-to-workspace 2'
-    cmd-shift-3 = 'move-node-to-workspace 3'
-    cmd-shift-4 = 'move-node-to-workspace 4'
-    cmd-shift-5 = 'move-node-to-workspace 5'
-    cmd-shift-6 = 'move-node-to-workspace 6'
-    cmd-shift-7 = 'move-node-to-workspace 7'
-    cmd-shift-8 = 'move-node-to-workspace 8'
-    cmd-shift-9 = 'move-node-to-workspace 9'
+    # Follow the window to its destination, matching Omarchy's movetoworkspace.
+    cmd-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+    cmd-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+    cmd-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+    cmd-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+    cmd-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+    cmd-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+    cmd-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+    cmd-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+    cmd-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'

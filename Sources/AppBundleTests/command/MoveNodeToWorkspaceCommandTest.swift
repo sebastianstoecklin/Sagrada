@@ -132,6 +132,24 @@ final class MoveNodeToWorkspaceCommandTest: XCTestCase {
         assertTrue(workspaceA.isEffectivelyEmpty)
     }
 
+    func testBundledNumberBindingsFollowWindow() async throws {
+        let toml = try String(contentsOf: projectRoot.appending(component: "docs/config-examples/default-config.toml"), encoding: .utf8)
+        let result = parseConfig(toml)
+        assertEquals(result.errors, [])
+        config = result.config
+        let window = TestWindow.new(id: 1, parent: Workspace.get(byName: "a").rootTilingContainer)
+        assertTrue(window.focusWindow())
+
+        for number in 1...9 {
+            let command = "trigger-binding cmd-shift-\(number) --mode main"
+            let result = await parseCommand(command).cmdOrDie.run(.defaultEnv, .emptyStdin)
+            assertEquals(result.exitCode.rawValue, 0)
+            assertEquals(focus.workspace.name, String(number))
+            assertEquals(focus.windowOrNil?.windowId, 1)
+            assertEquals(window.nodeWorkspace?.name, String(number))
+        }
+    }
+
     func testRelativeNext() async {
         Workspace.get(byName: "a").rootTilingContainer.apply {
             _ = TestWindow.new(id: 1, parent: $0).focusWindow()
