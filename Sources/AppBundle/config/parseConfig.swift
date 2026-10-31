@@ -155,6 +155,7 @@ private let configParser: [String: any ParserProtocol<Config>] = [
     modeConfigRootKey: Parser(\.modes, skipParsing(Config().modes)), // Parsed manually
 
     "borders": Parser(\.borders, parseBorders),
+    "scroll-reverser": Parser(\.scrollReverser, parseScrollReverser),
     "gaps": Parser(\.gaps, parseGaps),
     "focus-follows-mouse": Parser(\.focusFollowsMouse, parseFocusFollowsMouse),
     "workspace-to-monitor-force-assignment": Parser(\.workspaceToMonitorForceAssignment, parseWorkspaceToMonitorAssignment),

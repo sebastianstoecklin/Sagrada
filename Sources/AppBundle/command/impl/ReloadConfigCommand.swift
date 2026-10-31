@@ -58,6 +58,7 @@ struct ReloadConfigResult {
         syncFocusFollowsMouse(config)
         syncConfigFileWatcher()
         DesktopHelpers.shared.syncBorders(config.borders)
+        ScrollReverser.shared.apply(config.scrollReverser)
     }
 
     if warningsAsErrors {

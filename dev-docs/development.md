@@ -10,7 +10,34 @@ use the retained upstream configuration and disable Dwindle explicitly.
 
 The bundled default is the personal configuration described in the repository
 README. Tests must not run its external startup commands or depend on local apps.
-No build step installs or overwrites `~/.aerospace.toml`.
+No build step installs or overwrites user configuration files.
+
+## Scroll Reverser (0.4.0)
+
+`ScrollReverserConfig` parses the opt-in `[scroll-reverser]` table. A successful
+config reload applies it to `ScrollReverser.shared`; menu overrides last until
+reload/restart. The session event tap subscribes only to scroll-wheel events and
+runs on the main run loop. Disabling it, turning off both axes, or terminating the
+app removes the source and invalidates the tap. A timeout re-enables the tap;
+macOS user-input disablement surfaces a retry action instead.
+
+`reverseDiscreteScroll` changes the line, fixed-point, and point deltas for the
+selected axes. Read all representations before writing: CoreGraphics setters can
+update related fields. Continuous events, gesture phases, and momentum events
+pass through. This is event classification, not reliable physical-device
+identification: smooth mouse drivers may be excluded, and touch input converted
+to discrete wheel events cannot be distinguished.
+
+`ScrollReverserTest` covers parsing/defaults, both axes, disabled behavior,
+gesture passthrough, metadata preservation, and lifecycle without installing a
+global filter. The full suite has 415 tests. Real-device validation still needs
+a classic wheel mouse, trackpad, and (where available) Magic Mouse. Check both
+Natural Scrolling settings, both axes, enable/disable, config reload, restart,
+and permission denial/retry. Do not run another scroll reverser concurrently.
+Permission requests must remain tied to explicit user interaction; unit tests
+must never request TCC access or install an event tap.
+
+## Toolchain and testing
 
 On macOS 27 beta Command Line Tools, SwiftUI may fail to find `SwiftUIMacros`.
 Prefer a fully configured Xcode toolchain with its license accepted. For an app/CLI
@@ -22,8 +49,8 @@ swift build -Xswiftc -load-plugin-library -Xswiftc /Applications/Xcode.app/Conte
 
 Command Line Tools alone also omit XCTest; use full Xcode for the standard test
 commands. On the current beta setup, the following workaround built the tests;
-invoking `xctest` directly ran all 393 XCTest cases successfully (the SwiftPM
-runner otherwise reported zero tests):
+invoking `xctest` directly runs the XCTest suite (the SwiftPM runner otherwise
+reports zero tests):
 
 ```sh
 platform=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer

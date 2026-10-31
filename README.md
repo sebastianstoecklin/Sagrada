@@ -19,11 +19,11 @@ The power of AeroSpace, with native dwindle splits, integrated window borders, a
 
 ---
 
-## Sagrada 0.3.1
+## Sagrada 0.4.0
 
-**[Download Sagrada 0.3.1](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.1/Sagrada-v0.3.1.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.3.1) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.1/Sagrada-v0.3.1.zip.sha256)
+**[Download Sagrada 0.4.0](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.4.0/Sagrada-v0.4.0.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.4.0) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.4.0/Sagrada-v0.4.0.zip.sha256)
 
-One universal download for **Apple Silicon and Intel**, with native Dwindle splits, bundled **JankyBorders 1.9.0**, and **Caffeinate** controls. Version 0.3.1 brings **Omarchy-style window swaps**, **follow-window workspace shortcuts**, and a complete keybinding reference with Omarchy equivalents.
+One universal download for **Apple Silicon and Intel**, with native Dwindle splits, bundled **JankyBorders 1.9.0**, and **Caffeinate** controls. Version 0.4.0 adds an opt-in **[Scroll Reverser](#scroll-reverser-opt-in)** for classic mouse wheels, with independent axis controls and unchanged continuous trackpad/Magic Mouse scrolling.
 
 ## Your next window, already in place
 
@@ -38,6 +38,7 @@ This is a personal fork of [AeroSpace](https://github.com/nikitabobko/AeroSpace)
 | **A quieter menu bar** | Ordered i3-style indicators for occupied/visible workspaces on macOS 14+, with essential menu actions. Saved appearance preferences are respected. |
 | **Integrated borders** | Bundled JankyBorders, configured in TOML and managed with the app (macOS 14+). |
 | **Stay awake when needed** | Caffeinate modes for normal idle-sleep prevention or keeping the display awake. |
+| **Mouse-wheel scrolling, your way** | Optional scroll reversal for discrete wheel events, with separate vertical/horizontal controls and gesture passthrough. |
 | **Keyboard-first control** | Fast workspace switching, a scriptable CLI, and plain-text TOML configuration. |
 | **Built for multiple displays** | AeroSpace’s virtual workspaces and i3-like multi-monitor model, without disabling SIP. |
 | **An easy off switch** | Set `enable-dwindle = false` to restore upstream sibling insertion. |
@@ -162,6 +163,27 @@ When using the downloaded release instead of a source checkout, substitute `conf
 - **Borders:** JankyBorders 1.9.0 is bundled (macOS 14+). Configure `[borders]` in TOML: `enabled`, `width` (0–100 whole points), `style` (`round`, `square`, `uniform`), `active-color`, `inactive-color`, `background-color` (`0xAARRGGBB`), `hidpi`, `ax-focus`, `blacklist` and `whitelist` (comma-separated app names). Reload applies changes; disabling or quitting stops the helper. Enable borders with `enabled = true` inside `[borders]`. Run only the bundled helper to avoid duplicate borders.
 - **Caffeinate:** the menu bar submenu offers **Off**, **Keep Awake** (standard idle-sleep prevention), and **Keep Screen Awake** (also keeps the display on). The active option uses the same native selection indicator as Appearance. Starts off; quitting stops it. It also releases assertions if Sagrada exits unexpectedly.
 - **Launchers:** adjust app launch bindings (including Ghostty, Zen, and Obsidian) to your setup.
+
+### Scroll Reverser (opt-in)
+
+Available in **0.4.0 and later**, and disabled by default in both new and existing configurations. No external helper is required.
+
+Choose **Scroll Reverser → Enabled** in the menu bar to reverse classic mouse-wheel scrolling without changing macOS's Natural Scrolling preference. **Reverse Vertical** and **Reverse Horizontal** can be toggled independently. The defaults are off overall, vertical reversal on, horizontal reversal off.
+
+To persist your choice, add this top-level table to `~/.sagrada.toml` and reload the config:
+
+```toml
+[scroll-reverser]
+enabled = true
+reverse-vertical = true
+reverse-horizontal = false
+```
+
+Menu changes are session-only: a config reload or app restart restores the TOML settings. If both axes are off, no scroll filter is installed. Disabling the feature or quitting Sagrada removes the filter.
+
+**Permissions:** Sagrada uses a macOS event tap. If it cannot start, the submenu shows an error and offers **Grant Permissions / Retry** and a link to Input Monitoring settings. Check **System Settings → Privacy & Security → Accessibility** and, if requested by macOS, **Input Monitoring** for Sagrada. After granting access, retry or restart the app. The feature does not explicitly request permissions while disabled; permission prompts are initiated through the retry button.
+
+**Device limitations:** this first version filters **discrete wheel events**, not a physical-device whitelist. Continuous scrolling, gesture phases, and momentum events from trackpads and Magic Mouse pass through unchanged. Some smooth-scrolling mice/drivers also emit continuous events and therefore will not be reversed; software that converts touch gestures into discrete wheel events cannot be distinguished reliably. Do not enable another scroll-reversal tool at the same time, as the two can cancel each other out.
 
 ## At your fingertips
 

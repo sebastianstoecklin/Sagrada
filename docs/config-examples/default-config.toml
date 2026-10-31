@@ -62,6 +62,13 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     blacklist = ''
     whitelist = ''
 
+# Opt-in reversal for classic mouse wheels. Trackpad/Magic Mouse gestures pass through.
+# Menu changes last until config reload/restart; edit this table to persist them.
+[scroll-reverser]
+    enabled = false
+    reverse-vertical = true
+    reverse-horizontal = false
+
 # Keep workspace 5 on the secondary display; fall back when using one monitor.
 [workspace-to-monitor-force-assignment]
     5 = ['secondary', 'main']

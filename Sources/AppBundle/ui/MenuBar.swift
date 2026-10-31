@@ -39,6 +39,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
             }
         }
         CaffeinateMenu()
+        ScrollReverserMenu()
         Divider()
         Button("Quit Sagrada") {
             Task.startUnstructured {
