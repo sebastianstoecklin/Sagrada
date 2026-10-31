@@ -1,5 +1,48 @@
 # Development Notes
 
+## Dwindle fork
+
+The fork adds `enable-dwindle` (default `true`) to the configuration parser and
+implements binary insertion in `unbindAndGetBindingDataForNewTilingWindow`.
+`DwindleTest` covers alternating splits, focus selection, weight preservation,
+floating/accordion behavior, close/reinsert, and opting out. Legacy command tests
+use the retained upstream configuration and disable Dwindle explicitly.
+
+The bundled default is the personal configuration described in the repository
+README. Tests must not run its external startup commands or depend on local apps.
+No build step installs or overwrites `~/.aerospace.toml`.
+
+On macOS 27 beta Command Line Tools, SwiftUI may fail to find `SwiftUIMacros`.
+Prefer a fully configured Xcode toolchain with its license accepted. For an app/CLI
+build using Command Line Tools and the installed Xcode plugin:
+
+```sh
+swift build -Xswiftc -load-plugin-library -Xswiftc /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib
+```
+
+Command Line Tools alone also omit XCTest; use full Xcode for the standard test
+commands. On the current beta setup, the following workaround built the tests;
+invoking `xctest` directly ran all 393 XCTest cases successfully (the SwiftPM
+runner otherwise reported zero tests):
+
+```sh
+platform=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
+swift test \
+  -Xswiftc -load-plugin-library -Xswiftc "$platform/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib" \
+  -Xswiftc -F -Xswiftc "$platform/Library/Frameworks" \
+  -Xswiftc -I -Xswiftc "$platform/usr/lib" \
+  -Xlinker -rpath -Xlinker "$platform/Library/Frameworks" \
+  -Xlinker -rpath -Xlinker "$platform/usr/lib" \
+  -Xlinker "-L$platform/usr/lib"
+DYLD_FRAMEWORK_PATH="$platform/Library/Frameworks" \
+DYLD_LIBRARY_PATH="$platform/usr/lib" \
+  /Applications/Xcode.app/Contents/Developer/usr/bin/xctest \
+  "$(swift build --show-bin-path)/AppBundleTests.xctest"
+```
+
+The release script no longer resets the working tree after building; local fork
+edits must never be discarded by a build.
+
 To build/install from sources do the following:
 1. Install dependencies
 2. Create codesign certificate in `Keychain Access.app`

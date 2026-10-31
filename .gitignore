@@ -29,6 +29,9 @@
 
 /xcode/.xcode-build
 
+# macOS Finder metadata (at any directory depth)
+.DS_Store
+
 # XCode User settings
 xcuserdata/
 xcshareddata/

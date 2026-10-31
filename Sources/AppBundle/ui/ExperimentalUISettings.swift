@@ -4,8 +4,8 @@ struct ExperimentalUISettings {
     var displayStyle: MenuBarStyle {
         get {
             switch UserDefaults.standard.string(forKey: ExperimentalUISettingsItems.displayStyle.rawValue) {
-                case let value?: MenuBarStyle(rawValue: value) ?? .monospacedText
-                case nil: .monospacedText
+                case let value?: MenuBarStyle(rawValue: value) ?? .i3Ordered
+                case nil: .i3Ordered
             }
         }
         set {
@@ -41,12 +41,12 @@ enum ExperimentalUISettingsItems: String {
 func getExperimentalUISettingsMenu(viewModel: TrayMenuModel) -> some View {
     let color = AppearanceTheme.current == .dark ? Color.white : Color.black
     return Menu {
-        Text("Menu bar style (macOS 14 or later):")
+        Text("Menu bar style")
         ForEach(MenuBarStyle.allCases, id: \.id) { style in
             MenuBarStyleButton(style: style, color: color).environmentObject(viewModel)
         }
     } label: {
-        Text("Experimental UI Settings (No stability guarantees)")
+        Text("Appearance")
     }
 }
 

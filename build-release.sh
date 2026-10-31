@@ -39,7 +39,7 @@ cd ./xcode
         -derivedDataPath .xcode-build
 cd -
 
-git checkout .
+# Keep local fork changes intact; never reset the working tree during a build.
 
 cp -r "xcode/.xcode-build/Build/Products/$xcode_configuration/AeroSpace.app" .release
 cp -r "$cli_bin_path/aerospace" .release

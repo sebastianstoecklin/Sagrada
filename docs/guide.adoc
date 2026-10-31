@@ -216,6 +216,23 @@ key-mapping.key-notation-to-key-code = {
 key-mapping.preset = 'dvorak'  # or 'colemak'
 ----
 
+[#enable-dwindle]
+=== enable-dwindle (Dwindle fork)
+
+Defaults to `true`. New tiled windows split the most recently focused tiled window
+in half, alternating the split orientation at each level. The first pair follows
+`default-root-container-orientation`. Floating focus does not affect the tiled
+insertion target; accordion containers keep upstream sibling insertion.
+Existing outer split weights are preserved. Manual move/join/layout operations
+remain supported; this setting does not rebuild existing workspace trees.
+Set `enable-dwindle = false` for upstream insertion behavior.
+Do not combine native Dwindle with a script that also joins newly detected windows.
+
+This fork bundles a personal Cmd-based configuration and defaults the menu-bar
+appearance to ordered i3 style on macOS 14+. Existing appearance preferences and
+custom configuration files take precedence. See the repository README for setup
+and optional workspace-floating/JankyBorders dependencies.
+
 [#config-version]
 === config-version
 

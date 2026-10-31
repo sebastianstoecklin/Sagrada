@@ -15,7 +15,9 @@ let projectRoot: URL = {
 
 @MainActor
 func setUpWorkspacesForTests() {
-    config = defaultConfig
+    // Keep legacy command fixtures independent of the fork's personal defaults.
+    config = parseConfig(try! String(contentsOf: projectRoot.appending(component: "docs/config-examples/upstream-default-config.toml"), encoding: .utf8)).config
+    config.enableDwindle = false
     configUrl = defaultConfigUrl
     config.enableNormalizationFlattenContainers = false // Make layout tests more predictable
     config.enableNormalizationOppositeOrientationForNestedContainers = false // Make layout tests more predictable

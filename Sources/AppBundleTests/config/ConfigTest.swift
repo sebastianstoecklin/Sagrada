@@ -27,6 +27,10 @@ final class ConfigTest: XCTestCase {
         let result = parseConfig(toml)
         assertEquals(result.errors, [])
         assertEquals(result.warnings, [])
+        XCTAssertTrue(result.config.enableDwindle)
+        assertEquals(result.config.defaultRootContainerOrientation, .horizontal)
+        assertEquals(Set(result.config.workspaceToMonitorForceAssignment.keys), ["5"])
+        XCTAssertFalse(toml.contains("/dwindle.sh"))
     }
 
     func testConfigVersionOutOfBounds() {
@@ -319,7 +323,7 @@ final class ConfigTest: XCTestCase {
             "[ERROR] workspace-to-monitor-force-assignment.w7[0]: Empty string is an illegal monitor description",
             "[ERROR] workspace-to-monitor-force-assignment.w8: Monitor sequence numbers uses 1-based indexing. Values less than 1 are illegal",
         ], result.strErrors)
-        assertEquals([:], defaultConfig.workspaceToMonitorForceAssignment)
+        assertEquals([:], Config().workspaceToMonitorForceAssignment)
     }
 
     func testParseOnWindowDetected() {

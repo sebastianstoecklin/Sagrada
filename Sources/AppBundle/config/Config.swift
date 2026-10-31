@@ -37,6 +37,7 @@ struct Config: ConvenienceMutable {
     var _afterLoginCommand: [any Command] = []
     var afterStartupCommand: Shell<any Command> = .empty
     var _indentForNestedContainersWithTheSameOrientation: Void = ()
+    var enableDwindle: Bool = true
     var enableNormalizationFlattenContainers: Bool = true
     var _nonEmptyWorkspacesRootContainersLayoutOnStartup: Void = ()
     var defaultRootContainerLayout: Layout = .tiles

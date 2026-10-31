@@ -220,12 +220,27 @@ private func unbindAndGetBindingDataForNewWindow(_ windowId: UInt32, _ macApp: M
     }
 }
 
-// The function is private because it's unsafe. It leaves the window in unbound state
+// Leaves the window unbound; the caller must immediately bind it using the returned data.
 @MainActor
-private func unbindAndGetBindingDataForNewTilingWindow(_ workspace: Workspace, window: Window?) -> BindingData {
+func unbindAndGetBindingDataForNewTilingWindow(_ workspace: Workspace, window: Window?) -> BindingData {
     window?.unbindFromParent() // It's important to unbind to get correct data from below
-    let mruWindow = workspace.mostRecentWindowRecursive
+    let mruWindow = config.enableDwindle
+        ? workspace.rootTilingContainer.mostRecentWindowRecursive
+        : workspace.mostRecentWindowRecursive
     if let mruWindow, let tilingParent = mruWindow.parent as? TilingContainer {
+        if config.enableDwindle && tilingParent.layout == .tiles {
+            // Reuse empty/single-child containers. Otherwise replace the focused tile
+            // with an equally split pair, preserving its share of the outer layout.
+            if tilingParent.children.count > 1 {
+                let previous = mruWindow.unbindFromParent()
+                let split = TilingContainer(
+                    parent: tilingParent, adaptiveWeight: previous.adaptiveWeight,
+                    tilingParent.orientation.opposite, .tiles, index: previous.index,
+                )
+                mruWindow.bind(to: split, adaptiveWeight: 1, index: 0)
+                return BindingData(parent: split, adaptiveWeight: 1, index: 1)
+            }
+        }
         return BindingData(
             parent: tilingParent,
             adaptiveWeight: WEIGHT_AUTO,

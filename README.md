@@ -1,180 +1,239 @@
-# AeroSpace Beta [![Build](https://github.com/nikitabobko/AeroSpace/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/nikitabobko/AeroSpace/actions/workflows/build.yml)
+<div align="center">
 
-<img src="./resources/Assets.xcassets/AppIcon.appiconset/icon.png" width="40%" align="right">
+<img src="docs/assets/branding/sagrada-space.png" alt="Sagrada Space — cosmic stained-glass windows inspired by Sagrada Família" width="200" height="200">
 
-AeroSpace is an i3-like tiling window manager for macOS
+# Sagrada Space
 
-Videos:
-- [YouTube 91 sec Demo](https://www.youtube.com/watch?v=UOl7ErqWbrk)
-- [YouTube Guide by Josean Martinez](https://www.youtube.com/watch?v=-FoWClVHG5g)
+### Celestial light. Structured space.
 
-Docs:
-- [AeroSpace Guide](https://nikitabobko.github.io/AeroSpace/guide)
-- [AeroSpace Commands](https://nikitabobko.github.io/AeroSpace/commands)
-- [AeroSpace Goodies](https://nikitabobko.github.io/AeroSpace/goodies)
+A keyboard-first tiling window manager for macOS.<br>
+The power of AeroSpace, with native dwindle splits and a quieter menu bar.
 
-## Key features
+![macOS 13+](https://img.shields.io/badge/macOS-13%2B-111827?style=flat-square&logo=apple&logoColor=white)
+![Native Swift](https://img.shields.io/badge/Native-Swift-F05138?style=flat-square&logo=swift&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-8B5CF6?style=flat-square)](LICENSE.txt)
 
-- Tiling window manager based on a [tree paradigm](https://nikitabobko.github.io/AeroSpace/guide#tree)
-- [i3](https://i3wm.org/) inspired
-- Fast workspaces switching without animations and without the necessity to disable SIP
-- AeroSpace employs its [own emulation of virtual workspaces](https://nikitabobko.github.io/AeroSpace/guide#emulation-of-virtual-workspaces) instead of relying on native macOS Spaces due to [their considerable limitations](https://nikitabobko.github.io/AeroSpace/guide#emulation-of-virtual-workspaces)
-- Plain text configuration (dotfiles friendly). See: [default-config.toml](https://nikitabobko.github.io/AeroSpace/guide#default-config)
-- CLI first (manpages and shell completion included)
-- Doesn't require disabling SIP (System Integrity Protection)
-- [Proper multi-monitor support](https://nikitabobko.github.io/AeroSpace/guide#multiple-monitors) (i3-like paradigm)
+[Get started](#get-started) · [How it tiles](#how-it-tiles) · [Configuration](#make-it-yours) · [Keybindings](#at-your-fingertips) · [Upstream docs](https://nikitabobko.github.io/AeroSpace/guide)
 
-## Installation
+</div>
 
-Install via [Homebrew](https://brew.sh/) to get autoupdates (Preferred)
+---
 
-```
-brew install --cask nikitabobko/tap/aerospace
-```
+## Your next window, already in place
 
-In multi-monitor setup please make sure that monitors [are properly arranged](https://nikitabobko.github.io/AeroSpace/guide#proper-monitor-arrangement).
+Open a terminal. Add an editor. Bring in a browser. **Dwindle splits the tile you were working in**, keeping the rest of your layout intact. No separate tiling script. No manual rearranging after every launch.
 
-Other installation options: https://nikitabobko.github.io/AeroSpace/guide#installation
+This is a personal fork of [AeroSpace](https://github.com/nikitabobko/AeroSpace), not an official upstream release. It keeps AeroSpace’s tree-based controls and adds an opinionated insertion policy, ordered workspace indicators, and a minimal menu.
 
-> [!NOTE]
-> By using AeroSpace, you acknowledge that it's not [notarized](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution).
->
-> Notarization is a "security" feature by Apple.
-> You send binaries to Apple, and they either approve them or not.
-> In reality, notarization is about building binaries the way Apple likes it.
->
-> I don't have anything against notarization as a concept.
-> I specifically don't like the way Apple does notarization.
-> I don't have time to deal with Apple.
->
-> [Homebrew installation script](https://github.com/nikitabobko/homebrew-tap/blob/main/Casks/aerospace.rb) is configured to
-> automatically delete `com.apple.quarantine` attribute, that's why the app should work out of the box, without any warnings that
-> "Apple cannot check AeroSpace for malicious software"
+| A focused fork | What you get |
+| :--- | :--- |
+| **Native dwindle** | New tiled windows split the most recently focused tile equally, alternating split directions. |
+| **Your layout stays yours** | Existing outer split sizes survive. Focus, move, resize, join, and layout commands still work on the same tree. |
+| **A quieter menu bar** | Ordered i3-style indicators for occupied/visible workspaces on macOS 14+, with essential menu actions. Saved appearance preferences are respected. |
+| **Keyboard-first control** | Fast workspace switching, a scriptable CLI, and plain-text TOML configuration. |
+| **Built for multiple displays** | AeroSpace’s virtual workspaces and i3-like multi-monitor model, without disabling SIP. |
+| **An easy off switch** | Set `enable-dwindle = false` to restore upstream sibling insertion. |
 
-## Community, discussions, issues
+## How it tiles
 
-AeroSpace project doesn't accept Issues directly - we ask you to create a [Discussion](https://github.com/nikitabobko/AeroSpace/discussions) first.
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
+With a horizontal root and each newly opened window focused, the layout grows like this:
 
-Community discussions happen at GitHub Discussions.
-There you can discuss bugs, propose new features, ask your questions, show off your setup, or just chat.
+```text
+       One window                  Two windows                 Three windows
+┌─────────────────────┐     ┌──────────┬──────────┐     ┌──────────┬──────────┐
+│                     │     │          │          │     │          │    2     │
+│          1          │  →  │    1     │    2     │  →  │    1     ├──────────┤
+│                     │     │          │          │     │          │    3     │
+└─────────────────────┘     └──────────┴──────────┘     └──────────┴──────────┘
 
-There are 7 channels:
--   [#all](https://github.com/nikitabobko/AeroSpace/discussions).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions.atom?discussions_q=sort%3Adate_created).
-    Feed with all discussions.
--   [#announcements](https://github.com/nikitabobko/AeroSpace/discussions/categories/announcements).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/announcements.atom?discussions_q=category%3Aannouncements+sort%3Adate_created).
-    Only maintainers can post here.
-    Highly moderated traffic.
--   [#announcements-releases](https://github.com/nikitabobko/AeroSpace/discussions/categories/announcements-releases).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/announcements-releases.atom?discussions_q=category%3Aannouncements-releases+sort%3Adate_created).
-    Announcements about non-patch releases.
-    Only maintainers can post here.
--   [#feature-ideas](https://github.com/nikitabobko/AeroSpace/discussions/categories/feature-ideas).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/feature-ideas.atom?discussions_q=category%3Afeature-ideas+sort%3Adate_created).
--   [#general](https://github.com/nikitabobko/AeroSpace/discussions/categories/general).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/general.atom?discussions_q=sort%3Adate_created+category%3Ageneral).
--   [#potential-bugs](https://github.com/nikitabobko/AeroSpace/discussions/categories/potential-bugs).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/potential-bugs.atom?discussions_q=category%3Apotential-bugs+sort%3Adate_created).
-    If you think that you have encountered a bug, you can discuss your bugs here.
--   [#questions-and-answers](https://github.com/nikitabobko/AeroSpace/discussions/categories/questions-and-answers).
-    [RSS](https://github.com/nikitabobko/AeroSpace/discussions/categories/questions-and-answers.atom?discussions_q=category%3Aquestions-and-answers+sort%3Adate_created).
-    Everyone is welcome to ask questions.
-    Everyone is encouraged to answer other people's questions.
-
-## Project status
-
-Public Beta. AeroSpace can be used as a daily driver, but expect breaking changes until 1.0 is reached.
-
-What stops us from 1.0 release:
-- [x] https://github.com/nikitabobko/AeroSpace/issues/131 Performance. Implement thread-per-application to circumvent macOS blocking AX API.
-- [ ] https://github.com/nikitabobko/AeroSpace/issues/1215 _Big refactoring_. Rewrite mutable double-linked core tree data structure to immutable single-linked persistent tree.
-  Important for: stability and potential performance
-  - [ ] https://github.com/nikitabobko/AeroSpace/issues/1216 The big refactoring will help us to fix stability issue that windows may randomly jump to the focused workspace
-  - [ ] https://github.com/nikitabobko/AeroSpace/issues/68 The big refactoring will help us to support macOS native tabs
-- [x] https://github.com/nikitabobko/AeroSpace/issues/278 Implement shell-like combinators.
-  Ignore a lot of crazy fuss in the issue,
-  We are most probably going with the minimal approach to only introduce common shell-combinators: `||`, `&&`, `;` and `eval` command to send multiple commands in one go.
-- [ ] https://github.com/nikitabobko/AeroSpace/issues/1012 Investigate a possibility to use `CGEvent.tapCreate` API for global hotkeys
-  - [ ] https://github.com/nikitabobko/AeroSpace/issues/28 Maybe it will allow to distinguish left and right modifiers. Maybe not
-
-Big and important issues which will go after 1.0 release:
-- [ ] https://github.com/nikitabobko/AeroSpace/issues/2 sticky windows
-- [ ] https://github.com/nikitabobko/AeroSpace/issues/260 Dynamic TWM
-
-## Development
-
-A notes on how to setup the project, build it, how to run the tests, etc. can be found here: [dev-docs/development.md](./dev-docs/development.md)
-
-## Project values
-
-**Values**
-- AeroSpace is targeted at advanced users and developers
-- Keyboard centric
-- Breaking changes (configuration files, CLI, behavior) are avoided as much as possible, but it must not let the software stagnate.
-  Thus breaking changes can happen, but with careful considerations and helpful message.
-  [Semver](https://semver.org/) major version is bumped in case of a breaking change (It's all guaranteed once AeroSpace reaches 1.0 version, until then breaking changes just happen)
-- AeroSpace doesn't use GUI, unless necessarily
-  - AeroSpace will never provide a GUI for configuration.
-    For advanced users, it's easier to edit a configuration file in text editor rather than navigating through checkboxes in GUI.
-  - Status menu icon is ok, because visual feedback is needed
-- Provide _practical_ features. Fancy appearance features are not _practical_ (e.g. window borders, transparency, animations, etc.)
-- "dark magic" (aka "private APIs", "code injections", etc.) must be avoided as much as possible
-  - Right now, AeroSpace uses only a single private API to get window ID of accessibility object `_AXUIElementGetWindow`.
-    Everything else is [macOS public accessibility API](https://developer.apple.com/documentation/applicationservices/axuielement_h).
-  - AeroSpace will never require you to disable SIP (System Integrity Protection).
-  - The goal is to make AeroSpace easily maintainable, and resistant to macOS updates.
-
-**Non Values**
-- Play nicely with existing macOS features.
-  If limitations are imposed then AeroSpace won't play nicely with existing macOS features
-  (For example, AeroSpace doesn't acknowledge the existence of macOS Spaces, and it uses [emulation of its own workspaces](https://nikitabobko.github.io/AeroSpace/guide#emulation-of-virtual-workspaces))
-- Ricing.
-  AeroSpace provides only a very minimal support for ricing - gaps and a few callbacks for integrations with bars.
-  The current maintainer doesn't care about ricing.
-  Ricing issues are not a priority, and they are mostly ignored.
-  The ricing stance can change only with the appearance of more maintainers.
-
-## macOS compatibility
-
-* AeroSpace binary runs on: macOS 13+
-* AeroSpace debug build from sources is supported on: macOS 14+
-* AeroSpace release build from sources is supported on: macOS 15+ (Requires: Swift 6.4, Xcode 26.6+)
-
-## Sponsorship
-
-AeroSpace is developed and maintained in my free time.
-If you find it useful, [consider sponsoring](https://github.com/sponsors/nikitabobko#sponsors).
-
-## People who have write access
-
-In alphabetical order:
-
-- [@mobile-ar](https://github.com/mobile-ar)
-- [@nikitabobko](https://github.com/nikitabobko)
-- [@rickyz](https://github.com/rickyz)
-
-## Tip of the day
-
-```bash
-defaults write -g NSWindowShouldDragOnGesture -bool true
+                                                            Four windows
+                                                       ┌──────────┬──────────┐
+                                                       │          │    2     │
+                                                    →  │    1     ├─────┬────┤
+                                                       │          │  3  │ 4  │
+                                                       └──────────┴─────┴────┘
 ```
 
-Now, you can move windows by holding `ctrl`+`cmd` and dragging any part of the window (not necessarily the window title)
+**Focus decides where the next split happens.** Return to window 1 before opening another window, and that tile splits instead. The first pair follows the workspace orientation; subsequent splits alternate vertically and horizontally.
 
-Source: [reddit](https://www.reddit.com/r/MacOS/comments/k6hiwk/keyboard_modifier_to_simplify_click_drag_of/)
+Dwindle is an **insertion policy, not a forced reflow**. Manually edited layouts remain yours. Floating windows and accordion containers keep their existing behavior.
 
-## Related projects
+## Get started
 
-In alphabetical order:
+> [!IMPORTANT]
+> **Build this repository to get Sagrada Space.** Upstream Homebrew binaries do not include Dwindle or the menu changes. The app and CLI retain the names `AeroSpace.app` and `aerospace`; do not run them alongside another AeroSpace instance.
 
-- [Amethyst](https://github.com/ianyh/Amethyst) -
-  Beginners friendly GUI-configurable tiling window manager with automatic layouts à la xmonad.
-- [InstantSpaceSwitcher](https://github.com/jurplel/InstantSpaceSwitcher) -
-  Instant space switching by synthesizing trackpad gesture with an artificially high velocity.
-- [rift](https://github.com/acsandmann/rift) -
-  Virtual workspaces + private APIs.
-- [yabai](https://github.com/koekeishiya/yabai) -
-  A window manager that provides tight integration with native macOS Spaces and goes all the way to private APIs and code injection.
-  yabai is a source of inspiration for a lot of other OSS projects.
+### 1 · Build a release app
+
+The app targets **macOS 13+**; workspace indicators require **macOS 14+**. SwiftPM declares Swift **6.2+**, but release tooling can require a newer toolchain. Follow the [development prerequisites](dev-docs/development.md) and the repository’s [Swift version](.swift-version).
+
+For a release build, install full Xcode, accept its license, set up the documented build dependencies (including docs and shell completions), and create a code-signing certificate named `aerospace-codesign-certificate`.
+
+```sh
+git clone https://github.com/sebastianstoecklin/Sagrada-Space.git
+cd Sagrada-Space
+./build-release.sh
+```
+
+The output is **`.release/AeroSpace.app`** and **`.release/aerospace`**. Use this release app for daily use: debug executables ignore `start-at-login` and can depend on this checkout.
+
+### 2 · Install the app and CLI
+
+Quit any running AeroSpace instance and disable its old login item under **System Settings → General → Login Items**. If you installed upstream through Homebrew, uninstall that cask first to avoid launching or updating the wrong app:
+
+```sh
+# Only if the upstream cask is installed:
+brew uninstall --cask aerospace
+```
+
+Move any existing `/Applications/AeroSpace.app` aside, then install:
+
+```sh
+sudo ditto .release/AeroSpace.app /Applications/AeroSpace.app
+mkdir -p "$HOME/.local/bin"
+install -m 755 .release/aerospace "$HOME/.local/bin/aerospace"
+```
+
+Add the following to `~/.zprofile` (or your shell’s equivalent), open a new terminal, and check `command -v aerospace` resolves to your new CLI rather than an old Homebrew binary:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+### 3 · Launch and grant permission
+
+```sh
+open /Applications/AeroSpace.app
+```
+
+Grant **AeroSpace** access in **System Settings → Privacy & Security → Accessibility**. If a previous entry no longer works after replacement, remove it, add the installed app again, and relaunch.
+
+To launch automatically, put this at the top level of your active `~/.aerospace.toml`, **before any table headers**, and run `aerospace reload-config`:
+
+```toml
+start-at-login = true
+```
+
+Allow the login item if macOS asks. The installed release app runs independently of this checkout.
+
+## Make it yours
+
+### Keep your existing setup
+
+Existing user configs take precedence; building does **not** overwrite them. Dwindle is enabled by default in this fork. To make the choice explicit, add this before any `[table]` headers:
+
+```toml
+enable-dwindle = true
+```
+
+Set it to `false` to restore upstream insertion, then run `aerospace reload-config`.
+
+> [!WARNING]
+> Remove the old `dwindle.sh` window-detection callback if you used one. Native Dwindle runs synchronously in the engine; do not run both implementations together.
+
+### Adopt the bundled setup
+
+The [bundled config](docs/config-examples/default-config.toml) is deliberately personal: Cmd-based navigation, 10-point gaps, app launch shortcuts, workspace 5 assigned to the secondary display, and a JankyBorders startup hook. **Review it before copying**—its shortcuts can override familiar macOS/app shortcuts.
+
+```sh
+# Preserve your current config, if one exists.
+if [ -f "$HOME/.aerospace.toml" ]; then
+    cp "$HOME/.aerospace.toml" "$HOME/.aerospace.toml.backup-$(date +%Y%m%d-%H%M%S)"
+fi
+mkdir -p "$HOME/.config/aerospace"
+cp script/workspace-layout.sh "$HOME/.config/aerospace/"
+cp docs/config-examples/default-config.toml "$HOME/.aerospace.toml"
+aerospace reload-config
+```
+
+- **Workspace floating:** the helper provides the workspace-wide floating toggle and stores state in `~/.local/state/aerospace/workspace-layout`. It needs this fork’s CLI on `PATH`. Remove its callback and shortcut if you do not use it.
+- **Borders and launchers:** install or adjust the machine-specific `~/.config/borders/bordersrc` startup command and app launch bindings (including Ghostty, Zen, and Obsidian).
+- **A simpler starting point:** the [preserved upstream config](docs/config-examples/upstream-default-config.toml) is available for reference; Dwindle remains enabled unless explicitly disabled.
+
+## At your fingertips
+
+These shortcuts belong to the **bundled config**, not upstream defaults.
+
+| Shortcut | Action |
+| :--- | :--- |
+| `⌘` + arrow keys | Focus a window |
+| `⌘ ⇧` + arrow keys | Move a window |
+| `⌘` + `1`–`9` | Switch workspace |
+| `⌘ ⇧` + `1`–`9` | Move a window to a workspace |
+| `⌥ Tab` | Return to the previous workspace |
+| `⌥ ⇧ Tab` | Move the workspace to the next monitor |
+| `⌘ ⇧ -` / `⌘ ⇧ =` | Shrink / grow a tile |
+| `⌘ ⌥ F` | Toggle the focused window between floating and tiling |
+| `⌘ ⌥ ⇧ F` | Toggle floating for the workspace (helper required) |
+| `⌘ Return` | Open Ghostty (must be installed) |
+
+Prefer a terminal? The same controls are scriptable:
+
+```sh
+aerospace focus left
+aerospace workspace 2
+aerospace move-node-to-workspace 3
+aerospace reload-config
+```
+
+Find the full command surface in the [AeroSpace command reference](https://nikitabobko.github.io/AeroSpace/commands).
+
+## Development & maintenance
+
+<details>
+<summary><strong>Quick development build and tests</strong></summary>
+
+With a compatible Swift toolchain and full Xcode for XCTest, a direct SwiftPM build avoids the release scripts’ docs/completion dependencies:
+
+```sh
+swift build --build-tests
+swift test --skip-build
+bin_dir="$(swift build --show-bin-path)"
+mkdir -p .debug
+cp "$bin_dir/AeroSpaceApp" "$bin_dir/aerospace" .debug/
+```
+
+Run `.debug/AeroSpaceApp` from a terminal with Accessibility permission; use `.debug/aerospace` for commands. Do not run another instance at the same time.
+
+On macOS 27 beta Command Line Tools, missing `SwiftUIMacros` or XCTest may require the full Xcode toolchain. See the [development notes](dev-docs/development.md) for toolchain selection and workarounds.
+
+Dwindle-specific tests cover alternating splits, focus selection, weight preservation, floating/accordion behavior, close/reinsert, and opting out.
+
+</details>
+
+<details>
+<summary><strong>Update or uninstall</strong></summary>
+
+**Update:** quit AeroSpace, rebuild, and repeat the release app/CLI installation steps. Keep the same signing certificate to reduce Accessibility permission resets. This fork does not receive upstream Homebrew updates automatically.
+
+**Uninstall:** set `start-at-login = false`, reload, and quit. Remove `/Applications/AeroSpace.app` and `~/.local/bin/aerospace`, then remove any remaining login item in System Settings. Keep or remove your config and helper state as desired.
+
+</details>
+
+<details>
+<summary><strong>App icon and branding</strong></summary>
+
+The Sagrada Space icon combines Sagrada Família-inspired stained glass, branching geometry, and nebula light with recursive window splits. The README and macOS app share the same [master artwork](docs/assets/branding/sagrada-space.png); the app asset catalog includes all standard macOS icon sizes.
+
+See [branding notes](docs/assets/branding/README.md) for the image-generation prompt and regeneration instructions.
+
+</details>
+
+## Built on AeroSpace
+
+This fork exists thanks to **[Nikita Bobko](https://github.com/nikitabobko) and the AeroSpace contributors**. The underlying window manager, workspace model, CLI, and documentation are their work. This fork focuses on Dwindle insertion and its own default experience; it is not affiliated with Apple.
+
+- [Upstream project](https://github.com/nikitabobko/AeroSpace) · [User guide](https://nikitabobko.github.io/AeroSpace/guide) · [Configuration goodies](https://nikitabobko.github.io/AeroSpace/goodies)
+- [91-second upstream demo](https://www.youtube.com/watch?v=UOl7ErqWbrk) · [Video guide by Josean Martinez](https://www.youtube.com/watch?v=-FoWClVHG5g) — these showcase upstream, not the fork-specific changes.
+- [Contributing guidelines](CONTRIBUTING.md) · [Upstream discussions](https://github.com/nikitabobko/AeroSpace/discussions) — reproduce fork-specific problems on upstream before reporting them there.
+- [Sponsor upstream development](https://github.com/sponsors/nikitabobko)
+
+Released under the [MIT License](LICENSE.txt). Original copyright and third-party notices are retained in [legal/](legal).
+
+---
+
+<div align="center">
+
+**Keep your hands on the keyboard. Let your windows fall into place.**
+
+</div>
