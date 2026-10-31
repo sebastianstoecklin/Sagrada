@@ -60,89 +60,44 @@ Dwindle is an **insertion policy, not a forced reflow**. Manually edited layouts
 
 ## Get started
 
-> [!IMPORTANT]
-> **Download SagradaSpace from this repository’s [GitHub Releases](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest).** Upstream Homebrew binaries do not include Dwindle or the menu changes. This fork installs as `SagradaSpace.app` with the `sagradaspace` CLI. Do not run it alongside AeroSpace or another tiling window manager.
+Download the app for **Apple Silicon or Intel**, running **macOS 13+**. Workspace indicators require **macOS 14+**. No Xcode or Terminal needed.
 
-### 1 · Download the release
+### Install the app
 
-Download **[SagradaSpace-v0.1.0.zip](https://github.com/sebastianstoecklin/SagradaSpace/releases/download/v0.1.0/SagradaSpace-v0.1.0.zip)** and extract it. The app and CLI are universal binaries for **Apple Silicon and Intel**, targeting **macOS 13+**; workspace indicators require **macOS 14+**. No Xcode or source checkout is required.
+1. Download the ZIP from **[GitHub Releases](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest)** and double-click it to extract it.
+2. Quit AeroSpace or any other tiling window manager. If replacing an older version, quit it and disable its old login item first.
+3. Drag **SagradaSpace.app** into your **Applications** folder.
+4. Open SagradaSpace and grant access in **System Settings → Privacy & Security → Accessibility**.
 
-Optionally download the accompanying `.zip.sha256` file into the same directory and verify the archive before extracting:
+That’s it. You can ignore the other files in the download.
 
-```sh
-cd ~/Downloads
-shasum -a 256 -c SagradaSpace-v0.1.0.zip.sha256
-unzip SagradaSpace-v0.1.0.zip
-cd SagradaSpace-v0.1.0
-```
+> [!NOTE]
+> The current release is not notarized by Apple, so macOS may block it. If you trust the download, try opening the app, then go to **System Settings → Privacy & Security → Open Anyway** and confirm. Do not disable Gatekeeper.
 
-The package contains `SagradaSpace.app`, `bin/sagradaspace`, optional configuration examples and the workspace helper in `config/`, and license notices. Generated man pages and shell completions are not included in v0.1.0.
+Existing AeroSpace configuration files remain supported and are not overwritten. SagradaSpace needs its own Accessibility permission. Do not run it alongside another tiling window manager.
 
-> [!WARNING]
-> **v0.1.0 is ad-hoc signed, not Developer ID signed or notarized.** macOS may block the downloaded app or CLI. Only if you trust this repository and have verified the download, try opening the app, then use **System Settings → Privacy & Security → Open Anyway** and confirm. The CLI may need the same approval. Do not disable Gatekeeper globally.
+### Start at login (optional)
 
-<details>
-<summary><strong>Prefer building from source?</strong></summary>
-
-SwiftPM declares Swift **6.2+**, but release tooling can require a newer toolchain. Follow the [development prerequisites](dev-docs/development.md) and the repository’s [Swift version](.swift-version). Install full Xcode, accept its license, and set up the documented dependencies (including docs and shell completions).
-
-```sh
-git clone https://github.com/sebastianstoecklin/SagradaSpace.git
-cd SagradaSpace
-./build-release.sh --codesign-identity -
-```
-
-This creates a local ad-hoc signed **`.release/SagradaSpace.app`** and **`.release/sagradaspace`**. Alternatively, create a certificate named `sagradaspace-codesign-certificate` and omit `--codesign-identity -`. For the installation commands below, use `.release/SagradaSpace.app` and `.release/sagradaspace` instead of the downloaded package paths.
-
-Use a release app for daily use: debug executables ignore `start-at-login` and can depend on the checkout.
-
-</details>
-
-### 2 · Install the app and CLI
-
-Quit any running SagradaSpace or AeroSpace instance and disable its old login item under **System Settings → General → Login Items**. If you installed upstream through Homebrew, uninstall that cask first to avoid launching or updating the wrong app:
-
-```sh
-# Only if the upstream cask is installed:
-brew uninstall --cask aerospace
-```
-
-Move any existing `/Applications/SagradaSpace.app` aside, then install:
-
-```sh
-# Run from the extracted SagradaSpace-v0.1.0 directory:
-sudo ditto SagradaSpace.app /Applications/SagradaSpace.app
-mkdir -p "$HOME/.local/bin"
-install -m 755 bin/sagradaspace "$HOME/.local/bin/sagradaspace"
-```
-
-Add the following to `~/.zprofile` (or your shell’s equivalent), open a new terminal, and check `command -v sagradaspace` resolves to your new CLI rather than an old Homebrew binary:
-
-```sh
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-### 3 · Launch and grant permission
-
-```sh
-open /Applications/SagradaSpace.app
-```
-
-Grant **SagradaSpace** access in **System Settings → Privacy & Security → Accessibility**. If a previous entry no longer works after replacement, remove it, add the installed app again, and relaunch.
-
-To launch automatically, put this at the top level of your active `~/.aerospace.toml`, **before any table headers**, and run `sagradaspace reload-config`:
+Add this at the top of your `~/.aerospace.toml`, before any section headers:
 
 ```toml
 start-at-login = true
 ```
 
-Allow the login item if macOS asks. The installed release app runs independently of this checkout.
+Choose **Reload config** from the SagradaSpace menu and allow the login item if macOS asks.
 
-### Migrating from the AeroSpace-named build
+## Build from source
 
-SagradaSpace has its own bundle identifier (`com.sebastianstoecklin.sagradaspace`), Accessibility permission, login item, and CLI. Disable the old login item and quit the old app before launching it. Replace `aerospace` with `sagradaspace` in your own scripts and shell aliases; no compatibility CLI is installed automatically.
+For a local release app, install full **Xcode**, accept its license, and follow the [build prerequisites](dev-docs/development.md#1-install-dependencies), including the docs and shell-completion dependencies. Use the toolchain specified in [`.swift-version`](.swift-version).
 
-For configuration compatibility, `~/.aerospace.toml`, `${XDG_CONFIG_HOME:-~/.config}/aerospace/aerospace.toml`, `AEROSPACE_*` callback variables, and the workspace helper's existing paths remain unchanged. Your configuration is not copied or overwritten. The inherited documentation under `docs/` describes upstream AeroSpace; substitute `sagradaspace` for its `aerospace` commands when using this fork.
+```sh
+git clone https://github.com/sebastianstoecklin/SagradaSpace.git
+cd SagradaSpace
+./build-release.sh --codesign-identity -
+open .release
+```
+
+Drag **SagradaSpace.app** from the folder that opens into **Applications**, then open it and grant Accessibility access as above. This is an ad-hoc signed release build; no Apple Developer membership or custom signing certificate is required. Once installed, the app does not depend on the checkout.
 
 ## Make it yours
 
@@ -154,7 +109,7 @@ Existing user configs take precedence; building does **not** overwrite them. Dwi
 enable-dwindle = true
 ```
 
-Set it to `false` to restore upstream insertion, then run `sagradaspace reload-config`.
+Set it to `false` to restore upstream insertion, then choose **Reload config** from the SagradaSpace menu.
 
 > [!WARNING]
 > Remove the old `dwindle.sh` window-detection callback if you used one. Native Dwindle runs synchronously in the engine; do not run both implementations together.
@@ -171,8 +126,9 @@ fi
 mkdir -p "$HOME/.config/aerospace"
 cp script/workspace-layout.sh "$HOME/.config/aerospace/"
 cp docs/config-examples/default-config.toml "$HOME/.aerospace.toml"
-sagradaspace reload-config
 ```
+
+Choose **Reload config** from the SagradaSpace menu.
 
 When using the downloaded release instead of a source checkout, substitute `config/workspace-layout.sh` and `config/default-config.toml` for the two source paths above.
 
@@ -196,15 +152,6 @@ These shortcuts belong to the **bundled config**, not upstream defaults.
 | `⌘ ⌥ F` | Toggle the focused window between floating and tiling |
 | `⌘ ⌥ ⇧ F` | Toggle floating for the workspace (helper required) |
 | `⌘ Return` | Open Ghostty (must be installed) |
-
-Prefer a terminal? The same controls are scriptable:
-
-```sh
-sagradaspace focus left
-sagradaspace workspace 2
-sagradaspace move-node-to-workspace 3
-sagradaspace reload-config
-```
 
 Find the full command surface in the [AeroSpace command reference](https://nikitabobko.github.io/AeroSpace/commands).
 
@@ -234,9 +181,9 @@ Dwindle-specific tests cover alternating splits, focus selection, weight preserv
 <details>
 <summary><strong>Update or uninstall</strong></summary>
 
-**Update:** quit SagradaSpace, download the latest [release](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest) (or rebuild), and repeat the release app/CLI installation steps. Keep the same signing certificate to reduce Accessibility permission resets. This fork does not receive upstream Homebrew updates automatically.
+**Update:** quit SagradaSpace, download the latest [release](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest) (or rebuild), and replace the app in Applications and reopen it. Keep the same signing certificate to reduce Accessibility permission resets. This fork does not receive upstream Homebrew updates automatically.
 
-**Uninstall:** set `start-at-login = false`, reload, and quit. Remove `/Applications/SagradaSpace.app` and `~/.local/bin/sagradaspace`, then remove any remaining login item in System Settings. Keep or remove your config and helper state as desired.
+**Uninstall:** set `start-at-login = false`, choose **Reload config** from the menu, and quit. Move SagradaSpace from Applications to the Trash, then remove any remaining login item in System Settings. Keep or remove your config and helper state as desired.
 
 </details>
 
