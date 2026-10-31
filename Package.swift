@@ -9,15 +9,15 @@ let swiftSettings: [SwiftSetting] = [
 ]
 
 let package = Package(
-    name: "SagradaSpacePackage",
+    name: "SagradaPackage",
     // Runtime support for parameterized protocol types is only available in macOS 13.0.0 or newer
     // And it specifies deploymentTarget for CLI
     platforms: [.macOS(.v13)],
     // Products define the executables and libraries a package produces, making them visible to other packages.
     products: [
-        .executable(name: "sagradaspace", targets: ["Cli"]),
+        .executable(name: "sagrada", targets: ["Cli"]),
         // Don't use this build for release, use xcode instead
-        .executable(name: "SagradaSpaceApp", targets: ["SagradaSpaceApp"]),
+        .executable(name: "SagradaApp", targets: ["SagradaApp"]),
         // We only need to expose this as a product for xcode
         .library(name: "AppBundle", targets: ["AppBundle"]),
     ],
@@ -56,7 +56,7 @@ let package = Package(
             swiftSettings: swiftSettings,
         ),
         .executableTarget(
-            name: "SagradaSpaceApp",
+            name: "SagradaApp",
             dependencies: [
                 .target(name: "AppBundle"),
             ],

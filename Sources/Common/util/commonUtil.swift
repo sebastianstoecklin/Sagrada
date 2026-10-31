@@ -24,7 +24,7 @@ public func bugPrompt(
     let thread = Thread.current
     return """
         Please report to:
-            https://github.com/sebastianstoecklin/SagradaSpace
+            https://github.com/sebastianstoecklin/Sagrada
             Please describe what you did to trigger this error
 
         Message: \(_message)
@@ -59,9 +59,9 @@ public func dieT<T>(
     if !isUnitTest && isServer {
         showMessageInGui(
             filenameIfConsoleApp: recursionDetectorDuringTermination
-                ? "sagradaspace-runtime-error-recursion.txt"
-                : "sagradaspace-runtime-error.txt",
-            title: "SagradaSpace Runtime Error",
+                ? "sagrada-runtime-error-recursion.txt"
+                : "sagrada-runtime-error.txt",
+            title: "Sagrada Runtime Error",
             message: message,
         )
     }

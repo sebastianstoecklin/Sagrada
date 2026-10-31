@@ -1,13 +1,13 @@
 # Documentation in this fork
 
-SagradaSpace's installation, migration, and fork-specific behavior are documented
+Sagrada's installation, migration, and fork-specific behavior are documented
 in the repository's [README](../README.md). Build and architecture notes are in
 [dev-docs](../dev-docs/).
 
 The AsciiDoc command reference and guide here are inherited **AeroSpace**
 documentation. Upstream names, URLs, screenshots, and attribution are deliberately
-preserved. When using SagradaSpace, invoke `sagradaspace` instead of `aerospace`;
-the app is `SagradaSpace.app` rather than `AeroSpace.app`.
+preserved. When using Sagrada, invoke `sagrada` instead of `aerospace`;
+the app is `Sagrada.app` rather than `AeroSpace.app`.
 
 The upstream configuration paths (`~/.aerospace.toml` and
 `$XDG_CONFIG_HOME/aerospace/aerospace.toml`), `AEROSPACE_*` callback environment

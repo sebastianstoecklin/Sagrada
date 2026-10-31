@@ -5,7 +5,7 @@ import Network
 
 let usage =
     """
-    USAGE: \(CommandLine.arguments.first ?? "sagradaspace") [-h|--help] [-v|--version] <subcommand> [<args>...]
+    USAGE: \(CommandLine.arguments.first ?? "sagrada") [-h|--help] [-v|--version] <subcommand> [<args>...]
 
     SUBCOMMANDS:
     \(subcommandDescriptions.sortedBy { $0[0] }.toPaddingTable(columnSeparator: "   ").joined(separator: "\n"))
@@ -38,16 +38,16 @@ struct Main {
             }
             print(
                 """
-                sagradaspace CLI client version: \(cliClientVersionAndHash)
-                SagradaSpace.app server version: \(serverVersionAndHash ?? "Unknown. The server is not responding")
+                sagrada CLI client version: \(cliClientVersionAndHash)
+                Sagrada.app server version: \(serverVersionAndHash ?? "Unknown. The server is not responding")
                 """,
             )
             if serverVersionAndHash != nil && cliClientVersionAndHash != serverVersionAndHash {
                 eprint(
                     """
-                    Warning: SagradaSpace client/server versions don't match. Possible fixes:
-                      - Restart SagradaSpace.app (server restart is required after each update)
-                      - Reinstall and restart SagradaSpace (corrupted installation)
+                    Warning: Sagrada client/server versions don't match. Possible fixes:
+                      - Restart Sagrada.app (server restart is required after each update)
+                      - Reinstall and restart Sagrada (corrupted installation)
                     """,
                 )
             }
@@ -74,7 +74,7 @@ struct Main {
             case .customError(let msg):
                 exit(failExitCode, err: msg)
             case .nwError(let e):
-                exit(failExitCode, err: "Can't connect to SagradaSpace server. Is SagradaSpace.app running?\n\(e.localizedDescription)")
+                exit(failExitCode, err: "Can't connect to Sagrada server. Is Sagrada.app running?\n\(e.localizedDescription)")
         }
 
         var stdin = ""
@@ -121,12 +121,12 @@ struct Main {
         if ans.exitCode != EXIT_CODE_ZERO && ans.serverVersionAndHash != cliClientVersionAndHash {
             eprint(
                 """
-                Warning: SagradaSpace client/server versions don't match
-                  - sagradaspace CLI client version: \(cliClientVersionAndHash)
-                  - SagradaSpace.app server version: \(ans.serverVersionAndHash)
+                Warning: Sagrada client/server versions don't match
+                  - sagrada CLI client version: \(cliClientVersionAndHash)
+                  - Sagrada.app server version: \(ans.serverVersionAndHash)
                   Possible fixes:
-                  - Restart SagradaSpace.app (server restart is required after each update)
-                  - Reinstall and restart SagradaSpace (corrupted installation)
+                  - Restart Sagrada.app (server restart is required after each update)
+                  - Reinstall and restart Sagrada (corrupted installation)
                 """,
             )
         }

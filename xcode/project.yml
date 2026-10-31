@@ -1,11 +1,11 @@
 # Xcode project configuration. Managed by https://github.com/yonaskolb/XcodeGen
 # Xcode is only used to build the release App Bundle. Debug builds only use Swift Package Manager
 
-name: SagradaSpace
+name: Sagrada
 
 packages:
-  SagradaSpacePackage:
-    path: sagradaspace-package-symlink
+  SagradaPackage:
+    path: sagrada-package-symlink
 
 configs:
   Debug: debug
@@ -16,39 +16,45 @@ settings:
     TOOLCHAINS: ${XCODEGEN_TOOLCHAINS}
     SWIFT_VERSION: ${XCODEGEN_SWIFT_LANGUAGE_VERSION}
     GENERATE_INFOPLIST_FILE: YES
-    INFOPLIST_KEY_CFBundleDisplayName: SagradaSpace
-    MARKETING_VERSION: ${XCODEGEN_SAGRADASPACE_VERSION}
+    INFOPLIST_KEY_CFBundleDisplayName: Sagrada
+    MARKETING_VERSION: ${XCODEGEN_SAGRADA_VERSION}
     # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-108256
     # Specifies whether the app runs as an agent app. If this key is set to YES, Launch Services runs the app as an agent app.
     # Agent apps do not appear in the Dock or in the Force Quit window (cmd-opt-esc)
     INFOPLIST_KEY_LSUIElement: YES
-    CODE_SIGN_IDENTITY: ${XCODEGEN_SAGRADASPACE_CODE_SIGN_IDENTITY}
+    CODE_SIGN_IDENTITY: ${XCODEGEN_SAGRADA_CODE_SIGN_IDENTITY}
 
 targets:
-  SagradaSpace:
+  Sagrada:
     type: application
     platform: macOS
     deploymentTarget: "13.0"
     sources:
-      - "../Sources/SagradaSpaceApp"
+      - "../Sources/SagradaApp"
       - "../resources"
       - "../docs/config-examples/default-config.toml"
+      - path: "../vendor/JankyBorders/LICENSE"
+        buildPhase: resources
+    preBuildScripts:
+      - name: Build bundled JankyBorders
+        script: '/bin/bash "$SRCROOT/../script/build-borders.sh" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sagrada-borders"'
+        basedOnDependencyAnalysis: false
     dependencies:
-      - package: SagradaSpacePackage
+      - package: SagradaPackage
         product: AppBundle
     # https://developer.apple.com/documentation/xcode/build-settings-reference
     settings:
       configs:
         Debug:
-          PRODUCT_NAME: SagradaSpaceDebug
-          PRODUCT_BUNDLE_IDENTIFIER: com.sebastianstoecklin.sagradaspace.debug
+          PRODUCT_NAME: SagradaDebug
+          PRODUCT_BUNDLE_IDENTIFIER: com.sebastianstoecklin.sagrada.debug
         Release:
-          PRODUCT_NAME: SagradaSpace
-          PRODUCT_BUNDLE_IDENTIFIER: com.sebastianstoecklin.sagradaspace
+          PRODUCT_NAME: Sagrada
+          PRODUCT_BUNDLE_IDENTIFIER: com.sebastianstoecklin.sagrada
           SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
           GCC_TREAT_WARNINGS_AS_ERRORS: YES
     entitlements:
-      path: ../resources/SagradaSpace.entitlements
+      path: ../resources/Sagrada.entitlements
       properties:
         # Accessibility API doesn't work in sandboxed apps
         com.apple.security.app-sandbox: false

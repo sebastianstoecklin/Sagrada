@@ -4,13 +4,13 @@ import XCTest
 
 final class AppIdentityTest: XCTestCase {
     func testForkHasItsOwnBundleIdentity() {
-        assertEquals(stableAeroSpaceAppId, "com.sebastianstoecklin.sagradaspace")
+        assertEquals(stableAeroSpaceAppId, "com.sebastianstoecklin.sagrada")
         #if DEBUG
             assertEquals(aeroSpaceAppId, stableAeroSpaceAppId + ".debug")
-            assertEquals(aeroSpaceAppName, "SagradaSpaceDebug")
+            assertEquals(aeroSpaceAppName, "SagradaDebug")
         #else
             assertEquals(aeroSpaceAppId, stableAeroSpaceAppId)
-            assertEquals(aeroSpaceAppName, "SagradaSpace")
+            assertEquals(aeroSpaceAppName, "Sagrada")
         #endif
     }
 
@@ -19,8 +19,8 @@ final class AppIdentityTest: XCTestCase {
         assertFalse(socketPath.contains("bobko.aerospace"))
     }
 
-    func testUpstreamConfigurationContractIsPreserved() {
-        assertEquals(configDotfileName, ".aerospace.toml")
+    func testConfigUsesSagradaNameAndPreservesUpstreamEnvironment() {
+        assertEquals(configDotfileName, ".sagrada.toml")
         assertEquals(AEROSPACE_WINDOW_ID, "AEROSPACE_WINDOW_ID")
         assertEquals(AEROSPACE_WORKSPACE, "AEROSPACE_WORKSPACE")
         assertEquals(AEROSPACE_FOCUSED_WORKSPACE, "AEROSPACE_FOCUSED_WORKSPACE")

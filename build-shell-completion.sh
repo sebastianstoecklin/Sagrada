@@ -10,11 +10,11 @@ rm -rf .shell-completion && mkdir -p \
     .shell-completion/bash
 
 ./.deps/cargo-root/bin/complgen aot ./grammar/commands-bnf-grammar.txt \
-    --zsh-script .shell-completion/zsh/_sagradaspace \
-    --fish-script .shell-completion/fish/sagradaspace.fish \
-    --bash-script .shell-completion/bash/sagradaspace
+    --zsh-script .shell-completion/zsh/_sagrada \
+    --fish-script .shell-completion/fish/sagrada.fish \
+    --bash-script .shell-completion/bash/sagrada
 
 # Check basic syntax
-zsh -c 'autoload -Uz compinit; compinit; source ./.shell-completion/zsh/_sagradaspace'
-fish -c 'source ./.shell-completion/fish/sagradaspace.fish'
-bash -c 'source ./.shell-completion/bash/sagradaspace'
+zsh -c 'autoload -Uz compinit; compinit; source ./.shell-completion/zsh/_sagrada'
+fish -c 'source ./.shell-completion/fish/sagrada.fish'
+bash -c 'source ./.shell-completion/bash/sagrada'

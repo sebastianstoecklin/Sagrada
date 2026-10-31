@@ -64,11 +64,11 @@ struct ServerArgs: Sendable {
 }
 
 private let serverHelp = """
-    USAGE: \(CommandLine.arguments.first ?? "SagradaSpace.app/Contents/MacOS/SagradaSpace") [<options>]
+    USAGE: \(CommandLine.arguments.first ?? "Sagrada.app/Contents/MacOS/Sagrada") [<options>]
 
     OPTIONS:
       -h, --help              Print help
-      -v, --version           Print SagradaSpace.app version
+      -v, --version           Print Sagrada.app version
       --config-path <path>    Config path. It will take priority over ~/.aerospace.toml
                               and ${XDG_CONFIG_HOME}/aerospace/aerospace.toml
       --read-only             Disable window management.

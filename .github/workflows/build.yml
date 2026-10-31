@@ -60,7 +60,7 @@ jobs:
       - run: swiftly run swift --version
       - name: './build-release.sh'
         run: |
-          # "-" means "Sign to run locally". There is no sagradaspace-codesign-certificate on GH Actions
+          # "-" means "Sign to run locally". There is no sagrada-codesign-certificate on GH Actions
           ./build-release.sh --codesign-identity -
           brew trust nikitabobko/tap
           ./install-from-sources.sh --dont-rebuild

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/assets/branding/sagradaspace.png" alt="SagradaSpace — cosmic stained-glass windows inspired by Sagrada Família" width="200" height="200">
+<img src="docs/assets/branding/sagrada.png" alt="Sagrada — cosmic stained-glass windows inspired by Sagrada Família" width="200" height="200">
 
-# SagradaSpace
+# Sagrada
 
 ### Celestial light. Structured space.
 
@@ -13,7 +13,7 @@ The power of AeroSpace, with native dwindle splits and a quieter menu bar.
 ![Native Swift](https://img.shields.io/badge/Native-Swift-F05138?style=flat-square&logo=swift&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-8B5CF6?style=flat-square)](LICENSE.txt)
 
-[Download](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest) · [Get started](#get-started) · [How it tiles](#how-it-tiles) · [Configuration](#make-it-yours) · [Keybindings](#at-your-fingertips) · [Upstream docs](https://nikitabobko.github.io/AeroSpace/guide)
+[Download](https://github.com/sebastianstoecklin/Sagrada/releases/latest) · [Get started](#get-started) · [How it tiles](#how-it-tiles) · [Configuration](#make-it-yours) · [Keybindings](#at-your-fingertips) · [Upstream docs](https://nikitabobko.github.io/AeroSpace/guide)
 
 </div>
 
@@ -64,17 +64,17 @@ Download the app for **Apple Silicon or Intel**, running **macOS 13+**. Workspac
 
 ### Install the app
 
-1. Download the ZIP from **[GitHub Releases](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest)** and double-click it to extract it.
+1. Download the ZIP from **[GitHub Releases](https://github.com/sebastianstoecklin/Sagrada/releases/latest)** and double-click it to extract it.
 2. Quit AeroSpace or any other tiling window manager. If replacing an older version, quit it and disable its old login item first.
-3. Drag **SagradaSpace.app** into your **Applications** folder.
-4. Open SagradaSpace and grant access in **System Settings → Privacy & Security → Accessibility**.
+3. Drag **Sagrada.app** into your **Applications** folder.
+4. Open Sagrada and grant access in **System Settings → Privacy & Security → Accessibility**.
 
 That’s it. You can ignore the other files in the download.
 
 > [!NOTE]
 > The current release is not notarized by Apple, so macOS may block it. If you trust the download, try opening the app, then go to **System Settings → Privacy & Security → Open Anyway** and confirm. Do not disable Gatekeeper.
 
-Existing AeroSpace configuration files remain supported and are not overwritten. SagradaSpace needs its own Accessibility permission. Do not run it alongside another tiling window manager.
+Existing AeroSpace configuration files remain supported and are not overwritten. Sagrada needs its own Accessibility permission. Do not run it alongside another tiling window manager.
 
 ### Start at login (optional)
 
@@ -84,20 +84,20 @@ Add this at the top of your `~/.aerospace.toml`, before any section headers:
 start-at-login = true
 ```
 
-Choose **Reload config** from the SagradaSpace menu and allow the login item if macOS asks.
+Choose **Reload config** from the Sagrada menu and allow the login item if macOS asks.
 
 ## Build from source
 
 For a local release app, install full **Xcode**, accept its license, and follow the [build prerequisites](dev-docs/development.md#1-install-dependencies), including the docs and shell-completion dependencies. Use the toolchain specified in [`.swift-version`](.swift-version).
 
 ```sh
-git clone https://github.com/sebastianstoecklin/SagradaSpace.git
-cd SagradaSpace
+git clone https://github.com/sebastianstoecklin/Sagrada.git
+cd Sagrada
 ./build-release.sh --codesign-identity -
 open .release
 ```
 
-Drag **SagradaSpace.app** from the folder that opens into **Applications**, then open it and grant Accessibility access as above. This is an ad-hoc signed release build; no Apple Developer membership or custom signing certificate is required. Once installed, the app does not depend on the checkout.
+Drag **Sagrada.app** from the folder that opens into **Applications**, then open it and grant Accessibility access as above. This is an ad-hoc signed release build; no Apple Developer membership or custom signing certificate is required. Once installed, the app does not depend on the checkout.
 
 ## Make it yours
 
@@ -109,14 +109,14 @@ Existing user configs take precedence; building does **not** overwrite them. Dwi
 enable-dwindle = true
 ```
 
-Set it to `false` to restore upstream insertion, then choose **Reload config** from the SagradaSpace menu.
+Set it to `false` to restore upstream insertion, then choose **Reload config** from the Sagrada menu.
 
 > [!WARNING]
 > Remove the old `dwindle.sh` window-detection callback if you used one. Native Dwindle runs synchronously in the engine; do not run both implementations together.
 
 ### Adopt the bundled setup
 
-The [bundled config](docs/config-examples/default-config.toml) is deliberately personal: Cmd-based navigation, 10-point gaps, app launch shortcuts, workspace 5 assigned to the secondary display, and a JankyBorders startup hook. **Review it before copying**—its shortcuts can override familiar macOS/app shortcuts.
+The [bundled config](docs/config-examples/default-config.toml) is deliberately personal: Cmd-based navigation, 10-point gaps, app launch shortcuts, workspace 5 assigned to the secondary display, and integrated JankyBorders. **Review it before copying**—its shortcuts can override familiar macOS/app shortcuts.
 
 ```sh
 # Preserve your current config, if one exists.
@@ -128,12 +128,15 @@ cp script/workspace-layout.sh "$HOME/.config/aerospace/"
 cp docs/config-examples/default-config.toml "$HOME/.aerospace.toml"
 ```
 
-Choose **Reload config** from the SagradaSpace menu.
+Choose **Reload config** from the Sagrada menu.
 
 When using the downloaded release instead of a source checkout, substitute `config/workspace-layout.sh` and `config/default-config.toml` for the two source paths above.
 
 - **Workspace floating:** the helper provides the workspace-wide floating toggle and stores state in `~/.local/state/aerospace/workspace-layout`. It needs this fork’s CLI on `PATH`. Remove its callback and shortcut if you do not use it.
-- **Borders and launchers:** install or adjust the machine-specific `~/.config/borders/bordersrc` startup command and app launch bindings (including Ghostty, Zen, and Obsidian).
+- **Borders:** JankyBorders 1.9.0 is bundled (macOS 14+). Configure `[borders]` in TOML: `enabled`, `width` (0–100 whole points), `style` (`round`, `square`, `uniform`), `active-color`, `inactive-color`, `background-color` (`0xAARRGGBB`), `hidpi`, `ax-focus`, `blacklist` and `whitelist` (comma-separated app names). Reload applies changes; disabling or quitting stops the helper. Existing configs opt in with `borders.enabled = true`. Remove old borders startup hooks and stop standalone JankyBorders to avoid duplicate borders.
+- **Caffeinate:** the menu bar submenu offers **Aus**, **Wach halten** (standard idle-sleep prevention), and **Bildschirm wach halten** (also keeps the display on). Starts off; quitting stops it. It also releases assertions if Sagrada exits unexpectedly.
+- **Config migration:** `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml` takes priority. Legacy SagradaSpace/AeroSpace configs remain supported when no new config exists. Sagrada has a new bundle identifier and needs its own Accessibility approval.
+- **Launchers:** adjust app launch bindings (including Ghostty, Zen, and Obsidian) to your setup.
 - **A simpler starting point:** the [preserved upstream config](docs/config-examples/upstream-default-config.toml) is available for reference; Dwindle remains enabled unless explicitly disabled.
 
 ## At your fingertips
@@ -167,10 +170,10 @@ swift build --build-tests
 swift test --skip-build
 bin_dir="$(swift build --show-bin-path)"
 mkdir -p .debug
-cp "$bin_dir/SagradaSpaceApp" "$bin_dir/sagradaspace" .debug/
+cp "$bin_dir/SagradaApp" "$bin_dir/sagrada" .debug/
 ```
 
-Run `.debug/SagradaSpaceApp` from a terminal with Accessibility permission; use `.debug/sagradaspace` for commands. Do not run another instance at the same time.
+Run `.debug/SagradaApp` from a terminal with Accessibility permission; use `.debug/sagrada` for commands. Do not run another instance at the same time.
 
 On macOS 27 beta Command Line Tools, missing `SwiftUIMacros` or XCTest may require the full Xcode toolchain. See the [development notes](dev-docs/development.md) for toolchain selection and workarounds.
 
@@ -181,16 +184,16 @@ Dwindle-specific tests cover alternating splits, focus selection, weight preserv
 <details>
 <summary><strong>Update or uninstall</strong></summary>
 
-**Update:** quit SagradaSpace, download the latest [release](https://github.com/sebastianstoecklin/SagradaSpace/releases/latest) (or rebuild), and replace the app in Applications and reopen it. Keep the same signing certificate to reduce Accessibility permission resets. This fork does not receive upstream Homebrew updates automatically.
+**Update:** quit Sagrada, download the latest [release](https://github.com/sebastianstoecklin/Sagrada/releases/latest) (or rebuild), and replace the app in Applications and reopen it. Keep the same signing certificate to reduce Accessibility permission resets. This fork does not receive upstream Homebrew updates automatically.
 
-**Uninstall:** set `start-at-login = false`, choose **Reload config** from the menu, and quit. Move SagradaSpace from Applications to the Trash, then remove any remaining login item in System Settings. Keep or remove your config and helper state as desired.
+**Uninstall:** set `start-at-login = false`, choose **Reload config** from the menu, and quit. Move Sagrada from Applications to the Trash, then remove any remaining login item in System Settings. Keep or remove your config and helper state as desired.
 
 </details>
 
 <details>
 <summary><strong>App icon and branding</strong></summary>
 
-The SagradaSpace icon combines Sagrada Família-inspired stained glass, branching geometry, and nebula light with recursive window splits. The README and macOS app share the same [master artwork](docs/assets/branding/sagradaspace.png); the app asset catalog includes all standard macOS icon sizes.
+The Sagrada icon combines Sagrada Família-inspired stained glass, branching geometry, and nebula light with recursive window splits. The README and macOS app share the same [master artwork](docs/assets/branding/sagrada.png); the app asset catalog includes all standard macOS icon sizes.
 
 See [branding notes](docs/assets/branding/README.md) for the image-generation prompt and regeneration instructions.
 

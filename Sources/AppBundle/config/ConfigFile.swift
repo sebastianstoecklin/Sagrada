@@ -1,7 +1,7 @@
 import Common
 import Foundation
 
-let configDotfileName = ".aerospace.toml"
+let configDotfileName = ".sagrada.toml"
 func findCustomConfigUrl() -> ConfigFile {
     let xdgConfigHome = ProcessInfo.processInfo.environment["XDG_CONFIG_HOME"].map { URL(filePath: $0) }
         ?? FileManager.default.homeDirectoryForCurrentUser.appending(path: ".config/")
@@ -10,10 +10,19 @@ func findCustomConfigUrl() -> ConfigFile {
         case nil:
             [
                 FileManager.default.homeDirectoryForCurrentUser.appending(path: configDotfileName),
-                xdgConfigHome.appending(path: "aerospace").appending(path: "aerospace.toml"),
+                xdgConfigHome.appending(path: "sagrada").appending(path: "sagrada.toml"),
             ]
     }
-    let existingCandidates: [URL] = candidates.filter { (candidate: URL) in FileManager.default.fileExists(atPath: candidate.path) }
+    var existingCandidates: [URL] = candidates.filter { (candidate: URL) in FileManager.default.fileExists(atPath: candidate.path) }
+    if existingCandidates.isEmpty && serverArgs.configLocation == nil {
+        let legacy = [
+            FileManager.default.homeDirectoryForCurrentUser.appending(path: ".sagradaspace.toml"),
+            xdgConfigHome.appending(path: "sagradaspace/sagradaspace.toml"),
+            FileManager.default.homeDirectoryForCurrentUser.appending(path: ".aerospace.toml"),
+            xdgConfigHome.appending(path: "aerospace/aerospace.toml"),
+        ]
+        existingCandidates = legacy.filter { FileManager.default.fileExists(atPath: $0.path) }
+    }
     let count = existingCandidates.count
     return switch count {
         case 0: .noCustomConfigExists

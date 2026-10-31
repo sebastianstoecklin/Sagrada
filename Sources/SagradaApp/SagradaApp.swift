@@ -4,7 +4,7 @@ import SwiftUI
 // This file is shared between SPM and xcode project
 
 @main
-struct SagradaSpaceApp: App {
+struct SagradaApp: App {
     @StateObject var viewModel = TrayMenuModel.shared
     @StateObject var messageModel = MessageModel.shared
     @Environment(\.openWindow) var openWindow: OpenWindowAction

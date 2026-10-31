@@ -8,5 +8,5 @@ source ./script/setup.sh
 swift build --build-tests "$@"
 
 rm -rf .debug && mkdir .debug
-cp -r .build/debug/sagradaspace .debug
-cp -r .build/debug/SagradaSpaceApp .debug
+cp -r .build/debug/sagrada .debug
+cp -r .build/debug/SagradaApp .debug

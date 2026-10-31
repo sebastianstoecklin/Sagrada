@@ -1,8 +1,8 @@
 # Contributing
 
-For **SagradaSpace**, submit pull requests and discuss fork-specific changes at
-https://github.com/sebastianstoecklin/SagradaSpace. Include `sagradaspace --version`
-and, for window-handling problems, `sagradaspace debug-windows` output.
+For **Sagrada**, submit pull requests and discuss fork-specific changes at
+https://github.com/sebastianstoecklin/Sagrada. Include `sagrada --version`
+and, for window-handling problems, `sagrada debug-windows` output.
 
 The guidelines below are retained from **upstream AeroSpace**. Their links,
 contact details, and sponsorship instructions refer to upstream, not this fork.

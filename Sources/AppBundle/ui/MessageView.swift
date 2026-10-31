@@ -120,7 +120,7 @@ public struct Message: Hashable, Equatable {
     init(
         type: MessageType = .config,
         title: String = aeroSpaceAppName,
-        description: String = "SagradaSpace Config Diagnostics",
+        description: String = "Sagrada Config Diagnostics",
         body: String,
         containsWarnings: Bool,
     ) {

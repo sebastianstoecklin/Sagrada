@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 source ./script/setup.sh
 
 build_version="0.0.0-SNAPSHOT"
-codesign_identity="sagradaspace-codesign-certificate"
+codesign_identity="sagrada-codesign-certificate"
 while test $# -gt 0; do
     case $1 in
         --build-version) build_version="$2"; shift 2;;
@@ -23,7 +23,7 @@ done
 ./script/check-uncommitted-files.sh
 ./generate.sh --build-version "$build_version" --codesign-identity "$codesign_identity" --generate-git-hash
 
-swift_build_cli=(build -c release --arch arm64 --arch x86_64 --product sagradaspace)
+swift_build_cli=(build -c release --arch arm64 --arch x86_64 --product sagrada)
 swift "${swift_build_cli[@]}" -Xswiftc -warnings-as-errors
 cli_bin_path="$(swift "${swift_build_cli[@]}" --show-bin-path)"
 
@@ -33,7 +33,7 @@ cd ./xcode
     xcode_configuration="Release"
     xcodebuild -version
     xcodebuild-pretty ../.release/xcodebuild.log clean build \
-        -scheme SagradaSpace \
+        -scheme Sagrada \
         -destination "generic/platform=macOS" \
         -configuration "$xcode_configuration" \
         -derivedDataPath .xcode-build
@@ -41,38 +41,40 @@ cd -
 
 # Keep local fork changes intact; never reset the working tree during a build.
 
-cp -r "xcode/.xcode-build/Build/Products/$xcode_configuration/SagradaSpace.app" .release
-cp -r "$cli_bin_path/sagradaspace" .release
+cp -r "xcode/.xcode-build/Build/Products/$xcode_configuration/Sagrada.app" .release
+cp -r "$cli_bin_path/sagrada" .release
 
 ################
 ### SIGN CLI ###
 ################
 
-codesign -s "$codesign_identity" .release/sagradaspace
+codesign -s "$codesign_identity" .release/sagrada
 
 ################
 ### VALIDATE ###
 ################
 
 expected_layout=$(cat <<EOF
-.release/SagradaSpace.app
-.release/SagradaSpace.app/Contents
-.release/SagradaSpace.app/Contents/_CodeSignature
-.release/SagradaSpace.app/Contents/_CodeSignature/CodeResources
-.release/SagradaSpace.app/Contents/MacOS
-.release/SagradaSpace.app/Contents/MacOS/SagradaSpace
-.release/SagradaSpace.app/Contents/Resources
-.release/SagradaSpace.app/Contents/Resources/default-config.toml
-.release/SagradaSpace.app/Contents/Resources/AppIcon.icns
-.release/SagradaSpace.app/Contents/Resources/Assets.car
-.release/SagradaSpace.app/Contents/Info.plist
-.release/SagradaSpace.app/Contents/PkgInfo
+.release/Sagrada.app
+.release/Sagrada.app/Contents
+.release/Sagrada.app/Contents/_CodeSignature
+.release/Sagrada.app/Contents/_CodeSignature/CodeResources
+.release/Sagrada.app/Contents/MacOS
+.release/Sagrada.app/Contents/MacOS/Sagrada
+.release/Sagrada.app/Contents/Resources
+.release/Sagrada.app/Contents/Resources/default-config.toml
+.release/Sagrada.app/Contents/Resources/LICENSE
+.release/Sagrada.app/Contents/Resources/sagrada-borders
+.release/Sagrada.app/Contents/Resources/AppIcon.icns
+.release/Sagrada.app/Contents/Resources/Assets.car
+.release/Sagrada.app/Contents/Info.plist
+.release/Sagrada.app/Contents/PkgInfo
 EOF
 )
 
-if test "$expected_layout" != "$(find .release/SagradaSpace.app)"; then
+if test "$(printf '%s\n' "$expected_layout" | sort)" != "$(find .release/Sagrada.app | sort)"; then
     echo "!!! Expect/Actual layout don't match !!!"
-    find .release/SagradaSpace.app
+    find .release/Sagrada.app
     exit 1
 fi
 
@@ -91,34 +93,39 @@ check-contains-hash() {
     fi
 }
 
-check-universal-binary .release/SagradaSpace.app/Contents/MacOS/SagradaSpace
-check-universal-binary .release/sagradaspace
+check-universal-binary .release/Sagrada.app/Contents/MacOS/Sagrada
+check-universal-binary .release/sagrada
+check-universal-binary .release/Sagrada.app/Contents/Resources/sagrada-borders
 
-check-contains-hash .release/SagradaSpace.app/Contents/MacOS/SagradaSpace
-check-contains-hash .release/sagradaspace
+check-contains-hash .release/Sagrada.app/Contents/MacOS/Sagrada
+check-contains-hash .release/sagrada
 
-codesign -v .release/SagradaSpace.app
-codesign -v .release/sagradaspace
+codesign --verify --deep --strict .release/Sagrada.app
+codesign -v .release/sagrada
 
 ############
 ### PACK ###
 ############
 
-mkdir -p ".release/SagradaSpace-v$build_version/manpage" && cp .man/*.1 ".release/SagradaSpace-v$build_version/manpage"
-cp -r ./legal ".release/SagradaSpace-v$build_version/legal"
-cp -r .shell-completion ".release/SagradaSpace-v$build_version/shell-completion"
+mkdir -p ".release/Sagrada-v$build_version/manpage" && cp .man/*.1 ".release/Sagrada-v$build_version/manpage"
+cp -r ./legal ".release/Sagrada-v$build_version/legal"
+# GPLv3 corresponding source for the separately bundled JankyBorders helper.
+mkdir -p ".release/Sagrada-v$build_version/source/vendor" ".release/Sagrada-v$build_version/source/script"
+cp -r vendor/JankyBorders ".release/Sagrada-v$build_version/source/vendor/"
+cp script/build-borders.sh ".release/Sagrada-v$build_version/source/script/"
+cp -r .shell-completion ".release/Sagrada-v$build_version/shell-completion"
 cd .release
-    mkdir -p "SagradaSpace-v$build_version/bin" && cp -r sagradaspace "SagradaSpace-v$build_version/bin"
-    cp -r SagradaSpace.app "SagradaSpace-v$build_version"
-    zip -r "SagradaSpace-v$build_version.zip" "SagradaSpace-v$build_version"
+    mkdir -p "Sagrada-v$build_version/bin" && cp -r sagrada "Sagrada-v$build_version/bin"
+    cp -r Sagrada.app "Sagrada-v$build_version"
+    zip -r "Sagrada-v$build_version.zip" "Sagrada-v$build_version"
 cd -
 
 #################
 ### Brew Cask ###
 #################
-for cask_name in sagradaspace sagradaspace-dev; do
+for cask_name in sagrada sagrada-dev; do
     ./script/build-brew-cask.sh \
         --cask-name "$cask_name" \
-        --zip-uri ".release/SagradaSpace-v$build_version.zip" \
+        --zip-uri ".release/Sagrada-v$build_version.zip" \
         --build-version "$build_version"
 done

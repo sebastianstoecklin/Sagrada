@@ -1,16 +1,16 @@
-name: SagradaSpace report
-description: Report a problem with this SagradaSpace fork
+name: Sagrada report
+description: Report a problem with this Sagrada fork
 body:
   - type: markdown
     attributes:
       value: |
-        SagradaSpace is a fork of AeroSpace. Report fork-specific problems here.
+        Sagrada is a fork of AeroSpace. Report fork-specific problems here.
         Only report upstream problems to https://github.com/nikitabobko/AeroSpace after reproducing them on an upstream build.
   - type: textarea
     id: version
     attributes:
       label: Version and macOS
-      description: Include the output of sagradaspace --version and your macOS version.
+      description: Include the output of sagrada --version and your macOS version.
     validations:
       required: true
   - type: textarea

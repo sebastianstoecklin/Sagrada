@@ -14,9 +14,9 @@ marker_for() {
 
 case "${1:-}" in
   toggle)
-    workspace="$(sagradaspace list-workspaces --focused)"
+    workspace="$(sagrada list-workspaces --focused)"
     [[ -n "$workspace" ]] || exit 0
-    windows="$(sagradaspace list-windows --workspace "$workspace" --format '%{window-id}')"
+    windows="$(sagrada list-windows --workspace "$workspace" --format '%{window-id}')"
     marker="$(marker_for "$workspace")"
     mkdir -p "$state_dir"
     if [[ -f "$marker" ]]; then
@@ -30,7 +30,7 @@ case "${1:-}" in
     result=0
     while IFS= read -r id; do
       [[ "$id" =~ ^[0-9]+$ ]] || continue
-      sagradaspace layout --window-id "$id" "$target" || result=1
+      sagrada layout --window-id "$id" "$target" || result=1
     done <<< "$windows"
     exit "$result"
     ;;
@@ -38,11 +38,11 @@ case "${1:-}" in
     id="${AEROSPACE_WINDOW_ID:-}"
     [[ "$id" =~ ^[0-9]+$ ]] || exit 0
     # Resolve the detected window, not the potentially changed focused workspace.
-    windows="$(sagradaspace list-windows --all --format '%{window-id}|%{workspace}')"
+    windows="$(sagrada list-windows --all --format '%{window-id}|%{workspace}')"
     while IFS='|' read -r window_id workspace; do
       [[ "$window_id" == "$id" ]] || continue
       if [[ -f "$(marker_for "$workspace")" ]]; then
-        sagradaspace layout --window-id "$id" floating
+        sagrada layout --window-id "$id" floating
       fi
       break
     done <<< "$windows"

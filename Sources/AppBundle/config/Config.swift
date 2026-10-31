@@ -52,6 +52,7 @@ struct Config: ConvenienceMutable {
     var keyMapping = KeyMapping()
     var execConfig: ExecConfig = ExecConfig()
     var focusFollowsMouse: FocusFollowsMouse = FocusFollowsMouse()
+    var borders = BordersConfig()
 
     var onFocusChanged: Shell<any Command> = .empty
     // var onFocusedWorkspaceChanged: [any Command] = []

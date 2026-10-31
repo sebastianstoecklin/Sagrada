@@ -57,6 +57,7 @@ struct ReloadConfigResult {
         syncStartAtLogin()
         syncFocusFollowsMouse(config)
         syncConfigFileWatcher()
+        DesktopHelpers.shared.syncBorders(config.borders)
     }
 
     if warningsAsErrors {

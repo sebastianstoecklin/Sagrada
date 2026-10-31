@@ -19,10 +19,10 @@ export PATH
 
 # Do not uninstall upstream AeroSpace or alter its tap automatically.
 # The generated cask declares conflicts; quit/uninstall upstream explicitly first.
-brew list --cask sagradaspace > /dev/null 2>&1 && brew uninstall --cask sagradaspace
+brew list --cask sagrada > /dev/null 2>&1 && brew uninstall --cask sagrada
 which brew-install-path > /dev/null 2>&1 || brew install nikitabobko/tap/brew-install-path
 
 # Override HOMEBREW_CACHE. Otherwise, homebrew refuses to "redownload" the snapshot file
 # Maybe there is a better way, I don't know
-rm -rf /tmp/sagradaspace-from-sources-brew-cache
-HOMEBREW_CACHE=/tmp/sagradaspace-from-sources-brew-cache brew install-path ./.release/sagradaspace-dev.rb
+rm -rf /tmp/sagrada-from-sources-brew-cache
+HOMEBREW_CACHE=/tmp/sagrada-from-sources-brew-cache brew install-path ./.release/sagrada-dev.rb

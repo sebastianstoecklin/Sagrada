@@ -7,115 +7,128 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D9C00D649B5EC4E6A1B8181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F2B5705D978C503800577C /* Assets.xcassets */; };
-		D3BDC6CB7347DEDD86B129B3 /* default-config.toml in Resources */ = {isa = PBXBuildFile; fileRef = C70FED2530F00D16EA90F71F /* default-config.toml */; };
-		E484274814B33A95B202DBD0 /* AppBundle in Frameworks */ = {isa = PBXBuildFile; productRef = B5138D004065212E34F7E223 /* AppBundle */; };
-		EE0AAB30A60FF6D023486883 /* SagradaSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */; };
+		08DA65A57BA4C0F055E6C6CA /* AppBundle in Frameworks */ = {isa = PBXBuildFile; productRef = 2747BD9F3BA2C097B082459C /* AppBundle */; };
+		33AD90FEA9FB81CC569D022A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */; };
+		562870EEA6FB69159D74F7F8 /* SagradaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29546DD22CB32A655046721 /* SagradaApp.swift */; };
+		740C4E45E0834B94EB304807 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 150564C1E2EA0BE2870B277C /* LICENSE */; };
+		FA76FD397B0D7F996F6EB1AF /* default-config.toml in Resources */ = {isa = PBXBuildFile; fileRef = 4E1537F3AAB15A3438038401 /* default-config.toml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1CDC87FBACD8C9E102D2E9D5 /* sagradaspace-package-symlink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "sagradaspace-package-symlink"; path = "sagradaspace-package-symlink"; sourceTree = SOURCE_ROOT; };
-		269124754E73D433B57A1C9B /* SagradaSpace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SagradaSpace.entitlements; sourceTree = "<group>"; };
-		A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SagradaSpaceApp.swift; sourceTree = "<group>"; };
-		C70FED2530F00D16EA90F71F /* default-config.toml */ = {isa = PBXFileReference; path = "default-config.toml"; sourceTree = "<group>"; };
-		D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SagradaSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2F2B5705D978C503800577C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		150564C1E2EA0BE2870B277C /* LICENSE */ = {isa = PBXFileReference; path = LICENSE; sourceTree = "<group>"; };
+		2E224F2E19D63A6CCE549DE8 /* Sagrada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sagrada.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CC67B86B11536814130F18C /* Sagrada.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sagrada.entitlements; sourceTree = "<group>"; };
+		4E1537F3AAB15A3438038401 /* default-config.toml */ = {isa = PBXFileReference; path = "default-config.toml"; sourceTree = "<group>"; };
+		CCF30526F2805AB018A38EE4 /* sagrada-package-symlink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "sagrada-package-symlink"; path = "sagrada-package-symlink"; sourceTree = SOURCE_ROOT; };
+		D29546DD22CB32A655046721 /* SagradaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SagradaApp.swift; sourceTree = "<group>"; };
+		D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CA1C05FEF5048F28DD66548A /* Frameworks */ = {
+		BDF3D93681322225B7149C9D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E484274814B33A95B202DBD0 /* AppBundle in Frameworks */,
+				08DA65A57BA4C0F055E6C6CA /* AppBundle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14E37DECD91E098E09CCE7F7 = {
+		4D295C77C726BF848E743ABB /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				D1C3BBF39854B904411CEAAA /* config-examples */,
-				56A4A325D27BCA471E096671 /* Packages */,
-				D8EBB6963BE7501041775F16 /* resources */,
-				A6C86B47ADCB7E6C9CB0D9D4 /* SagradaSpaceApp */,
-				8222222C6332F4B4B82E6F2D /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		56A4A325D27BCA471E096671 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				1CDC87FBACD8C9E102D2E9D5 /* sagradaspace-package-symlink */,
+				CCF30526F2805AB018A38EE4 /* sagrada-package-symlink */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
 		};
-		8222222C6332F4B4B82E6F2D /* Products */ = {
+		8E86D90B85C5BCC4C04D63B2 /* SagradaApp */ = {
 			isa = PBXGroup;
 			children = (
-				D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */,
+				D29546DD22CB32A655046721 /* SagradaApp.swift */,
 			);
-			name = Products;
+			name = SagradaApp;
+			path = ../Sources/SagradaApp;
 			sourceTree = "<group>";
 		};
-		A6C86B47ADCB7E6C9CB0D9D4 /* SagradaSpaceApp */ = {
+		AFF48085C4CB91E6B1BBBE1A /* JankyBorders */ = {
 			isa = PBXGroup;
 			children = (
-				A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */,
+				150564C1E2EA0BE2870B277C /* LICENSE */,
 			);
-			name = SagradaSpaceApp;
-			path = ../Sources/SagradaSpaceApp;
+			name = JankyBorders;
+			path = ../vendor/JankyBorders;
 			sourceTree = "<group>";
 		};
-		D1C3BBF39854B904411CEAAA /* config-examples */ = {
+		B8B531F7ADE63F6FBFC16E74 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				C70FED2530F00D16EA90F71F /* default-config.toml */,
-			);
-			name = "config-examples";
-			path = "../docs/config-examples";
-			sourceTree = "<group>";
-		};
-		D8EBB6963BE7501041775F16 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				F2F2B5705D978C503800577C /* Assets.xcassets */,
-				269124754E73D433B57A1C9B /* SagradaSpace.entitlements */,
+				D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */,
+				3CC67B86B11536814130F18C /* Sagrada.entitlements */,
 			);
 			name = resources;
 			path = ../resources;
 			sourceTree = "<group>";
 		};
+		C508CDE2608382BA67B1762B /* config-examples */ = {
+			isa = PBXGroup;
+			children = (
+				4E1537F3AAB15A3438038401 /* default-config.toml */,
+			);
+			name = "config-examples";
+			path = "../docs/config-examples";
+			sourceTree = "<group>";
+		};
+		C7BD61042CEF4B93885E5AF3 = {
+			isa = PBXGroup;
+			children = (
+				C508CDE2608382BA67B1762B /* config-examples */,
+				AFF48085C4CB91E6B1BBBE1A /* JankyBorders */,
+				4D295C77C726BF848E743ABB /* Packages */,
+				B8B531F7ADE63F6FBFC16E74 /* resources */,
+				8E86D90B85C5BCC4C04D63B2 /* SagradaApp */,
+				FB2CC1FDEA0B9B97D9BC3002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB2CC1FDEA0B9B97D9BC3002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E224F2E19D63A6CCE549DE8 /* Sagrada.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2189ABF0A5D75CFB8C1FC0C4 /* SagradaSpace */ = {
+		BFE1F74AC1C5D41DA17FC5FA /* Sagrada */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6AFA8E57077EF3B5A4BCB67D /* Build configuration list for PBXNativeTarget "SagradaSpace" */;
+			buildConfigurationList = 1DCE766C683AC16E10E7FCB8 /* Build configuration list for PBXNativeTarget "Sagrada" */;
 			buildPhases = (
-				064C481AF28EF1B094044DC7 /* Sources */,
-				3412FDAB9B77B0CA351A79D5 /* Resources */,
-				CA1C05FEF5048F28DD66548A /* Frameworks */,
+				FFAF75D5F0136E1AAA66E3EE /* Build bundled JankyBorders */,
+				F65895BF45BC0B830B0E024E /* Sources */,
+				038220605A4817481389A078 /* Resources */,
+				BDF3D93681322225B7149C9D /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SagradaSpace;
+			name = Sagrada;
 			packageProductDependencies = (
-				B5138D004065212E34F7E223 /* AppBundle */,
+				2747BD9F3BA2C097B082459C /* AppBundle */,
 			);
-			productName = SagradaSpace;
-			productReference = D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */;
+			productName = Sagrada;
+			productReference = 2E224F2E19D63A6CCE549DE8 /* Sagrada.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FA9B9D68E9928970F868AF64 /* Project object */ = {
+		88E888B30D1A94DD265F028B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
@@ -123,53 +136,76 @@
 				TargetAttributes = {
 				};
 			};
-			buildConfigurationList = 6F799367E98417CCAC943EF9 /* Build configuration list for PBXProject "SagradaSpace" */;
+			buildConfigurationList = 577D079F652BA8F4016C2538 /* Build configuration list for PBXProject "Sagrada" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
 				en,
 			);
-			mainGroup = 14E37DECD91E098E09CCE7F7;
+			mainGroup = C7BD61042CEF4B93885E5AF3;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				7171DEFA001BE6A27B40E28A /* XCLocalSwiftPackageReference "sagradaspace-package-symlink" */,
+				CE46A1267D9C94FF9D391D4F /* XCLocalSwiftPackageReference "sagrada-package-symlink" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 8222222C6332F4B4B82E6F2D /* Products */;
+			productRefGroup = FB2CC1FDEA0B9B97D9BC3002 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2189ABF0A5D75CFB8C1FC0C4 /* SagradaSpace */,
+				BFE1F74AC1C5D41DA17FC5FA /* Sagrada */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3412FDAB9B77B0CA351A79D5 /* Resources */ = {
+		038220605A4817481389A078 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D9C00D649B5EC4E6A1B8181 /* Assets.xcassets in Resources */,
-				D3BDC6CB7347DEDD86B129B3 /* default-config.toml in Resources */,
+				33AD90FEA9FB81CC569D022A /* Assets.xcassets in Resources */,
+				740C4E45E0834B94EB304807 /* LICENSE in Resources */,
+				FA76FD397B0D7F996F6EB1AF /* default-config.toml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FFAF75D5F0136E1AAA66E3EE /* Build bundled JankyBorders */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build bundled JankyBorders";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"$SRCROOT/../script/build-borders.sh\" \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sagrada-borders\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		064C481AF28EF1B094044DC7 /* Sources */ = {
+		F65895BF45BC0B830B0E024E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE0AAB30A60FF6D023486883 /* SagradaSpaceApp.swift in Sources */,
+				562870EEA6FB69159D74F7F8 /* SagradaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		6201C531040698E6D7C23D1A /* Debug */ = {
+		0448AC0FBD6097ADA2F9CB5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -202,7 +238,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "sagradaspace-codesign-certificate";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -222,9 +258,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SagradaSpace;
+				INFOPLIST_KEY_CFBundleDisplayName = Sagrada;
 				INFOPLIST_KEY_LSUIElement = YES;
-				MARKETING_VERSION = "0.0.0-SNAPSHOT";
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -237,7 +273,7 @@
 			};
 			name = Debug;
 		};
-		8DF7DE86EEA5E32A262E788C /* Release */ = {
+		49917B6B226B89441C5C6090 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,7 +306,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "sagradaspace-codesign-certificate";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -284,9 +320,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SagradaSpace;
+				INFOPLIST_KEY_CFBundleDisplayName = Sagrada;
 				INFOPLIST_KEY_LSUIElement = YES;
-				MARKETING_VERSION = "0.0.0-SNAPSHOT";
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -298,11 +334,11 @@
 			};
 			name = Release;
 		};
-		E2B686C3C202A3176269E663 /* Release */ = {
+		702B76D636847975E076E3BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ../resources/SagradaSpace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ../resources/Sagrada.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,26 +346,26 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagradaspace;
-				PRODUCT_NAME = SagradaSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagrada;
+				PRODUCT_NAME = Sagrada;
 				SDKROOT = macosx;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 			};
 			name = Release;
 		};
-		EAADF65F5B1B810CB06C3DFE /* Debug */ = {
+		8F4F37CCA89D42988BE00CB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ../resources/SagradaSpace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ../resources/Sagrada.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagradaspace.debug;
-				PRODUCT_NAME = SagradaSpaceDebug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagrada.debug;
+				PRODUCT_NAME = SagradaDebug;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -337,20 +373,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6AFA8E57077EF3B5A4BCB67D /* Build configuration list for PBXNativeTarget "SagradaSpace" */ = {
+		1DCE766C683AC16E10E7FCB8 /* Build configuration list for PBXNativeTarget "Sagrada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EAADF65F5B1B810CB06C3DFE /* Debug */,
-				E2B686C3C202A3176269E663 /* Release */,
+				8F4F37CCA89D42988BE00CB6 /* Debug */,
+				702B76D636847975E076E3BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		6F799367E98417CCAC943EF9 /* Build configuration list for PBXProject "SagradaSpace" */ = {
+		577D079F652BA8F4016C2538 /* Build configuration list for PBXProject "Sagrada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6201C531040698E6D7C23D1A /* Debug */,
-				8DF7DE86EEA5E32A262E788C /* Release */,
+				0448AC0FBD6097ADA2F9CB5F /* Debug */,
+				49917B6B226B89441C5C6090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -358,18 +394,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		7171DEFA001BE6A27B40E28A /* XCLocalSwiftPackageReference "sagradaspace-package-symlink" */ = {
+		CE46A1267D9C94FF9D391D4F /* XCLocalSwiftPackageReference "sagrada-package-symlink" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "sagradaspace-package-symlink";
+			relativePath = "sagrada-package-symlink";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B5138D004065212E34F7E223 /* AppBundle */ = {
+		2747BD9F3BA2C097B082459C /* AppBundle */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppBundle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = FA9B9D68E9928970F868AF64 /* Project object */;
+	rootObject = 88E888B30D1A94DD265F028B /* Project object */;
 }

@@ -1,17 +1,15 @@
 config-version = 2
 enable-dwindle = true
 
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# Place a copy of this config at ~/.sagrada.toml.
+# Existing ~/.aerospace.toml configurations are still supported.
 
-# You can use it to add commands that run after SagradaSpace startup.
+# You can use it to add commands that run after Sagrada startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-# JankyBorders follows window focus automatically; no focus callbacks needed.
-after-startup-command = [
-    'exec-and-forget /bin/bash "$HOME/.config/borders/bordersrc"'
-]
+# JankyBorders is bundled and managed via [borders] below.
+after-startup-command = []
 
-# Start SagradaSpace at login
+# Start Sagrada at login
 start-at-login = true
 
 # Normalizations preserve the native alternating Dwindle split tree.
@@ -49,6 +47,20 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
 if = 'true'
 run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" detected'
+
+# Integrated JankyBorders (macOS 14+), applied on config reload.
+# Width is in whole points. Colors use 0xAARRGGBB, lists are comma-separated app names.
+[borders]
+    enabled = true
+    width = 5
+    style = 'round' # round | square | uniform
+    active-color = '0xffe2e2e3'
+    inactive-color = '0xff414550'
+    background-color = '0x00000000'
+    hidpi = true
+    ax-focus = false
+    blacklist = ''
+    whitelist = ''
 
 # Keep workspace 5 on the secondary display; fall back when using one monitor.
 [workspace-to-monitor-force-assignment]

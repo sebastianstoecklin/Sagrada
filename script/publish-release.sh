@@ -33,21 +33,21 @@ fi
 ./build-release.sh --build-version "$build_version"
 
 git tag -a "v$build_version" -m "v$build_version" && git push origin "v$build_version"
-link="https://github.com/sebastianstoecklin/SagradaSpace/releases/new?tag=v$build_version"
+link="https://github.com/sebastianstoecklin/Sagrada/releases/new?tag=v$build_version"
 open "$link" || { echo "$link"; exit 1; }
 sleep 1
-open -R "./.release/SagradaSpace-v$build_version.zip"
+open -R "./.release/Sagrada-v$build_version.zip"
 
 echo "Please upload .zip to GitHub release and hit Enter"
 read -r
 
 ./script/build-brew-cask.sh \
-    --cask-name sagradaspace \
-    --zip-uri "https://github.com/sebastianstoecklin/SagradaSpace/releases/download/v$build_version/SagradaSpace-v$build_version.zip" \
+    --cask-name sagrada \
+    --zip-uri "https://github.com/sebastianstoecklin/Sagrada/releases/download/v$build_version/Sagrada-v$build_version.zip" \
     --build-version "$build_version"
 
 eval "$cask_git_repo_path/pin.sh"
-cp -r .release/sagradaspace.rb "$cask_git_repo_path/Casks/sagradaspace.rb"
+cp -r .release/sagrada.rb "$cask_git_repo_path/Casks/sagrada.rb"
 
 rm -rf "${site_git_repo_path:?}/*" # https://www.shellcheck.net/wiki/SC2115
 cp -r .site/* "$site_git_repo_path"

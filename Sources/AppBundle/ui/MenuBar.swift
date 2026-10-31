@@ -5,7 +5,7 @@ import SwiftUI
 @MainActor
 public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it be converted to "SwiftUI struct"?
     MenuBarExtra {
-        Text("SagradaSpace")
+        Text("Sagrada")
         Divider()
 
         if viewModel.axPermissionStatus == .granted {
@@ -34,11 +34,13 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
             openConfigButton()
             reloadConfigButton(warningsAsErrors: false)
         } else {
-            Button("SagradaSpace requires accessibility permission to move windows") {
+            Button("Sagrada requires accessibility permission to move windows") {
                 viewModel.axPermissionStatus = .waitingWithPrompt
             }
         }
-        Button("Quit SagradaSpace") {
+        CaffeinateMenu()
+        Divider()
+        Button("Quit Sagrada") {
             Task.startUnstructured {
                 terminationHandler?.beforeTermination()
                 terminateApp()

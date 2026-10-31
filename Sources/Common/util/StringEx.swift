@@ -83,7 +83,7 @@ extension String {
                     switch token {
                         case .literal(let literal): .success(literal)
                         case .interVar(let value):
-                            variables[value].toResult("Env variable '\(value)' isn't presented in SagradaSpace.app env vars, "
+                            variables[value].toResult("Env variable '\(value)' isn't presented in Sagrada.app env vars, "
                                 + "or not available for interpolation (because it's mutated)")
                     }
                 }
