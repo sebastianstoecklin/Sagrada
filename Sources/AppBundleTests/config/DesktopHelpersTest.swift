@@ -41,6 +41,10 @@ final class DesktopHelpersTest: XCTestCase {
         XCTAssertFalse(result.config.borders.enabled)
     }
 
+    func testCaffeinateMenuTitlesAreEnglish() {
+        XCTAssertEqual(DesktopHelpers.CaffeinateMode.allCases.map(\.rawValue), ["Off", "Keep Awake", "Keep Screen Awake"])
+    }
+
     func testCaffeinateModes() {
         XCTAssertNil(DesktopHelpers.CaffeinateMode.off.arguments)
         XCTAssertEqual(DesktopHelpers.CaffeinateMode.awake.arguments, ["-i"])

@@ -7,9 +7,9 @@ final class DesktopHelpers: ObservableObject {
     static let shared = DesktopHelpers()
 
     enum CaffeinateMode: String, CaseIterable, Identifiable {
-        case off = "Aus"
-        case awake = "Wach halten"
-        case screen = "Bildschirm wach halten"
+        case off = "Off"
+        case awake = "Keep Awake"
+        case screen = "Keep Screen Awake"
         var id: Self { self }
 
         var arguments: [String]? {
@@ -49,11 +49,11 @@ final class DesktopHelpers: ObservableObject {
         appliedBorders = nil
         guard settings.enabled else { appliedBorders = settings; return }
         guard #available(macOS 14, *) else {
-            errorMessage = "JankyBorders benötigt macOS 14 oder neuer."
+            errorMessage = "JankyBorders requires macOS 14 or later."
             return
         }
         guard let executable = Bundle.main.url(forResource: "sagrada-borders", withExtension: nil) else {
-            errorMessage = "JankyBorders-Helper fehlt. Bitte den App-Bundle-Build verwenden."
+            errorMessage = "JankyBorders helper is missing. Please use the app bundle build."
             return
         }
         do {
@@ -97,9 +97,7 @@ struct CaffeinateMenu: View {
                 Button {
                     helpers.setCaffeinate(mode)
                 } label: {
-                    if helpers.caffeinateMode == mode {
-                        Label(mode.rawValue, systemImage: "checkmark")
-                    } else {
+                    Toggle(isOn: .constant(helpers.caffeinateMode == mode)) {
                         Text(mode.rawValue)
                     }
                 }

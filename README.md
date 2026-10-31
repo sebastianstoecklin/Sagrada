@@ -19,13 +19,11 @@ The power of AeroSpace, with native dwindle splits, integrated window borders, a
 
 ---
 
-## Sagrada 0.2.0
+## Sagrada 0.3.0
 
-**[Download Sagrada 0.2.0](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.2.0/Sagrada-v0.2.0.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.2.0) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.2.0/Sagrada-v0.2.0.zip.sha256)
+**[Download Sagrada 0.3.0](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.0/Sagrada-v0.3.0.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.3.0) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.3.0/Sagrada-v0.3.0.zip.sha256)
 
-One universal download for **Apple Silicon and Intel**. Version 0.2.0 renames SagradaSpace to **Sagrada**, bundles **JankyBorders 1.9.0**, and adds three **Caffeinate** modes to the menu bar. The release passed **400 tests**; app, CLI, and border helper are universal binaries with verified ad-hoc signatures.
-
-Upgrading from SagradaSpace? Quit the old app and disable its login item, install Sagrada, and grant its new Accessibility permission. Existing configurations remain supported. Remove any old JankyBorders startup hook and stop the standalone service before enabling integrated borders.
+One universal download for **Apple Silicon and Intel**, with native Dwindle splits, bundled **JankyBorders 1.9.0**, and **Caffeinate** controls. Version 0.3.0 gives Caffeinate the same native selection indicator as Appearance and English menu items: **Off**, **Keep Awake**, and **Keep Screen Awake**.
 
 ## Your next window, already in place
 
@@ -75,7 +73,7 @@ Download the app for **Apple Silicon or Intel**, running **macOS 13+**. Workspac
 ### Install the app
 
 1. Download the ZIP from **[GitHub Releases](https://github.com/sebastianstoecklin/Sagrada/releases/latest)** and double-click it to extract it.
-2. Quit AeroSpace or any other tiling window manager. If replacing an older version, quit it and disable its old login item first.
+2. Quit any other tiling window manager before opening Sagrada.
 3. Drag **Sagrada.app** into your **Applications** folder.
 4. Open Sagrada and grant access in **System Settings → Privacy & Security → Accessibility**.
 
@@ -84,11 +82,11 @@ That’s it. You can ignore the other files in the download.
 > [!NOTE]
 > The current release is not notarized by Apple, so macOS may block it. If you trust the download, try opening the app, then go to **System Settings → Privacy & Security → Open Anyway** and confirm. Do not disable Gatekeeper.
 
-Existing AeroSpace configuration files remain supported and are not overwritten. Sagrada needs its own Accessibility permission. Do not run it alongside another tiling window manager.
+Sagrada needs Accessibility permission to manage windows. User configuration files are not overwritten.
 
 ### Start at login (optional)
 
-Add this at the top of your `~/.sagrada.toml` (or your existing legacy config), before any section headers:
+Add this at the top of your `~/.sagrada.toml`, before any section headers:
 
 ```toml
 start-at-login = true
@@ -111,18 +109,15 @@ Drag **Sagrada.app** from the folder that opens into **Applications**, then open
 
 ## Make it yours
 
-### Keep your existing setup
+### Configure Sagrada
 
-Existing user configs take precedence; building does **not** overwrite them. Dwindle is enabled by default in this fork. To make the choice explicit, add this before any `[table]` headers:
+Use `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml`. Building does **not** overwrite your configuration. Dwindle is enabled by default. To make the choice explicit, add this before any `[table]` headers:
 
 ```toml
 enable-dwindle = true
 ```
 
 Set it to `false` to restore upstream insertion, then choose **Reload config** from the Sagrada menu.
-
-> [!WARNING]
-> Remove the old `dwindle.sh` window-detection callback if you used one. Native Dwindle runs synchronously in the engine; do not run both implementations together.
 
 ### Adopt the bundled setup
 
@@ -143,11 +138,9 @@ Choose **Reload config** from the Sagrada menu.
 When using the downloaded release instead of a source checkout, substitute `config/workspace-layout.sh` and `config/default-config.toml` for the two source paths above.
 
 - **Workspace floating:** the helper provides the workspace-wide floating toggle and stores state in `~/.local/state/aerospace/workspace-layout`. It needs this fork’s CLI on `PATH`. Remove its callback and shortcut if you do not use it.
-- **Borders:** JankyBorders 1.9.0 is bundled (macOS 14+). Configure `[borders]` in TOML: `enabled`, `width` (0–100 whole points), `style` (`round`, `square`, `uniform`), `active-color`, `inactive-color`, `background-color` (`0xAARRGGBB`), `hidpi`, `ax-focus`, `blacklist` and `whitelist` (comma-separated app names). Reload applies changes; disabling or quitting stops the helper. Existing configs opt in with `borders.enabled = true`. Remove old borders startup hooks and stop standalone JankyBorders to avoid duplicate borders.
-- **Caffeinate:** the menu bar submenu offers **Aus**, **Wach halten** (standard idle-sleep prevention), and **Bildschirm wach halten** (also keeps the display on). Starts off; quitting stops it. It also releases assertions if Sagrada exits unexpectedly.
-- **Config migration:** `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml` takes priority. Legacy SagradaSpace/AeroSpace configs remain supported when no new config exists. Sagrada has a new bundle identifier and needs its own Accessibility approval.
+- **Borders:** JankyBorders 1.9.0 is bundled (macOS 14+). Configure `[borders]` in TOML: `enabled`, `width` (0–100 whole points), `style` (`round`, `square`, `uniform`), `active-color`, `inactive-color`, `background-color` (`0xAARRGGBB`), `hidpi`, `ax-focus`, `blacklist` and `whitelist` (comma-separated app names). Reload applies changes; disabling or quitting stops the helper. Enable borders with `enabled = true` inside `[borders]`. Run only the bundled helper to avoid duplicate borders.
+- **Caffeinate:** the menu bar submenu offers **Off**, **Keep Awake** (standard idle-sleep prevention), and **Keep Screen Awake** (also keeps the display on). The active option uses the same native selection indicator as Appearance. Starts off; quitting stops it. It also releases assertions if Sagrada exits unexpectedly.
 - **Launchers:** adjust app launch bindings (including Ghostty, Zen, and Obsidian) to your setup.
-- **A simpler starting point:** the [preserved upstream config](docs/config-examples/upstream-default-config.toml) is available for reference; Dwindle remains enabled unless explicitly disabled.
 
 ## At your fingertips
 
