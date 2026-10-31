@@ -6,6 +6,8 @@ on:
 
 jobs:
   close-third-party-issues:
+    # Retained upstream policy; never close SagradaSpace reports automatically.
+    if: github.repository == 'nikitabobko/AeroSpace'
     name: Close third party issues
     runs-on: ubuntu-latest
     permissions:

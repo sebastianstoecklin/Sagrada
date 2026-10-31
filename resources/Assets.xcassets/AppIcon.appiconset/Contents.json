@@ -1,61 +1,61 @@
 {
   "images": [
     {
-      "filename": "sagrada-space-16.png",
+      "filename": "sagradaspace-16.png",
       "idiom": "mac",
       "scale": "1x",
       "size": "16x16"
     },
     {
-      "filename": "sagrada-space-32.png",
+      "filename": "sagradaspace-32.png",
       "idiom": "mac",
       "scale": "2x",
       "size": "16x16"
     },
     {
-      "filename": "sagrada-space-32.png",
+      "filename": "sagradaspace-32.png",
       "idiom": "mac",
       "scale": "1x",
       "size": "32x32"
     },
     {
-      "filename": "sagrada-space-64.png",
+      "filename": "sagradaspace-64.png",
       "idiom": "mac",
       "scale": "2x",
       "size": "32x32"
     },
     {
-      "filename": "sagrada-space-128.png",
+      "filename": "sagradaspace-128.png",
       "idiom": "mac",
       "scale": "1x",
       "size": "128x128"
     },
     {
-      "filename": "sagrada-space-256.png",
+      "filename": "sagradaspace-256.png",
       "idiom": "mac",
       "scale": "2x",
       "size": "128x128"
     },
     {
-      "filename": "sagrada-space-256.png",
+      "filename": "sagradaspace-256.png",
       "idiom": "mac",
       "scale": "1x",
       "size": "256x256"
     },
     {
-      "filename": "sagrada-space-512.png",
+      "filename": "sagradaspace-512.png",
       "idiom": "mac",
       "scale": "2x",
       "size": "256x256"
     },
     {
-      "filename": "sagrada-space-512.png",
+      "filename": "sagradaspace-512.png",
       "idiom": "mac",
       "scale": "1x",
       "size": "512x512"
     },
     {
-      "filename": "sagrada-space-1024.png",
+      "filename": "sagradaspace-1024.png",
       "idiom": "mac",
       "scale": "2x",
       "size": "512x512"

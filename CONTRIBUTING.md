@@ -1,5 +1,13 @@
 # Contributing
 
+For **SagradaSpace**, submit pull requests and discuss fork-specific changes at
+https://github.com/sebastianstoecklin/SagradaSpace. Include `sagradaspace --version`
+and, for window-handling problems, `sagradaspace debug-windows` output.
+
+The guidelines below are retained from **upstream AeroSpace**. Their links,
+contact details, and sponsorship instructions refer to upstream, not this fork.
+Only report problems there after reproducing them on an upstream build.
+
 The main and the most important rule: **read the room!**
 
 * Does your patch look like typical commit in the repo?

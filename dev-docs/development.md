@@ -48,7 +48,7 @@ To build/install from sources do the following:
 2. Create codesign certificate in `Keychain Access.app`
 3. Run one of the entry point scripts to build/install from sources
 
-If you struggle to build AeroSpace locally, you can also refer to [builds in GitHub Actions](https://github.com/nikitabobko/AeroSpace/actions?query=branch%3Amain)
+If you struggle to build SagradaSpace locally, you can also refer to [builds in GitHub Actions](https://github.com/sebastianstoecklin/SagradaSpace/actions).
 
 ## Definitions
 
@@ -65,18 +65,18 @@ If you struggle to build AeroSpace locally, you can also refer to [builds in Git
     -   `brew install bash fish`
 4.  If you want to build man pages, install Ruby >= 3.0. I recommend using [rbenv](https://github.com/rbenv/rbenv).
     -   `rbenv install 3.3.4` (or whatever 3.x version)
-    -   Install asciidoctor using Ruby `bundler`. `cd AeroSpace && bundler install`
+    -   Install asciidoctor using Ruby `bundler`. `cd SagradaSpace && bundler install`
 5.  Install optional `xcbeautify` to make Xcode build logs readable. `brew install xcbeautify`
 
 ## 2. Create codesign certificate
 
-If you want to run AeroSpace as App Bundle (AeroSpace.app) you need to create self-signed certificate that will be used to codesign AeroSpace.
+If you want to run SagradaSpace as an app bundle (SagradaSpace.app), create a self-signed certificate to sign it, or pass `--codesign-identity -` for a local ad-hoc build (not notarized).
 Release artifact is built as App Bundle.
-If you only plan to build the debug version of AeroSpace, you can run it from the terminal and custom certificate is not required.
+If you only plan to build the debug version of SagradaSpace, you can run it from the terminal and custom certificate is not required.
 
 1.  Open `Keychain Access.app`
 2.  Menu -> `Keychain Access` -> `Certificate Assistance` -> `Create a Certificate...`
-    -   Name: `aerospace-codesign-certificate`
+    -   Name: `sagradaspace-codesign-certificate`
     -   Identity Type: `Self-Signed Root`
     -   Certificate Type: `Code Signing`
 
@@ -86,17 +86,17 @@ If you only plan to build the debug version of AeroSpace, you can run it from th
 -   `build-debug.sh` - Build debug build to `.debug` dir by using SPM. (Xcode is not involved)
 -   `test.sh` - Run tests.
 -   `swiftformat.sh` - Format the code.
--   `run-debug.sh` - Run AeroSpace.app debug build.
--   `run-cli.sh` - Run `aerospace` in CLI. Arguments are forwarded to `aerospace` binary.
+-   `run-debug.sh` - Run the SagradaSpace debug build.
+-   `run-cli.sh` - Run `sagradaspace` in CLI. Arguments are forwarded to the `sagradaspace` binary.
 -   `build-docs.sh` - Build the site and man pages to `.site` and `.man` dirs respectively.
 -   `build-shell-completion.sh` - Build shell completion to `.shell-completion`.
-    You can test that the completion works properly by sourcing the file `source ./.shell-completion/zsh/_aerospace`
--   `generate.sh` - Regenerate generated project files. `xcode/AeroSpace.xcodeproj` is generated, and some of the source files
+    You can test that the completion works properly by sourcing the file `source ./.shell-completion/zsh/_sagradaspace`
+-   `generate.sh` - Regenerate generated project files. `xcode/SagradaSpace.xcodeproj` is generated, and some of the source files
     (the source files have `Generated` suffix in their names).
 
 **Release build**
 -   `build-release.sh` - Build release build to `.release` dir by using Xcode.
--   `install-from-sources.sh` - Build release build from sources and install it as `aerospace-dev` brew cask.
+-   `install-from-sources.sh` - Build release build from sources and install it as `sagradaspace-dev` brew cask.
     This script is "work in progress".
     Use it on your own risk.
 
@@ -114,12 +114,12 @@ If you only plan to build the debug version of AeroSpace, you can run it from th
 
 Even if you use LSP and another text editor, Xcode is still useful to attach debugger (though you can use `lldb` in CLI).
 
-1.  To open the project in Xcode: File -> Open -> Choose `Package.swift` file instead of `xcode/AeroSpace.xcodeproj`.
+1.  To open the project in Xcode: File -> Open -> Choose `Package.swift` file instead of `xcode/SagradaSpace.xcodeproj`.
     It's better to open `Package.swift`, because SPM project is more lightweight.
-    `xcode/AeroSpace.xcodeproj` is only used in `*release*.sh` build scripts.
+    `xcode/SagradaSpace.xcodeproj` is only used in `*release*.sh` build scripts.
 2.  After you opened the project in Xcode.
     Edit Scheme... -> Options -> Console -> Choose `Terminal`.
-    This way Accessibility permission will be requested from Terminal.
+    This way Accessibility permission will be requested from Terminal. The release app has its own `com.sebastianstoecklin.sagradaspace` identity and requires a new Accessibility grant when migrating from AeroSpace.
     If you don't change Console to `Terminal`, Accessibility permission will be requested on every rebuild, because the debug binary is unsigned.
 
 ## Tips

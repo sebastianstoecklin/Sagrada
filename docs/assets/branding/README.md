@@ -1,15 +1,16 @@
-# Sagrada Space branding
+# SagradaSpace branding
 
 **Celestial light. Structured space.**
 
-`sagrada-space.png` is the shared master for the README and macOS app icon:
+`sagradaspace.png` is the shared master for the README and macOS app icon:
 1254 × 1254 RGBA artwork combining Sagrada Família-inspired stained glass,
 organic branching geometry, nebula light, and recursive window tiles.
 Its exterior includes a soft translucent halo.
 
-Sagrada Space is the fork's display identity. The `AeroSpace.app` bundle filename,
-`aerospace` CLI, configuration paths, and bundle identifiers remain unchanged for
-compatibility. The original AeroSpace copyright and attribution are preserved.
+SagradaSpace is the fork's identity: `SagradaSpace.app`, the `sagradaspace` CLI,
+and bundle identifier `com.sebastianstoecklin.sagradaspace`. Existing AeroSpace
+configuration paths and environment variables are retained for compatibility.
+The original AeroSpace copyright and attribution are preserved.
 
 ## Rebuild app assets
 
@@ -23,7 +24,7 @@ python script/build-branding.py
 
 This resamples the master with Lanczos to 16, 32, 64, 128, 256, 512, and 1024 pixels
 and maps all ten macOS 1×/2× slots in
-`resources/Assets.xcassets/AppIcon.appiconset/Contents.json` to `sagrada-space-*.png`.
+`resources/Assets.xcassets/AppIcon.appiconset/Contents.json` to `sagradaspace-*.png`.
 Rebuild the release app to compile these into its icon resources.
 
 Superseded generated artwork and concept documents have been removed from the

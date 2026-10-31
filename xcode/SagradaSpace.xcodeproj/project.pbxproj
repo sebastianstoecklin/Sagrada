@@ -7,115 +7,115 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		238EF26CAAADD1FE11312D7C /* default-config.toml in Resources */ = {isa = PBXBuildFile; fileRef = 8FE45A887100EB70912B07F0 /* default-config.toml */; };
-		852F88894A3B9FC385563665 /* AppBundle in Frameworks */ = {isa = PBXBuildFile; productRef = 018E55979F61DA6DA6DCB442 /* AppBundle */; };
-		883A44C8295FECF49F94269D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C35D8E25B61D4D1ADB1851 /* Assets.xcassets */; };
-		C40E0D9C06086C58955237D9 /* AeroSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C104E927E079E60C91AE3E /* AeroSpaceApp.swift */; };
+		8D9C00D649B5EC4E6A1B8181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F2B5705D978C503800577C /* Assets.xcassets */; };
+		D3BDC6CB7347DEDD86B129B3 /* default-config.toml in Resources */ = {isa = PBXBuildFile; fileRef = C70FED2530F00D16EA90F71F /* default-config.toml */; };
+		E484274814B33A95B202DBD0 /* AppBundle in Frameworks */ = {isa = PBXBuildFile; productRef = B5138D004065212E34F7E223 /* AppBundle */; };
+		EE0AAB30A60FF6D023486883 /* SagradaSpaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09685297933511208058F7CF /* AeroSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18C104E927E079E60C91AE3E /* AeroSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AeroSpaceApp.swift; sourceTree = "<group>"; };
-		226D545E20A3CF547088F832 /* aerospace-package-symlink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "aerospace-package-symlink"; path = "aerospace-package-symlink"; sourceTree = SOURCE_ROOT; };
-		84C35D8E25B61D4D1ADB1851 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8FE45A887100EB70912B07F0 /* default-config.toml */ = {isa = PBXFileReference; path = "default-config.toml"; sourceTree = "<group>"; };
-		CF85755BFF66B59A84F98262 /* AeroSpace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AeroSpace.entitlements; sourceTree = "<group>"; };
+		1CDC87FBACD8C9E102D2E9D5 /* sagradaspace-package-symlink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "sagradaspace-package-symlink"; path = "sagradaspace-package-symlink"; sourceTree = SOURCE_ROOT; };
+		269124754E73D433B57A1C9B /* SagradaSpace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SagradaSpace.entitlements; sourceTree = "<group>"; };
+		A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SagradaSpaceApp.swift; sourceTree = "<group>"; };
+		C70FED2530F00D16EA90F71F /* default-config.toml */ = {isa = PBXFileReference; path = "default-config.toml"; sourceTree = "<group>"; };
+		D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SagradaSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F2B5705D978C503800577C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2AFAB0BC1A2742132D7CB950 /* Frameworks */ = {
+		CA1C05FEF5048F28DD66548A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				852F88894A3B9FC385563665 /* AppBundle in Frameworks */,
+				E484274814B33A95B202DBD0 /* AppBundle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E0109AE5F7881520B0D2384 /* config-examples */ = {
+		14E37DECD91E098E09CCE7F7 = {
 			isa = PBXGroup;
 			children = (
-				8FE45A887100EB70912B07F0 /* default-config.toml */,
+				D1C3BBF39854B904411CEAAA /* config-examples */,
+				56A4A325D27BCA471E096671 /* Packages */,
+				D8EBB6963BE7501041775F16 /* resources */,
+				A6C86B47ADCB7E6C9CB0D9D4 /* SagradaSpaceApp */,
+				8222222C6332F4B4B82E6F2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		56A4A325D27BCA471E096671 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				1CDC87FBACD8C9E102D2E9D5 /* sagradaspace-package-symlink */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		8222222C6332F4B4B82E6F2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A6C86B47ADCB7E6C9CB0D9D4 /* SagradaSpaceApp */ = {
+			isa = PBXGroup;
+			children = (
+				A7A77C142C6420DE184F906E /* SagradaSpaceApp.swift */,
+			);
+			name = SagradaSpaceApp;
+			path = ../Sources/SagradaSpaceApp;
+			sourceTree = "<group>";
+		};
+		D1C3BBF39854B904411CEAAA /* config-examples */ = {
+			isa = PBXGroup;
+			children = (
+				C70FED2530F00D16EA90F71F /* default-config.toml */,
 			);
 			name = "config-examples";
 			path = "../docs/config-examples";
 			sourceTree = "<group>";
 		};
-		21E15F84087042E63C0150AB /* resources */ = {
+		D8EBB6963BE7501041775F16 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				CF85755BFF66B59A84F98262 /* AeroSpace.entitlements */,
-				84C35D8E25B61D4D1ADB1851 /* Assets.xcassets */,
+				F2F2B5705D978C503800577C /* Assets.xcassets */,
+				269124754E73D433B57A1C9B /* SagradaSpace.entitlements */,
 			);
 			name = resources;
 			path = ../resources;
 			sourceTree = "<group>";
 		};
-		393942C56466FDBBE35F9EC0 = {
-			isa = PBXGroup;
-			children = (
-				6F6BCFA26BF3E35072EF2C77 /* AeroSpaceApp */,
-				0E0109AE5F7881520B0D2384 /* config-examples */,
-				3A1FF786C84025133F96138D /* Packages */,
-				21E15F84087042E63C0150AB /* resources */,
-				62BEA6F49E6648E2EE3C208F /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		3A1FF786C84025133F96138D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				226D545E20A3CF547088F832 /* aerospace-package-symlink */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
-		62BEA6F49E6648E2EE3C208F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				09685297933511208058F7CF /* AeroSpace.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6F6BCFA26BF3E35072EF2C77 /* AeroSpaceApp */ = {
-			isa = PBXGroup;
-			children = (
-				18C104E927E079E60C91AE3E /* AeroSpaceApp.swift */,
-			);
-			name = AeroSpaceApp;
-			path = ../Sources/AeroSpaceApp;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B00BE37A79171B0EE995EB83 /* AeroSpace */ = {
+		2189ABF0A5D75CFB8C1FC0C4 /* SagradaSpace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C34EA41A1F045E016D1944D /* Build configuration list for PBXNativeTarget "AeroSpace" */;
+			buildConfigurationList = 6AFA8E57077EF3B5A4BCB67D /* Build configuration list for PBXNativeTarget "SagradaSpace" */;
 			buildPhases = (
-				D7A18303C03F2CB26F7BB54B /* Sources */,
-				BA5F2F9022B8385637D263E4 /* Resources */,
-				2AFAB0BC1A2742132D7CB950 /* Frameworks */,
+				064C481AF28EF1B094044DC7 /* Sources */,
+				3412FDAB9B77B0CA351A79D5 /* Resources */,
+				CA1C05FEF5048F28DD66548A /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AeroSpace;
+			name = SagradaSpace;
 			packageProductDependencies = (
-				018E55979F61DA6DA6DCB442 /* AppBundle */,
+				B5138D004065212E34F7E223 /* AppBundle */,
 			);
-			productName = AeroSpace;
-			productReference = 09685297933511208058F7CF /* AeroSpace.app */;
+			productName = SagradaSpace;
+			productReference = D29F07EBFE3004EB5AFC773E /* SagradaSpace.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0B585B3093DA0FC12E7983E2 /* Project object */ = {
+		FA9B9D68E9928970F868AF64 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
@@ -123,53 +123,53 @@
 				TargetAttributes = {
 				};
 			};
-			buildConfigurationList = D6982B0C3E92C5AF28BCD315 /* Build configuration list for PBXProject "AeroSpace" */;
+			buildConfigurationList = 6F799367E98417CCAC943EF9 /* Build configuration list for PBXProject "SagradaSpace" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
 				en,
 			);
-			mainGroup = 393942C56466FDBBE35F9EC0;
+			mainGroup = 14E37DECD91E098E09CCE7F7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				767692AAC6F214E25E5903A7 /* XCLocalSwiftPackageReference "aerospace-package-symlink" */,
+				7171DEFA001BE6A27B40E28A /* XCLocalSwiftPackageReference "sagradaspace-package-symlink" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 62BEA6F49E6648E2EE3C208F /* Products */;
+			productRefGroup = 8222222C6332F4B4B82E6F2D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B00BE37A79171B0EE995EB83 /* AeroSpace */,
+				2189ABF0A5D75CFB8C1FC0C4 /* SagradaSpace */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BA5F2F9022B8385637D263E4 /* Resources */ = {
+		3412FDAB9B77B0CA351A79D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				883A44C8295FECF49F94269D /* Assets.xcassets in Resources */,
-				238EF26CAAADD1FE11312D7C /* default-config.toml in Resources */,
+				8D9C00D649B5EC4E6A1B8181 /* Assets.xcassets in Resources */,
+				D3BDC6CB7347DEDD86B129B3 /* default-config.toml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D7A18303C03F2CB26F7BB54B /* Sources */ = {
+		064C481AF28EF1B094044DC7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C40E0D9C06086C58955237D9 /* AeroSpaceApp.swift in Sources */,
+				EE0AAB30A60FF6D023486883 /* SagradaSpaceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		175127AAF914899705FABF12 /* Debug */ = {
+		6201C531040698E6D7C23D1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -202,7 +202,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "aerospace-codesign-certificate";
+				CODE_SIGN_IDENTITY = "sagradaspace-codesign-certificate";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -222,7 +222,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Sagrada Space";
+				INFOPLIST_KEY_CFBundleDisplayName = SagradaSpace;
 				INFOPLIST_KEY_LSUIElement = YES;
 				MARKETING_VERSION = "0.0.0-SNAPSHOT";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -237,24 +237,7 @@
 			};
 			name = Debug;
 		};
-		31B702864571F51814E4F12C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ../resources/AeroSpace.entitlements;
-				COMBINE_HIDPI_IMAGES = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bobko.aerospace.debug;
-				PRODUCT_NAME = "AeroSpace-Debug";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		A991F90908318BCD1655E904 /* Release */ = {
+		8DF7DE86EEA5E32A262E788C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -287,7 +270,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "aerospace-codesign-certificate";
+				CODE_SIGN_IDENTITY = "sagradaspace-codesign-certificate";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -301,7 +284,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Sagrada Space";
+				INFOPLIST_KEY_CFBundleDisplayName = SagradaSpace;
 				INFOPLIST_KEY_LSUIElement = YES;
 				MARKETING_VERSION = "0.0.0-SNAPSHOT";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -315,11 +298,11 @@
 			};
 			name = Release;
 		};
-		D1D1A9E07F0AB40E14CAC0F6 /* Release */ = {
+		E2B686C3C202A3176269E663 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ../resources/AeroSpace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ../resources/SagradaSpace.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -327,30 +310,47 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bobko.aerospace;
-				PRODUCT_NAME = AeroSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagradaspace;
+				PRODUCT_NAME = SagradaSpace;
 				SDKROOT = macosx;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 			};
 			name = Release;
 		};
+		EAADF65F5B1B810CB06C3DFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ../resources/SagradaSpace.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstoecklin.sagradaspace.debug;
+				PRODUCT_NAME = SagradaSpaceDebug;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1C34EA41A1F045E016D1944D /* Build configuration list for PBXNativeTarget "AeroSpace" */ = {
+		6AFA8E57077EF3B5A4BCB67D /* Build configuration list for PBXNativeTarget "SagradaSpace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31B702864571F51814E4F12C /* Debug */,
-				D1D1A9E07F0AB40E14CAC0F6 /* Release */,
+				EAADF65F5B1B810CB06C3DFE /* Debug */,
+				E2B686C3C202A3176269E663 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		D6982B0C3E92C5AF28BCD315 /* Build configuration list for PBXProject "AeroSpace" */ = {
+		6F799367E98417CCAC943EF9 /* Build configuration list for PBXProject "SagradaSpace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				175127AAF914899705FABF12 /* Debug */,
-				A991F90908318BCD1655E904 /* Release */,
+				6201C531040698E6D7C23D1A /* Debug */,
+				8DF7DE86EEA5E32A262E788C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -358,18 +358,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		767692AAC6F214E25E5903A7 /* XCLocalSwiftPackageReference "aerospace-package-symlink" */ = {
+		7171DEFA001BE6A27B40E28A /* XCLocalSwiftPackageReference "sagradaspace-package-symlink" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "aerospace-package-symlink";
+			relativePath = "sagradaspace-package-symlink";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		018E55979F61DA6DA6DCB442 /* AppBundle */ = {
+		B5138D004065212E34F7E223 /* AppBundle */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppBundle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 0B585B3093DA0FC12E7983E2 /* Project object */;
+	rootObject = FA9B9D68E9928970F868AF64 /* Project object */;
 }

@@ -4,14 +4,14 @@ enable-dwindle = true
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
-# You can use it to add commands that run after AeroSpace startup.
+# You can use it to add commands that run after SagradaSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 # JankyBorders follows window focus automatically; no focus callbacks needed.
 after-startup-command = [
     'exec-and-forget /bin/bash "$HOME/.config/borders/bordersrc"'
 ]
 
-# Start AeroSpace at login
+# Start SagradaSpace at login
 start-at-login = true
 
 # Normalizations preserve the native alternating Dwindle split tree.

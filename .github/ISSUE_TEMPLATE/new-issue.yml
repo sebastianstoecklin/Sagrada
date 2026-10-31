@@ -1,23 +1,22 @@
-name: New Issue
-description: New Issue
+name: SagradaSpace report
+description: Report a problem with this SagradaSpace fork
 body:
   - type: markdown
     attributes:
       value: |
-        AeroSpace project doesn't accept Issues directly. Please prefer GitHub Discussions. See: https://github.com/nikitabobko/AeroSpace/issues/947
-  - type: checkboxes
-    id: checkbox
+        SagradaSpace is a fork of AeroSpace. Report fork-specific problems here.
+        Only report upstream problems to https://github.com/nikitabobko/AeroSpace after reproducing them on an upstream build.
+  - type: textarea
+    id: version
     attributes:
-      label: 'Sanity check'
-      options:
-        - label: |
-            I read https://github.com/nikitabobko/AeroSpace/issues/947
-          required: true
+      label: Version and macOS
+      description: Include the output of sagradaspace --version and your macOS version.
+    validations:
+      required: true
   - type: textarea
     id: body
     attributes:
-      label: Body
-      value: |
-        YOUR ISSUE WILL BE IMMEDIATELY CLOSED BY BOT, DON'T OPEN NEW ISSUES DIRECTLY, USE DISCUSSIONS INSTEAD
+      label: Steps to reproduce
+      description: Include expected and actual behavior, relevant config, and screenshots if useful.
     validations:
       required: true

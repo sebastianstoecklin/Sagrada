@@ -6,7 +6,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "docs/assets/branding/sagrada-space.png"
+SOURCE = ROOT / "docs/assets/branding/sagradaspace.png"
 ICON_SET = ROOT / "resources/Assets.xcassets/AppIcon.appiconset"
 
 
@@ -19,7 +19,7 @@ def main():
         for size in (16, 32, 128, 256, 512):
             for scale in (1, 2):
                 pixels = size * scale
-                filename = f"sagrada-space-{pixels}.png"
+                filename = f"sagradaspace-{pixels}.png"
                 source.resize((pixels, pixels), Image.Resampling.LANCZOS).save(
                     ICON_SET / filename, optimize=True
                 )
