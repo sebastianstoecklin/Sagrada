@@ -7,7 +7,7 @@
 ### Celestial light. Structured space.
 
 A keyboard-first tiling window manager for macOS.<br>
-The power of AeroSpace, with native dwindle splits and a quieter menu bar.
+The power of AeroSpace, with native dwindle splits, integrated window borders, and a quieter menu bar.
 
 ![macOS 13+](https://img.shields.io/badge/macOS-13%2B-111827?style=flat-square&logo=apple&logoColor=white)
 ![Native Swift](https://img.shields.io/badge/Native-Swift-F05138?style=flat-square&logo=swift&logoColor=white)
@@ -18,6 +18,14 @@ The power of AeroSpace, with native dwindle splits and a quieter menu bar.
 </div>
 
 ---
+
+## Sagrada 0.2.0
+
+**[Download Sagrada 0.2.0](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.2.0/Sagrada-v0.2.0.zip)** · [Release notes](https://github.com/sebastianstoecklin/Sagrada/releases/tag/v0.2.0) · [SHA-256 checksum](https://github.com/sebastianstoecklin/Sagrada/releases/download/v0.2.0/Sagrada-v0.2.0.zip.sha256)
+
+One universal download for **Apple Silicon and Intel**. Version 0.2.0 renames SagradaSpace to **Sagrada**, bundles **JankyBorders 1.9.0**, and adds three **Caffeinate** modes to the menu bar. The release passed **400 tests**; app, CLI, and border helper are universal binaries with verified ad-hoc signatures.
+
+Upgrading from SagradaSpace? Quit the old app and disable its login item, install Sagrada, and grant its new Accessibility permission. Existing configurations remain supported. Remove any old JankyBorders startup hook and stop the standalone service before enabling integrated borders.
 
 ## Your next window, already in place
 
@@ -30,6 +38,8 @@ This is a personal fork of [AeroSpace](https://github.com/nikitabobko/AeroSpace)
 | **Native dwindle** | New tiled windows split the most recently focused tile equally, alternating split directions. |
 | **Your layout stays yours** | Existing outer split sizes survive. Focus, move, resize, join, and layout commands still work on the same tree. |
 | **A quieter menu bar** | Ordered i3-style indicators for occupied/visible workspaces on macOS 14+, with essential menu actions. Saved appearance preferences are respected. |
+| **Integrated borders** | Bundled JankyBorders, configured in TOML and managed with the app (macOS 14+). |
+| **Stay awake when needed** | Caffeinate modes for normal idle-sleep prevention or keeping the display awake. |
 | **Keyboard-first control** | Fast workspace switching, a scriptable CLI, and plain-text TOML configuration. |
 | **Built for multiple displays** | AeroSpace’s virtual workspaces and i3-like multi-monitor model, without disabling SIP. |
 | **An easy off switch** | Set `enable-dwindle = false` to restore upstream sibling insertion. |
@@ -60,7 +70,7 @@ Dwindle is an **insertion policy, not a forced reflow**. Manually edited layouts
 
 ## Get started
 
-Download the app for **Apple Silicon or Intel**, running **macOS 13+**. Workspace indicators require **macOS 14+**. No Xcode or Terminal needed.
+Download the app for **Apple Silicon or Intel**, running **macOS 13+**. Workspace indicators and integrated JankyBorders require **macOS 14+**. No Xcode or Terminal needed.
 
 ### Install the app
 
@@ -78,7 +88,7 @@ Existing AeroSpace configuration files remain supported and are not overwritten.
 
 ### Start at login (optional)
 
-Add this at the top of your `~/.aerospace.toml`, before any section headers:
+Add this at the top of your `~/.sagrada.toml` (or your existing legacy config), before any section headers:
 
 ```toml
 start-at-login = true
@@ -120,12 +130,12 @@ The [bundled config](docs/config-examples/default-config.toml) is deliberately p
 
 ```sh
 # Preserve your current config, if one exists.
-if [ -f "$HOME/.aerospace.toml" ]; then
-    cp "$HOME/.aerospace.toml" "$HOME/.aerospace.toml.backup-$(date +%Y%m%d-%H%M%S)"
+if [ -f "$HOME/.sagrada.toml" ]; then
+    cp "$HOME/.sagrada.toml" "$HOME/.sagrada.toml.backup-$(date +%Y%m%d-%H%M%S)"
 fi
 mkdir -p "$HOME/.config/aerospace"
 cp script/workspace-layout.sh "$HOME/.config/aerospace/"
-cp docs/config-examples/default-config.toml "$HOME/.aerospace.toml"
+cp docs/config-examples/default-config.toml "$HOME/.sagrada.toml"
 ```
 
 Choose **Reload config** from the Sagrada menu.
@@ -208,7 +218,7 @@ This fork exists thanks to **[Nikita Bobko](https://github.com/nikitabobko) and 
 - [Contributing guidelines](CONTRIBUTING.md) · [Upstream discussions](https://github.com/nikitabobko/AeroSpace/discussions) — reproduce fork-specific problems on upstream before reporting them there.
 - [Sponsor upstream development](https://github.com/sponsors/nikitabobko)
 
-Released under the [MIT License](LICENSE.txt). Original copyright and third-party notices are retained in [legal/](legal).
+Sagrada is released under the [MIT License](LICENSE.txt). Original copyright and third-party notices are retained in [legal/](legal). The separately bundled [JankyBorders](https://github.com/FelixKratz/JankyBorders) helper is licensed under [GNU GPL v3](vendor/JankyBorders/LICENSE); its corresponding source and build script are included under `source/` in the release ZIP and in [vendor/JankyBorders/](vendor/JankyBorders/).
 
 ---
 
