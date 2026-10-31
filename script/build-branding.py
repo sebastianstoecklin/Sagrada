@@ -8,6 +8,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/assets/branding/sagrada.png"
 ICON_SET = ROOT / "resources/Assets.xcassets/AppIcon.appiconset"
+COMPOSER_ASSETS = ROOT / "resources/AppIcon.icon/Assets"
 
 
 def main():
@@ -15,6 +16,16 @@ def main():
         source = source.convert("RGBA")
         if source.width != source.height:
             raise ValueError("App icon artwork must be square")
+        # Native macOS icons are full-bleed; the OS supplies the mask and shadow.
+        # Exclude the legacy artwork's transparent padding and baked outer halo,
+        # which otherwise expose macOS's gray compatibility enclosure.
+        full_bleed = source.crop((147, 147, 1107, 1107)).resize(
+            (1024, 1024), Image.Resampling.LANCZOS
+        )
+        background = Image.new("RGBA", full_bleed.size, (8, 12, 28, 255))
+        background.alpha_composite(full_bleed)
+        COMPOSER_ASSETS.mkdir(parents=True, exist_ok=True)
+        background.convert("RGB").save(COMPOSER_ASSETS / "stained-glass.png", optimize=True)
         images = []
         for size in (16, 32, 128, 256, 512):
             for scale in (1, 2):

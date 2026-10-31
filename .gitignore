@@ -1,37 +1,24 @@
-# Ignore everything in the root by default.
-# New root entries must be explicitly added with `git add -f`
-# New root directories must be explicitly listed below
-/*
+# Build products and downloaded dependencies
+/.build/
+/.debug/
+/.deps/
+/.release/
+/.site/
+/.man/
+/.shell-completion/
+/.swiftpm/
+/xcode/.xcode-build/
+/vendor/JankyBorders/bin/
 
-# Top level dirs
-!/.bundle
-!/.github
-!/Sources
-!/axDumps
-!/dev-docs
-!/docs
-!/grammar
-!/legal
-!/resources
-!/script
-!/xcode
+# Local Ruby dependency resolution
+/Gemfile.lock
 
-# Top level important files
-!/*.sh
-!/.editorconfig
-!/.gitattributes
-!/.gitignore
-!/CONTRIBUTING.md
-!/Gemfile
-!/Package.resolved
-!/Package.swift
-!/README.md
-
-/xcode/.xcode-build
+# JetBrains IDE settings
+/.idea/
 
 # macOS Finder metadata (at any directory depth)
 .DS_Store
 
-# XCode User settings
+# Xcode user settings (keep shared schemes trackable)
 xcuserdata/
-xcshareddata/
+*.xcuserstate

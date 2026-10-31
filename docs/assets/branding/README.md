@@ -25,11 +25,18 @@ python script/build-branding.py
 This resamples the master with Lanczos to 16, 32, 64, 128, 256, 512, and 1024 pixels
 and maps all ten macOS 1×/2× slots in
 `resources/Assets.xcassets/AppIcon.appiconset/Contents.json` to `sagrada-*.png`.
-Rebuild the release app to compile these into its icon resources.
+The script also crops the existing artwork to its inner frame, composites it
+onto an opaque navy background, and writes the full-bleed 1024px image in
+`resources/AppIcon.icon/Assets/`. The Icon Composer package uses that image
+without extra glass, translucency, or shadow effects. macOS supplies its native
+mask and enclosure instead of placing the padded legacy icon on a gray tile.
+The legacy asset catalog remains available for older macOS versions.
 
-Superseded generated artwork and concept documents have been removed from the
-repository. Upstream's original `icon.png` assets are retained as upstream source
-assets, not selected by this app icon catalog.
+Rebuild with Xcode 26 or later to compile both icon formats. No new AI image
+generation is needed for this conversion.
+
+The upstream documentation keeps its original `docs/assets/icon.png`.
+The app icon catalog uses only the generated Sagrada assets.
 
 ## Image generation
 

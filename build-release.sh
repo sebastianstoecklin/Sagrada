@@ -63,7 +63,11 @@ expected_layout=$(cat <<EOF
 .release/Sagrada.app/Contents/MacOS/Sagrada
 .release/Sagrada.app/Contents/Resources
 .release/Sagrada.app/Contents/Resources/default-config.toml
-.release/Sagrada.app/Contents/Resources/LICENSE
+.release/Sagrada.app/Contents/Resources/legal
+$(find legal -mindepth 1 | sort | sed 's|^legal/|.release/Sagrada.app/Contents/Resources/legal/|')
+.release/Sagrada.app/Contents/Resources/legal/JankyBorders
+.release/Sagrada.app/Contents/Resources/legal/JankyBorders/LICENSE
+.release/Sagrada.app/Contents/Resources/legal/JankyBorders/README.sagrada.md
 .release/Sagrada.app/Contents/Resources/sagrada-borders
 .release/Sagrada.app/Contents/Resources/AppIcon.icns
 .release/Sagrada.app/Contents/Resources/Assets.car
@@ -108,7 +112,13 @@ codesign -v .release/sagrada
 ############
 
 mkdir -p ".release/Sagrada-v$build_version/manpage" && cp .man/*.1 ".release/Sagrada-v$build_version/manpage"
-cp -r ./legal ".release/Sagrada-v$build_version/legal"
+./script/bundle-legal.sh ".release/Sagrada-v$build_version/legal"
+cp LICENSE.txt README.md ".release/Sagrada-v$build_version/"
+mkdir -p ".release/Sagrada-v$build_version/config"
+cp docs/config-examples/default-config.toml script/workspace-layout.sh ".release/Sagrada-v$build_version/config/"
+if test -f "docs/release-notes/$build_version.md"; then
+    cp "docs/release-notes/$build_version.md" ".release/Sagrada-v$build_version/RELEASE-NOTES.md"
+fi
 # GPLv3 corresponding source for the separately bundled JankyBorders helper.
 mkdir -p ".release/Sagrada-v$build_version/source/vendor" ".release/Sagrada-v$build_version/source/script"
 cp -r vendor/JankyBorders ".release/Sagrada-v$build_version/source/vendor/"
@@ -117,7 +127,8 @@ cp -r .shell-completion ".release/Sagrada-v$build_version/shell-completion"
 cd .release
     mkdir -p "Sagrada-v$build_version/bin" && cp -r sagrada "Sagrada-v$build_version/bin"
     cp -r Sagrada.app "Sagrada-v$build_version"
-    zip -r "Sagrada-v$build_version.zip" "Sagrada-v$build_version"
+    COPYFILE_DISABLE=1 zip -r "Sagrada-v$build_version.zip" "Sagrada-v$build_version" -x '*/.DS_Store' '*/._*'
+    shasum -a 256 "Sagrada-v$build_version.zip" > "Sagrada-v$build_version.zip.sha256"
 cd -
 
 #################

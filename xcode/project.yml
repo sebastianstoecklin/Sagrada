@@ -31,11 +31,15 @@ targets:
     deploymentTarget: "13.0"
     sources:
       - "../Sources/SagradaApp"
-      - "../resources"
+      - path: "../resources"
+        excludes: ["AppIcon.icon"]
       - "../docs/config-examples/default-config.toml"
-      - path: "../vendor/JankyBorders/LICENSE"
+      - path: "../resources/AppIcon.icon"
         buildPhase: resources
     preBuildScripts:
+      - name: Bundle license notices
+        script: '/bin/bash "$SRCROOT/../script/bundle-legal.sh" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal"'
+        basedOnDependencyAnalysis: false
       - name: Build bundled JankyBorders
         script: '/bin/bash "$SRCROOT/../script/build-borders.sh" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sagrada-borders"'
         basedOnDependencyAnalysis: false

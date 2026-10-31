@@ -10,18 +10,18 @@
 		08DA65A57BA4C0F055E6C6CA /* AppBundle in Frameworks */ = {isa = PBXBuildFile; productRef = 2747BD9F3BA2C097B082459C /* AppBundle */; };
 		33AD90FEA9FB81CC569D022A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */; };
 		562870EEA6FB69159D74F7F8 /* SagradaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29546DD22CB32A655046721 /* SagradaApp.swift */; };
-		740C4E45E0834B94EB304807 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 150564C1E2EA0BE2870B277C /* LICENSE */; };
+		EBCC0CA486E4DA932289189A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = ED227FBF63523D3F0AFEEF8C /* AppIcon.icon */; };
 		FA76FD397B0D7F996F6EB1AF /* default-config.toml in Resources */ = {isa = PBXBuildFile; fileRef = 4E1537F3AAB15A3438038401 /* default-config.toml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		150564C1E2EA0BE2870B277C /* LICENSE */ = {isa = PBXFileReference; path = LICENSE; sourceTree = "<group>"; };
 		2E224F2E19D63A6CCE549DE8 /* Sagrada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sagrada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC67B86B11536814130F18C /* Sagrada.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sagrada.entitlements; sourceTree = "<group>"; };
 		4E1537F3AAB15A3438038401 /* default-config.toml */ = {isa = PBXFileReference; path = "default-config.toml"; sourceTree = "<group>"; };
 		CCF30526F2805AB018A38EE4 /* sagrada-package-symlink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "sagrada-package-symlink"; path = "sagrada-package-symlink"; sourceTree = SOURCE_ROOT; };
 		D29546DD22CB32A655046721 /* SagradaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SagradaApp.swift; sourceTree = "<group>"; };
 		D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED227FBF63523D3F0AFEEF8C /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,18 +53,10 @@
 			path = ../Sources/SagradaApp;
 			sourceTree = "<group>";
 		};
-		AFF48085C4CB91E6B1BBBE1A /* JankyBorders */ = {
-			isa = PBXGroup;
-			children = (
-				150564C1E2EA0BE2870B277C /* LICENSE */,
-			);
-			name = JankyBorders;
-			path = ../vendor/JankyBorders;
-			sourceTree = "<group>";
-		};
 		B8B531F7ADE63F6FBFC16E74 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED227FBF63523D3F0AFEEF8C /* AppIcon.icon */,
 				D69E7A385EAD8AEB8582E2E8 /* Assets.xcassets */,
 				3CC67B86B11536814130F18C /* Sagrada.entitlements */,
 			);
@@ -85,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				C508CDE2608382BA67B1762B /* config-examples */,
-				AFF48085C4CB91E6B1BBBE1A /* JankyBorders */,
 				4D295C77C726BF848E743ABB /* Packages */,
 				B8B531F7ADE63F6FBFC16E74 /* resources */,
 				8E86D90B85C5BCC4C04D63B2 /* SagradaApp */,
@@ -108,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DCE766C683AC16E10E7FCB8 /* Build configuration list for PBXNativeTarget "Sagrada" */;
 			buildPhases = (
+				2308A17668D34FE8A88E4044 /* Bundle license notices */,
 				FFAF75D5F0136E1AAA66E3EE /* Build bundled JankyBorders */,
 				F65895BF45BC0B830B0E024E /* Sources */,
 				038220605A4817481389A078 /* Resources */,
@@ -163,8 +155,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBCC0CA486E4DA932289189A /* AppIcon.icon in Resources */,
 				33AD90FEA9FB81CC569D022A /* Assets.xcassets in Resources */,
-				740C4E45E0834B94EB304807 /* LICENSE in Resources */,
 				FA76FD397B0D7F996F6EB1AF /* default-config.toml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +164,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2308A17668D34FE8A88E4044 /* Bundle license notices */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle license notices";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"$SRCROOT/../script/bundle-legal.sh\" \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"";
+		};
 		FFAF75D5F0136E1AAA66E3EE /* Build bundled JankyBorders */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -238,7 +249,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "sagrada-codesign-certificate";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -260,7 +271,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sagrada;
 				INFOPLIST_KEY_LSUIElement = YES;
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = "0.0.0-SNAPSHOT";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -269,7 +280,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.2;
-				TOOLCHAINS = org.swift.640202609131a;
+				TOOLCHAINS = com.apple.dt.toolchain.XcodeDefault;
 			};
 			name = Debug;
 		};
@@ -306,7 +317,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "sagrada-codesign-certificate";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -322,7 +333,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sagrada;
 				INFOPLIST_KEY_LSUIElement = YES;
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = "0.0.0-SNAPSHOT";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -330,7 +341,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.2;
-				TOOLCHAINS = org.swift.640202609131a;
+				TOOLCHAINS = com.apple.dt.toolchain.XcodeDefault;
 			};
 			name = Release;
 		};

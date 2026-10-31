@@ -12,7 +12,7 @@ The bundled default is the personal configuration described in the repository
 README. Tests must not run its external startup commands or depend on local apps.
 No build step installs or overwrites user configuration files.
 
-## Scroll Reverser (0.4.0)
+## Scroll Reverser
 
 `ScrollReverserConfig` parses the opt-in `[scroll-reverser]` table. A successful
 config reload applies it to `ScrollReverser.shared`; menu overrides last until
@@ -30,7 +30,7 @@ to discrete wheel events cannot be distinguished.
 
 `ScrollReverserTest` covers parsing/defaults, both axes, disabled behavior,
 gesture passthrough, metadata preservation, and lifecycle without installing a
-global filter. The full suite has 415 tests. Real-device validation still needs
+global filter. Real-device validation still needs
 a classic wheel mouse, trackpad, and (where available) Magic Mouse. Check both
 Natural Scrolling settings, both axes, enable/disable, config reload, restart,
 and permission denial/retry. Do not run another scroll reverser concurrently.
@@ -83,7 +83,8 @@ If you struggle to build Sagrada locally, you can also refer to [builds in GitHu
 
 ## 1. Install dependencies
 
-1.  Install Xcode from App Store https://apps.apple.com/us/app/xcode/id497799835
+1.  Install Xcode 26 or later from App Store https://apps.apple.com/us/app/xcode/id497799835
+    (required to compile the native Icon Composer asset).
 2.  Install [swiftly](https://github.com/swiftlang/swiftly).
     Swiftly is a Swift toolchain manager that will make sure that you use the same swift version as written in `.swift-version` file.
     `brew install swiftly`
@@ -112,7 +113,7 @@ If you only plan to build the debug version of Sagrada, you can run it from the 
 **Debug build**
 -   `build-debug.sh` - Build debug build to `.debug` dir by using SPM. (Xcode is not involved)
 -   `test.sh` - Run tests.
--   `swiftformat.sh` - Format the code.
+-   `format.sh` - Format the code.
 -   `run-debug.sh` - Run the Sagrada debug build.
 -   `run-cli.sh` - Run `sagrada` in CLI. Arguments are forwarded to the `sagrada` binary.
 -   `build-docs.sh` - Build the site and man pages to `.site` and `.man` dirs respectively.
@@ -148,6 +149,18 @@ Even if you use LSP and another text editor, Xcode is still useful to attach deb
     Edit Scheme... -> Options -> Console -> Choose `Terminal`.
     This way Accessibility permission will be requested from Terminal. The release app has its own `com.sebastianstoecklin.sagrada` identity and requires a new Accessibility grant when migrating from AeroSpace.
     If you don't change Console to `Terminal`, Accessibility permission will be requested on every rebuild, because the debug binary is unsigned.
+
+## Release checks
+
+- Build with an explicit `--build-version` and verify the app's
+  `CFBundleShortVersionString` and `sagrada --version` both match the release tag.
+- Keep `Contents/Resources/legal/` inside the signed app; do not remove it when
+  packaging. It includes the MIT notice, dependency notices, and GPLv3 helper notice.
+- Ship the exact `vendor/JankyBorders/` source and `script/build-borders.sh`
+  used for the helper in every release archive. Update the dated modification
+  notice when changing that source.
+- Verify universal architectures, signatures, ZIP integrity, and SHA-256 checksum
+  before publishing. The README does not need a version bump.
 
 ## Tips
 
