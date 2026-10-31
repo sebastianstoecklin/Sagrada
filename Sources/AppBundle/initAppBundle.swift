@@ -69,8 +69,9 @@ private let serverHelp = """
     OPTIONS:
       -h, --help              Print help
       -v, --version           Print Sagrada.app version
-      --config-path <path>    Config path. It will take priority over ~/.aerospace.toml
-                              and ${XDG_CONFIG_HOME}/aerospace/aerospace.toml
+      --config-path <path>    Config path. Takes priority over ~/.sagrada.toml
+                              and ${XDG_CONFIG_HOME}/sagrada/sagrada.toml.
+                              Legacy AeroSpace configs remain supported.
       --read-only             Disable window management.
                               Useful if you want to use only debug-windows or other query commands.
     """
