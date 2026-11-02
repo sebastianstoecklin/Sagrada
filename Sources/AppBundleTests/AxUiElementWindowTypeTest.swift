@@ -3,6 +3,37 @@ import Common
 import XCTest
 
 final class AxWindowKindTest: XCTestCase {
+    func testModalStandardWindowFloatsEvenForChrome() {
+        let window: [String: Json] = [
+            "AXRole": .string(kAXWindowRole),
+            "AXSubrole": .string(kAXStandardWindowSubrole),
+            "AXModal": .bool(true),
+            "AXFullScreenButton": .dict(["AXEnabled": .bool(true)]),
+        ]
+        assertEquals(window.getWindowType(axApp: [:], .chrome, .regular, .normalWindow), .dialog)
+    }
+
+    func testNonModalStandardWindowStillTiles() {
+        for modal in [nil, Json.bool(false)] {
+            var window: [String: Json] = [
+                "AXRole": .string(kAXWindowRole),
+                "AXSubrole": .string(kAXStandardWindowSubrole),
+                "AXFullScreenButton": .dict(["AXEnabled": .bool(true)]),
+            ]
+            window["AXModal"] = modal
+            assertEquals(window.getWindowType(axApp: [:], .chrome, .regular, .normalWindow), .window)
+        }
+    }
+
+    func testAttachedSheetIsNotManaged() {
+        let sheet: [String: Json] = [
+            "AXRole": .string(kAXSheetRole),
+            "AXSubrole": .string(kAXStandardWindowSubrole),
+            "AXModal": .bool(true),
+        ]
+        assertEquals(sheet.getWindowType(axApp: [:], nil, .regular, .normalWindow), .popup)
+    }
+
     func test() throws {
         try checkAxDumpsRecursive(projectRoot.appending(path: "./axDumps"))
     }

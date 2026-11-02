@@ -24,6 +24,12 @@ extension AxUiElementMock {
     ) -> Bool {
         // Note: a lot of windows don't have title on startup. So please don't rely on the title
 
+        // Native print/open/save panels can report AXStandardWindow and even have
+        // an enabled fullscreen button. Modality takes precedence over app exceptions.
+        if get(Ax.modalAttr) == true {
+            return true
+        }
+
         if id == ._1password && windowLevel != .normalWindow {
             return true
         }
@@ -104,6 +110,12 @@ extension AxUiElementMock {
         _ activationPolicy: NSApplication.ActivationPolicy,
         _ windowLevel: MacOsWindowLevel?,
     ) -> Bool {
+        // Attached sheets are positioned by macOS relative to their parent window.
+        // Do not manage their geometry, even as floating windows.
+        if get(Ax.roleAttr) == kAXSheetRole {
+            return false
+        }
+
         if windowLevel != .normalWindow &&
             // Slowly roll out windowLevel for applications for which we have the appropriate dumps
             (id == .slack || id == .chrome || id?.isFirefox == true || id == .braveBrowser || id == .screenstudio || id == .cleanshotx || id == .iterm2 || id == .outlook || id == .codex || id == .wisprFlow)
