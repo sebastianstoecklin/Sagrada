@@ -38,6 +38,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                 viewModel.axPermissionStatus = .waitingWithPrompt
             }
         }
+        ScreenshotsMenu()
         CaffeinateMenu()
         ScrollReverserMenu()
         Divider()

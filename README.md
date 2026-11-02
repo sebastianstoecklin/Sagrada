@@ -20,6 +20,7 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 - **Native dwindle:** new tiled windows split the most recently focused tile equally, alternating split directions. Existing outer split sizes and manually edited layouts stay intact; floating windows and accordion containers keep their behavior.
 - **Workspace indicators:** ordered i3-style indicators for occupied and visible workspaces (macOS 14+).
 - **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+).
+- **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
 - **Caffeinate:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
 - **Scroll Reverser:** optional mouse-wheel reversal with independent axis controls and continuous gesture passthrough.
 - **AeroSpace controls:** virtual workspaces, multiple displays, a scriptable CLI, and plain-text configuration without disabling SIP.
@@ -41,6 +42,14 @@ Requires **macOS 13+** on **Apple Silicon or Intel**. No Xcode is needed for the
 **Update:** quit Sagrada, replace the app with the new download, and reopen it. Your configuration is not overwritten. This fork does not receive upstream Homebrew updates.
 
 **Uninstall:** disable `start-at-login` in your config, reload, and quit. Move the app to the Trash and remove any remaining login item in System Settings. Keep or remove your configuration and helper state as desired.
+
+## New in 0.4.2
+
+- Screenshot shortcuts are **Option–Shift–3/4/5** while Sagrada runs; the **Screenshots** menu provides the same actions, including recording controls.
+- Command–Shift–3/4/5 can move windows without also invoking macOS screenshots when the temporary override succeeds.
+- No configuration migration is required. The app is ad-hoc signed; after updating, macOS may require you to re-enable Sagrada under **Privacy & Security → Accessibility**, and approve screen capture when prompted.
+
+See the [0.4.2 release notes](docs/release-notes/0.4.2.md) and [shortcut overlap overview](docs/macos-shortcut-conflicts.md) for limitations and other macOS shortcut overlaps.
 
 ## Configuration
 
@@ -70,6 +79,14 @@ cp docs/config-examples/default-config.toml "$HOME/.sagrada.toml"
 ```
 
 The [workspace-layout helper](script/workspace-layout.sh) needs this fork’s `sagrada` CLI on `PATH` and stores state in `~/.local/state/aerospace/workspace-layout`. Remove its callback and shortcut if you do not use workspace-wide floating. Reload the configuration after changes.
+
+### Screenshots
+
+While Sagrada runs, screenshot shortcuts move to **Option–Shift–3** (entire screen), **Option–Shift–4** (selection/window), and **Option–Shift–5** (screenshot and recording controls). The **Screenshots** menu offers the same actions without memorizing shortcuts. Captures use macOS's configured destination.
+
+This frees Command–Shift–3/4/5 for moving windows without also taking screenshots. Sagrada temporarily disables the corresponding macOS screenshot hotkeys (including the clipboard variants) and restores their previous enabled states on normal quit; it does not edit your saved keyboard preferences. Touch Bar capture is unchanged. Option–Shift–3/4/5 will not type their usual special characters while Sagrada is running.
+
+The temporary override uses a dynamically loaded private macOS API. If unavailable, the menu reports the failure and the original macOS shortcuts remain active. Force-quitting or a crash can skip cleanup; logging out and back in restores the saved system configuration.
 
 ### Borders
 
