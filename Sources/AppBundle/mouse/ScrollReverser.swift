@@ -130,19 +130,18 @@ struct ScrollReverserMenu: View {
     @ObservedObject private var reverser = ScrollReverser.shared
 
     var body: some View {
-        Menu("Scroll Reverser") {
+        Menu("Reverse scrolling") {
             Toggle("Enabled", isOn: setting(\.enabled))
-            Toggle("Reverse Vertical", isOn: setting(\.reverseVertical))
-            Toggle("Reverse Horizontal", isOn: setting(\.reverseHorizontal))
+            Toggle("Vertical", isOn: setting(\.reverseVertical))
+            Toggle("Horizontal", isOn: setting(\.reverseHorizontal))
             Divider()
-            Text("Classic mouse wheels only; gestures are unchanged.")
-            Text(reverser.isActive ? "Active" : "Inactive")
+            Text("Mouse wheels only")
             if let error = reverser.errorMessage {
                 Text(error)
-                Button("Grant Permissions / Retry") {
+                Button("Retry") {
                     reverser.requestPermissionsAndRetry()
                 }
-                Button("Open Input Monitoring Settings…") {
+                Button("Permissions…") {
                     if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent") {
                         NSWorkspace.shared.open(url)
                     }

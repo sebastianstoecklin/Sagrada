@@ -42,7 +42,7 @@ final class DesktopHelpersTest: XCTestCase {
     }
 
     func testCaffeinateMenuTitlesAreEnglish() {
-        XCTAssertEqual(DesktopHelpers.CaffeinateMode.allCases.map(\.rawValue), ["Off", "Keep Awake", "Keep Screen Awake"])
+        XCTAssertEqual(DesktopHelpers.CaffeinateMode.allCases.map(\.rawValue), ["Off", "System", "System & display"])
     }
 
     func testCaffeinateModes() {

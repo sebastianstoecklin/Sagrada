@@ -9,9 +9,9 @@ final class Screenshots: ObservableObject {
     static let shared = Screenshots()
 
     enum Capture: String, CaseIterable, Identifiable {
-        case screen = "Capture Entire Screen"
-        case selection = "Capture Selection or Window…"
-        case controls = "Screenshot and Recording Controls…"
+        case screen = "Entire screen"
+        case selection = "Selection / window…"
+        case controls = "Capture / record…"
         var id: Self { self }
 
         var key: Key {
@@ -95,7 +95,7 @@ struct ScreenshotsMenu: View {
             if let error = screenshots.errorMessage {
                 Divider()
                 Text(error)
-                Button("Retry Shortcut Remap") { screenshots.start() }
+                Button("Retry") { screenshots.start() }
             }
         }
     }

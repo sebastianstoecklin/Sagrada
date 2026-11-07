@@ -5,7 +5,7 @@ import SwiftUI
 @MainActor
 public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it be converted to "SwiftUI struct"?
     MenuBarExtra {
-        Text("Sagrada")
+        Text("Sagrada \(aeroSpaceAppVersion)")
         Divider()
 
         if viewModel.axPermissionStatus == .granted {
@@ -18,7 +18,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                         }
                     }
                 } label: {
-                    Label("Config contains warnings...", systemImage: "exclamationmark.triangle.fill")
+                    Label("Config warnings…", systemImage: "exclamationmark.triangle.fill")
                 }
                 Divider()
             }
@@ -35,7 +35,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                 reloadConfigButton(warningsAsErrors: false)
             }
         } else {
-            Button("Sagrada requires accessibility permission to move windows") {
+            Button("Grant Accessibility…") {
                 viewModel.axPermissionStatus = .waitingWithPrompt
             }
         }
@@ -43,7 +43,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
         CaffeinateMenu()
         ScrollReverserMenu()
         Divider()
-        Button("Quit Sagrada") {
+        Button("Quit") {
             Task.startUnstructured {
                 terminationHandler?.beforeTermination()
                 terminateApp()
@@ -68,7 +68,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
 @MainActor @ViewBuilder
 func openConfigButton(showShortcutGroup: Bool = false) -> some View {
     let editor = getTextEditorToOpenConfig()
-    let button = Button("Open config…") {
+    let button = Button("Open…") {
         let fallbackConfig: URL = FileManager.default.homeDirectoryForCurrentUser.appending(path: configDotfileName)
         switch findCustomConfigUrl() {
             case .file(let url):
@@ -89,7 +89,7 @@ func openConfigButton(showShortcutGroup: Bool = false) -> some View {
 @MainActor @ViewBuilder
 func reloadConfigButton(showShortcutGroup: Bool = false, warningsAsErrors: Bool) -> some View {
     if let token: RunSessionGuard = .isServerEnabled {
-        let button = Button("Reload config") {
+        let button = Button("Reload") {
             Task.startUnstructured {
                 try await runLightSession(.menuBarButton, token) {
                     let args: ReloadConfigCmdArgs = ReloadConfigCmdArgs(rawArgs: []).copy(\.warningsAsErrors, warningsAsErrors)

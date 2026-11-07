@@ -8,8 +8,8 @@ final class DesktopHelpers: ObservableObject {
 
     enum CaffeinateMode: String, CaseIterable, Identifiable {
         case off = "Off"
-        case awake = "Keep Awake"
-        case screen = "Keep Screen Awake"
+        case awake = "System"
+        case screen = "System & display"
         var id: Self { self }
 
         var arguments: [String]? {
@@ -37,7 +37,7 @@ final class DesktopHelpers: ObservableObject {
             caffeinateMode = mode
             errorMessage = nil
         } catch {
-            errorMessage = "Caffeinate: \(error.localizedDescription)"
+            errorMessage = "Keep awake: \(error.localizedDescription)"
         }
     }
 
@@ -92,7 +92,7 @@ struct CaffeinateMenu: View {
     @ObservedObject private var helpers = DesktopHelpers.shared
 
     var body: some View {
-        Menu("Caffeinate") {
+        Menu("Keep awake") {
             ForEach(DesktopHelpers.CaffeinateMode.allCases) { mode in
                 Button {
                     helpers.setCaffeinate(mode)

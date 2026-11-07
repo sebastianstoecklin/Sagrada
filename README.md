@@ -15,14 +15,16 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 
 </div>
 
+![Sagrada desktop with tiled windows, integrated borders, and workspace indicators](docs/assets/screenshots/sagrada-desktop.png)
+
 ## Features
 
 - **Native dwindle:** new tiled windows split the most recently focused tile equally, alternating split directions. Existing outer split sizes and manually edited layouts stay intact; floating windows and accordion containers keep their behavior.
 - **Workspace indicators:** ordered i3-style indicators for occupied, visible, and configured persistent workspaces (macOS 14+).
 - **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+).
 - **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
-- **Caffeinate:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
-- **Scroll Reverser:** optional mouse-wheel reversal with independent axis controls and continuous gesture passthrough.
+- **Keep awake:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
+- **Reverse scrolling:** optional mouse-wheel reversal with independent axis controls and continuous gesture passthrough.
 - **AeroSpace controls:** virtual workspaces, multiple displays, a scriptable CLI, and plain-text configuration without disabling SIP.
 
 This is a personal fork, not an official AeroSpace release.
@@ -43,17 +45,17 @@ Requires **macOS 13+** on **Apple Silicon or Intel**. No Xcode is needed for the
 
 **Uninstall:** disable `start-at-login` in your config, reload, and quit. Move the app to the Trash and remove any remaining login item in System Settings. Keep or remove your configuration and helper state as desired.
 
-## New in 0.4.2
+## New in 0.4.5
 
-- Screenshot shortcuts are **Option–Shift–3/4/5** while Sagrada runs; the **Screenshots** menu provides the same actions, including recording controls.
-- Command–Shift–3/4/5 can move windows without also invoking macOS screenshots when the temporary override succeeds.
-- No configuration migration is required. The app is ad-hoc signed; after updating, macOS may require you to re-enable Sagrada under **Privacy & Security → Accessibility**, and approve screen capture when prompted.
+- The dropdown header now shows **Sagrada + version**, with shorter menu and submenu entries.
+- **Keep awake** offers Off, System, and System & display; **Reverse scrolling** offers independent axis controls.
+- A desktop screenshot now showcases the tiled layout, borders, and workspace indicators above.
 
-See the [0.4.2 release notes](docs/release-notes/0.4.2.md) and [shortcut overlap overview](docs/macos-shortcut-conflicts.md) for limitations and other macOS shortcut overlaps.
+No configuration migration is required. See the [0.4.5 release notes](docs/release-notes/0.4.5.md). The app is ad-hoc signed; macOS may require renewed Accessibility approval after updating.
 
 ## Configuration
 
-Use `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml`, then choose **Config → Reload config** from the menu. See the [bundled config](docs/config-examples/default-config.toml) and [upstream guide](https://nikitabobko.github.io/AeroSpace/guide) for the full settings.
+Use `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml`, then choose **Config → Reload** from the menu. See the [bundled config](docs/config-examples/default-config.toml) and [upstream guide](https://nikitabobko.github.io/AeroSpace/guide) for the full settings.
 
 Top-level options belong before any `[table]` headers:
 
@@ -92,9 +94,9 @@ The temporary override uses a dynamically loaded private macOS API. If unavailab
 
 Configure `[borders]` in TOML; set `enabled = true` to enable. Options include `width` (0–100 whole points), `style` (`round`, `square`, `uniform`), `active-color`, `inactive-color`, `background-color` (`0xAARRGGBB`), `hidpi`, `ax-focus`, and comma-separated app `blacklist`/`whitelist` values. Reload applies changes; disabling borders or quitting stops the helper. Do not run another JankyBorders instance alongside it.
 
-### Scroll Reverser
+### Reverse scrolling
 
-Disabled by default. Choose **Scroll Reverser → Enabled** in the menu to reverse classic mouse-wheel scrolling without changing macOS’s Natural Scrolling preference. Menu changes last until a config reload or app restart. To persist them:
+Disabled by default. Choose **Reverse scrolling → Enabled** in the menu to reverse classic mouse-wheel scrolling without changing macOS’s Natural Scrolling preference. Menu changes last until a config reload or app restart. To persist them:
 
 ```toml
 [scroll-reverser]
@@ -105,7 +107,7 @@ reverse-horizontal = false
 
 Continuous scrolling, gesture phases, and momentum from trackpads and Magic Mouse pass through. This filters discrete events, not physical devices: smooth-scrolling mouse drivers may also pass through. Do not run another scroll-reversal tool at the same time.
 
-If the event tap cannot start, use **Grant Permissions / Retry** in the submenu. Check Accessibility and, if requested, Input Monitoring in System Settings, then retry or restart. Disabling the feature, turning off both axes, or quitting removes the filter.
+If the event tap cannot start, use **Retry** in the submenu. Check Accessibility and, if requested, Input Monitoring in System Settings, then retry or restart. Disabling the feature, turning off both axes, or quitting removes the filter.
 
 ## Keybindings
 
