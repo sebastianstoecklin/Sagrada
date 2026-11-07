@@ -1,6 +1,9 @@
 config-version = 2
 enable-dwindle = true
 
+# Keep these workspaces available and visible in the ordered menu-bar indicators.
+persistent-workspaces = ['1', '2', '3', '4', '5']
+
 # Place a copy of this config at ~/.sagrada.toml.
 # Existing ~/.aerospace.toml configurations are still supported.
 
@@ -128,7 +131,7 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-shift-slash = 'layout tiles horizontal vertical'
+    cmd-shift-minus = 'layout tiles horizontal vertical'
     cmd-shift-comma = 'layout accordion horizontal vertical'
     cmd-alt-f = 'layout floating tiling' # Toggle floating for the focused window
     cmd-alt-shift-f = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" toggle'
@@ -152,7 +155,7 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     cmd-shift-right = 'swap right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    cmd-shift-minus = 'resize smart -50'
+    cmd-alt-minus = 'resize smart -50'
     cmd-shift-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace

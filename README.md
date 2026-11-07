@@ -18,7 +18,7 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 ## Features
 
 - **Native dwindle:** new tiled windows split the most recently focused tile equally, alternating split directions. Existing outer split sizes and manually edited layouts stay intact; floating windows and accordion containers keep their behavior.
-- **Workspace indicators:** ordered i3-style indicators for occupied and visible workspaces (macOS 14+).
+- **Workspace indicators:** ordered i3-style indicators for occupied, visible, and configured persistent workspaces (macOS 14+).
 - **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+).
 - **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
 - **Caffeinate:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
@@ -53,7 +53,7 @@ See the [0.4.2 release notes](docs/release-notes/0.4.2.md) and [shortcut overlap
 
 ## Configuration
 
-Use `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml`, then choose **Reload config** from the menu. See the [bundled config](docs/config-examples/default-config.toml) and [upstream guide](https://nikitabobko.github.io/AeroSpace/guide) for the full settings.
+Use `~/.sagrada.toml` or `$XDG_CONFIG_HOME/sagrada/sagrada.toml`, then choose **Config → Reload config** from the menu. See the [bundled config](docs/config-examples/default-config.toml) and [upstream guide](https://nikitabobko.github.io/AeroSpace/guide) for the full settings.
 
 Top-level options belong before any `[table]` headers:
 
@@ -119,8 +119,8 @@ These are the main shortcuts in the [bundled config](docs/config-examples/defaul
 | `⌘ ⇧` + `1`–`9` | Move a window to a workspace and follow it |
 | `⌥ Tab` | Return to the previous workspace |
 | `⌥ ⇧ Tab` | Move the workspace to the next monitor |
-| `⌘ ⇧ -` / `⌘ ⇧ =` | Shrink / grow a tile |
-| `⌘ ⇧ /` | Select tiles layout; cycle orientation |
+| `⌘ ⌥ -` / `⌘ ⇧ =` | Shrink / grow a tile |
+| `⌘ ⇧ -` | Select tiles layout; cycle orientation |
 | `⌘ ⇧ ,` | Select accordion layout; cycle orientation |
 | `⌘ ⌥ F` | Toggle floating for the focused window |
 | `⌘ ⌥ ⇧ F` | Toggle floating for the workspace (requires helper) |

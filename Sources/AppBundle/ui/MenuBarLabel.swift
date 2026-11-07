@@ -40,7 +40,7 @@ struct MenuBarLabel: View {
 
     var menuBarContent: some View {
         return HStack(spacing: hStackSpacing) {
-            let style = style ?? viewModel.experimentalUISettings.displayStyle
+            let style = style ?? .i3Ordered
             switch style {
                 case .monospacedText: getText(for: .monospaced)
                 case .systemText: getText(for: .default)
@@ -57,7 +57,7 @@ struct MenuBarLabel: View {
                         itemView(for: modeItem)
                         modeSeparator(with: .monospaced)
                     }
-                    let orderedWorkspaces = viewModel.workspaces.filter { !$0.isEffectivelyEmpty || $0.isVisible }
+                    let orderedWorkspaces = viewModel.workspaces.filter { !$0.isEffectivelyEmpty || $0.isVisible || $0.isPersistent }
                     ForEach(orderedWorkspaces, id: \.name) { item in
                         let trayItem = TrayItem(
                             type: .workspace,

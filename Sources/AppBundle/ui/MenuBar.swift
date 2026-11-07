@@ -30,9 +30,10 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                     }
                 }
             }.keyboardShortcut("E", modifiers: .command)
-            getExperimentalUISettingsMenu(viewModel: viewModel)
-            openConfigButton()
-            reloadConfigButton(warningsAsErrors: false)
+            Menu("Config") {
+                openConfigButton()
+                reloadConfigButton(warningsAsErrors: false)
+            }
         } else {
             Button("Sagrada requires accessibility permission to move windows") {
                 viewModel.axPermissionStatus = .waitingWithPrompt

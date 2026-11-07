@@ -27,9 +27,9 @@ These are app-level shortcuts, often available across many macOS apps rather tha
 | `cmd-up`, `cmd-down` | `focus up`, `focus down` | Move to the beginning/end of a document; in Finder, open the enclosing folder/open the selected item. |
 | `cmd-shift-left`, `cmd-shift-right` | `swap left`, `swap right` | Extend text selection to the beginning/end of the line. |
 | `cmd-shift-up`, `cmd-shift-down` | `swap up`, `swap down` | Extend text selection to the beginning/end of the document. |
-| `cmd-shift-slash` | `layout tiles horizontal vertical` | Open Help (`cmd-?` on a US keyboard). Layout-dependent. |
+| `cmd-shift-minus` | `layout tiles horizontal vertical` | Decrease text size in apps that use `cmd-shift-minus` (often shown as `cmd-_`). App/layout-dependent. |
 | `cmd-alt-f` | `layout floating tiling` | Move focus to an app's search field, where supported, such as Safari. |
-| `cmd-shift-minus` | `resize smart -50` | Decrease text size in apps that use `cmd-shift-minus` (often shown as `cmd-_`). App/layout-dependent. |
+| `cmd-alt-minus` | `resize smart -50` | App-specific shortcuts may overlap. |
 | `cmd-shift-equal` | `resize smart +50` | Increase text size in apps that use `cmd-+`, including TextEdit. App/layout-dependent. |
 
 ## Finder and other built-in apps

@@ -1,20 +1,5 @@
 import SwiftUI
 
-struct ExperimentalUISettings {
-    var displayStyle: MenuBarStyle {
-        get {
-            switch UserDefaults.standard.string(forKey: ExperimentalUISettingsItems.displayStyle.rawValue) {
-                case let value?: MenuBarStyle(rawValue: value) ?? .i3Ordered
-                case nil: .i3Ordered
-            }
-        }
-        set {
-            UserDefaults.standard.setValue(newValue.rawValue, forKey: ExperimentalUISettingsItems.displayStyle.rawValue)
-            UserDefaults.standard.synchronize()
-        }
-    }
-}
-
 enum MenuBarStyle: String, CaseIterable, Identifiable, Equatable, Hashable {
     case monospacedText
     case systemText
@@ -29,42 +14,6 @@ enum MenuBarStyle: String, CaseIterable, Identifiable, Equatable, Hashable {
             case .squares: "Square images"
             case .i3: "i3 style grouped"
             case .i3Ordered: "i3 style ordered"
-        }
-    }
-}
-
-enum ExperimentalUISettingsItems: String {
-    case displayStyle
-}
-
-@MainActor
-func getExperimentalUISettingsMenu(viewModel: TrayMenuModel) -> some View {
-    let color = AppearanceTheme.current == .dark ? Color.white : Color.black
-    return Menu {
-        Text("Menu bar style")
-        ForEach(MenuBarStyle.allCases, id: \.id) { style in
-            MenuBarStyleButton(style: style, color: color).environmentObject(viewModel)
-        }
-    } label: {
-        Text("Appearance")
-    }
-}
-
-@MainActor
-struct MenuBarStyleButton: View {
-    @EnvironmentObject var viewModel: TrayMenuModel
-    let style: MenuBarStyle
-    let color: Color
-
-    var body: some View {
-        Button {
-            viewModel.experimentalUISettings.displayStyle = style
-        } label: {
-            Toggle(isOn: .constant(viewModel.experimentalUISettings.displayStyle == style)) {
-                MenuBarLabel(style: style, color: color)
-                    .environmentObject(viewModel)
-                Text(" -  " + style.title)
-            }
         }
     }
 }

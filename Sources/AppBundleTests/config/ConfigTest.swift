@@ -28,6 +28,7 @@ final class ConfigTest: XCTestCase {
         assertEquals(result.errors, [])
         assertEquals(result.warnings, [])
         XCTAssertTrue(result.config.enableDwindle)
+        assertEquals(Array(result.config.persistentWorkspaces), ["1", "2", "3", "4", "5"])
         assertEquals(result.config.defaultRootContainerOrientation, .horizontal)
         assertEquals(Set(result.config.workspaceToMonitorForceAssignment.keys), ["5"])
         XCTAssertFalse(toml.contains("/dwindle.sh"))

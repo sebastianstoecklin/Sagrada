@@ -11,7 +11,6 @@ public final class TrayMenuModel: ObservableObject {
     /// Is "layouting" enabled
     @Published var isEnabled: Bool = true
     @Published var workspaces: [WorkspaceViewModel] = []
-    @Published var experimentalUISettings: ExperimentalUISettings = ExperimentalUISettings()
     @Published var lastReloadConfigContainedWarnings: Bool = false
     @Published var axPermissionStatus: AxPermissionStatus = .waitingWithPrompt
 }
@@ -47,6 +46,7 @@ enum AxPermissionStatus: Equatable {
             suffix: suffix,
             isFocused: focus.workspace == $0,
             isEffectivelyEmpty: $0.isEffectivelyEmpty,
+            isPersistent: config.persistentWorkspaces.contains($0.name),
             isVisible: $0.isVisible,
             hasFullscreenWindows: hasFullscreenWindows,
         )
@@ -74,6 +74,7 @@ struct WorkspaceViewModel: Hashable {
     let suffix: String
     let isFocused: Bool
     let isEffectivelyEmpty: Bool
+    let isPersistent: Bool
     let isVisible: Bool
     let hasFullscreenWindows: Bool
 }
