@@ -47,7 +47,7 @@ struct Config: ConvenienceMutable {
     var automaticallyUnhideMacosHiddenApps: Bool = false
     var accordionPadding: Int = 30
     var enableNormalizationOppositeOrientationForNestedContainers: Bool = true
-    var persistentWorkspaces: OrderedSet<String> = []
+    var persistentWorkspaces: OrderedSet<String> = ["1", "2", "3", "4", "5"]
     var execOnWorkspaceChange: [String] = [] // todo deprecate
     var keyMapping = KeyMapping()
     var execConfig: ExecConfig = ExecConfig()

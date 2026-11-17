@@ -14,7 +14,7 @@ final class LayoutCommandTest: XCTestCase {
 
         testParseCommandFail(
             "layout --root accordion tiling",
-            msg: "layout command: --root and tiling|floating are incompatible",
+            msg: "layout command: --root cannot mix tiling|floating with tree layouts",
             exitCode: 2,
         )
         testParseSingleCommandSucc(

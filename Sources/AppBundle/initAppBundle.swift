@@ -3,6 +3,7 @@ import Common
 import Foundation
 
 @MainActor public func initAppBundle() {
+    if #available(macOS 14.4, *) { _ = WorkspaceStatusItem.shared }
     Task.startUnstructured {
         initTerminationHandler()
         unsafe _isCli = false

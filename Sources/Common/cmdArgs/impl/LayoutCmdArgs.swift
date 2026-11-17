@@ -42,7 +42,7 @@ public struct LayoutCmdArgs: CmdArgs {
     public var forNextDetectedWindow: Bool = false
 }
 
-public let layoutCommandRootFlagIncompatibilityMsg = "layout command: --root and tiling|floating are incompatible"
+public let layoutCommandRootFlagIncompatibilityMsg = "layout command: --root cannot mix tiling|floating with tree layouts"
 public let layoutCommandForNextDetectedWindowFlagIncompatibilityMsg =
     "layout command: --for-next-detected-window allows only one tiling|floating <target-layout> argument"
 
@@ -73,14 +73,8 @@ func parseLayoutCmdArgs(_ args: StrArrSlice) -> ParsedCmd<LayoutCmdArgs> {
             return $0
         }
         .filter(layoutCommandRootFlagIncompatibilityMsg) { cmdArgs in
-            !cmdArgs.root || cmdArgs.toggleBetween.val.allSatisfy {
-                switch $0 {
-                    case .floating, .tiling: false
-                    case .accordion, .h_accordion, .h_tiles,
-                         .horizontal, .tiles, .v_accordion, .v_tiles,
-                         .vertical: true
-                }
-            }
+            let policyArgs = cmdArgs.toggleBetween.val.filter { $0 == .tiling || $0 == .floating }
+            return !cmdArgs.root || policyArgs.isEmpty || policyArgs.count == cmdArgs.toggleBetween.val.count
         }
         .filter(layoutCommandForNextDetectedWindowFlagIncompatibilityMsg) { cmdArgs in
             !cmdArgs.forNextDetectedWindow || true == cmdArgs.toggleBetween.val.singleOrNil()?.then {

@@ -1,7 +1,7 @@
 config-version = 2
 enable-dwindle = true
 
-# Keep these workspaces available and visible in the ordered menu-bar indicators.
+# Keep five workspaces available in the compact menu-bar strip, even when empty.
 persistent-workspaces = ['1', '2', '3', '4', '5']
 
 # Place a copy of this config at ~/.sagrada.toml.
@@ -45,11 +45,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
-# Optional workspace-wide floating toggle (install script/workspace-layout.sh).
-# Dwindle is native; do not run the old dwindle.sh callback as well.
-[[on-window-detected]]
-if = 'true'
-run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" detected'
+# Workspace-wide Tiling/Floating is native and available in the Workspaces menu.
+# No workspace-layout.sh or dwindle.sh callback is needed.
 
 # Integrated JankyBorders (macOS 14+), applied on config reload.
 # Width is in whole points. Colors use 0xAARRGGBB, lists are comma-separated app names.
@@ -134,7 +131,7 @@ run = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" d
     cmd-shift-minus = 'layout tiles horizontal vertical'
     cmd-shift-comma = 'layout accordion horizontal vertical'
     cmd-alt-f = 'layout floating tiling' # Toggle floating for the focused window
-    cmd-alt-shift-f = 'exec-and-forget /bin/bash "$HOME/.config/aerospace/workspace-layout.sh" toggle'
+    cmd-alt-shift-f = 'layout --root floating tiling'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-left = 'focus left'

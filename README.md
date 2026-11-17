@@ -20,7 +20,7 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 ## Features
 
 - **Native dwindle:** new tiled windows split the most recently focused tile equally, alternating split directions. Existing outer split sizes and manually edited layouts stay intact; floating windows and accordion containers keep their behavior.
-- **Workspace indicators:** ordered i3-style indicators for occupied, visible, and configured persistent workspaces (macOS 14+).
+- **Workspace indicators:** Circled Numbers with a circle for active Floating, a lightly rounded rectangle for active Tiling, and bold numbers for occupied workspaces (macOS 14+).
 - **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+).
 - **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
 - **Keep awake:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
@@ -44,6 +44,63 @@ Requires **macOS 13+** on **Apple Silicon or Intel**. No Xcode is needed for the
 **Update:** quit Sagrada, replace the app with the new download, and reopen it. Your configuration is not overwritten. This fork does not receive upstream Homebrew updates.
 
 **Uninstall:** disable `start-at-login` in your config, reload, and quit. Move the app to the Trash and remove any remaining login item in System Settings. Keep or remove your configuration and helper state as desired.
+
+## New in 0.5.6
+
+- Compact Circled Numbers: bold occupied workspaces, light empty workspaces, with a 19-point circle (Floating) or rounded rectangle (Tiling) around the active workspace. Stroke width is 1.5 points.
+- Left-click to select a workspace; click the active workspace to toggle Tiling / Floating. Right-click opens the native Sagrada dropdown. Interactive indicators require macOS 14.4+.
+- **Workspaces → workspace → Tiling / Floating** controls each workspace independently, including inactive/empty workspaces. Choices persist; new workspaces default to Tiling.
+- Workspaces 1–5 are persistent defaults and visible when empty. Explicit `persistent-workspaces` lists remain supported.
+- Native CLI toggle: `sagrada layout --root floating tiling`. Replace the legacy helper callback/shortcut as described in the release notes.
+- See [0.5.6 release notes](docs/release-notes/0.5.6.md).
+
+## Local development build 0.5.5
+
+- Compact-strip clicks now go through the native status button, not child views ignored by the macOS menu-bar host.
+- Workspace selection uses screen mouse coordinates converted into the button’s actual image rectangle, accounting for padding/scaling. Left-click misses do nothing.
+- No separate logo: right-click the workspace strip for the dropdown. New workspaces default to Tiling; saved layout choices are retained.
+- See [0.5.5 release notes](docs/release-notes/0.5.5.md).
+
+## Local development build 0.5.4
+
+- Compact workspace buttons share one menu-bar host: 22-point cells with 3-point spacing, without system gaps between individual status items.
+- A separate Sagrada app logo opens the dropdown with a normal click. Workspace right-clicks no longer open menus.
+- No five-workspace default: only occupied, visible or focused workspaces appear. Empty persistent placeholders are hidden, even when explicitly configured.
+- Each workspace remains a real button with its own target/action; no event-coordinate hit testing is reintroduced. Existing startup and multi-click protections remain.
+
+See [0.5.4 release notes](docs/release-notes/0.5.4.md).
+
+## Local development build 0.5.3
+
+- Fix automatic termination after startup when replacing status-item host windows. Sagrada now explicitly stays running after the last window closes.
+- Replace the crashing `NSHostingMenu` integration with a plain AppKit dropdown, retaining all workspace/config/helper actions.
+- See [0.5.3 release notes](docs/release-notes/0.5.3.md) for the debugger-confirmed causes.
+
+## Local development build 0.5.2
+
+- Each workspace now has its own native status button. Target/action identifies the workspace without relying on coordinates forwarded from the system menu-bar host.
+- Rapid/double clicks cannot overlap workspace operations or queue unexpected layout toggles. Click errors are handled without terminating the app.
+- Right-click uses native status-item menu tracking/placement instead of manually positioning a popup. Left-clicking a workspace never falls through to the dropdown.
+
+See [0.5.2 release notes](docs/release-notes/0.5.2.md).
+
+## Local development build 0.5.1
+
+- Left-click a workspace to select it; clicking the focused workspace toggles Tiling / Floating.
+- Right-click any workspace (or Control-click) to open the full Sagrada dropdown. Interactive indicators require macOS 14.4+; older macOS versions retain the menu-only fallback.
+- Workspaces 1–5 are now persistent by default for version-2 configs. An explicit `persistent-workspaces` list still overrides this default.
+- Numbers are centered using their visible glyph bounds rather than the font’s ascender/descender box, with pixel-level tests for both font weights.
+
+See [0.5.1 release notes](docs/release-notes/0.5.1.md).
+
+## Local development build 0.5.0
+
+- **Circled Numbers** workspace indicators follow the [refined design study](http://mini-server.local/designstudien/workspace-status/circled-numbers/): only the focused workspace has an outline; occupancy controls font weight. Nonexistent workspaces leave no gaps.
+- **Workspaces → workspace → Tiling / Floating** switches all its managed windows, including on inactive and empty workspaces. Settings persist by workspace name across restarts; new windows inherit the mode. Native minimized/fullscreen/hidden windows are left alone until restored.
+- `sagrada layout --root floating tiling` toggles the focused workspace, or use `--workspace NAME --root tiling|floating`. Normal Tiling still supports dialog windows and explicit per-window floating.
+- The old helper is now a compatibility wrapper. Remove its `on-window-detected` callback and replace its toggle binding with `layout --root floating tiling`, or install the updated helper. Its old marker files are no longer used.
+
+See [0.5.0 release notes](docs/release-notes/0.5.0.md). Ad-hoc signed builds may require renewed Accessibility approval.
 
 ## New in 0.4.5
 
@@ -75,12 +132,10 @@ From a source checkout:
 if [ -f "$HOME/.sagrada.toml" ]; then
     cp "$HOME/.sagrada.toml" "$HOME/.sagrada.toml.backup-$(date +%Y%m%d-%H%M%S)"
 fi
-mkdir -p "$HOME/.config/aerospace"
-cp script/workspace-layout.sh "$HOME/.config/aerospace/"
 cp docs/config-examples/default-config.toml "$HOME/.sagrada.toml"
 ```
 
-The [workspace-layout helper](script/workspace-layout.sh) needs this fork’s `sagrada` CLI on `PATH` and stores state in `~/.local/state/aerospace/workspace-layout`. Remove its callback and shortcut if you do not use workspace-wide floating. Reload the configuration after changes.
+Workspace-wide floating is native; no helper or detection callback is required. Layout choices are stored in Sagrada’s user preferences, not the config file. Reload the configuration after changing shortcuts.
 
 ### Screenshots
 
@@ -125,7 +180,7 @@ These are the main shortcuts in the [bundled config](docs/config-examples/defaul
 | `⌘ ⇧ -` | Select tiles layout; cycle orientation |
 | `⌘ ⇧ ,` | Select accordion layout; cycle orientation |
 | `⌘ ⌥ F` | Toggle floating for the focused window |
-| `⌘ ⌥ ⇧ F` | Toggle floating for the workspace (requires helper) |
+| `⌘ ⌥ ⇧ F` | Toggle native Tiling / Floating for the workspace |
 | `⌘ ⌃ ←` / `⌘ ⌃ →` | Join with the nearest node on that side |
 | `⌘ ⇧ ;` | Enter service mode |
 

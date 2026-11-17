@@ -57,19 +57,23 @@ struct MenuBarLabel: View {
                         itemView(for: modeItem)
                         modeSeparator(with: .monospaced)
                     }
-                    let orderedWorkspaces = viewModel.workspaces.filter { !$0.isEffectivelyEmpty || $0.isVisible || $0.isPersistent }
+                    let orderedWorkspaces = viewModel.workspaces.filter { !$0.isEffectivelyEmpty || $0.isVisible || $0.isFocused || $0.isPersistent }
                     ForEach(orderedWorkspaces, id: \.name) { item in
-                        let trayItem = TrayItem(
-                            type: .workspace,
-                            name: item.name,
-                            isActive: item.isFocused,
-                            hasFullscreenWindows: item.hasFullscreenWindows,
-                        )
-                        itemView(for: trayItem)
-                            .opacity(item.isVisible ? 1 : 0.5)
+                        workspaceIndicator(for: item)
                     }
             }
         }
+    }
+
+    private func workspaceIndicator(for item: WorkspaceViewModel) -> some View {
+        let image = WorkspaceIndicatorStrip(workspaces: [item]).image
+        // The legacy label's outer ImageRenderer is displayed at scale 2.
+        return Image(nsImage: image)
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: image.size.width * 2, height: image.size.height * 2)
+            .foregroundStyle(finalColor)
+            .accessibilityLabel("Workspace \(item.name), \(item.windowMode.title), \(item.hasWindows ? "occupied" : "empty")")
     }
 
     private func getText(for design: Font.Design) -> some View {
