@@ -16,6 +16,21 @@ struct LayoutCommand: Command {
         }
         guard let target = args.resolveTargetOrReportError(env, io) else { return .fail }
 
+        // Workspace-wide policy: works even when the workspace is empty.
+        if args.root && args.toggleBetween.val.allSatisfy({ $0 == .tiling || $0 == .floating }) {
+            let workspace = target.workspace
+            let requested = args.toggleBetween.val.first { $0.rawValue != workspace.windowMode.rawValue }
+                ?? args.toggleBetween.val.first.orDie()
+            let mode: WorkspaceWindowMode = requested == .floating ? .floating : .tiling
+            if mode == workspace.windowMode && args.failIfNoop { return .fail }
+            do {
+                try await workspace.setWindowMode(mode)
+                return .succ
+            } catch {
+                return .fail(io.err("Could not change workspace layout: \(error)"))
+            }
+        }
+
         let node: ConventionalWindowParentCases
         switch args.root ? nil : target.windowOrNil {
             case let window?:

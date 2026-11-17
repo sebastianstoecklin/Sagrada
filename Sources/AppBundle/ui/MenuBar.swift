@@ -3,8 +3,10 @@ import Foundation
 import SwiftUI
 
 @MainActor
-public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it be converted to "SwiftUI struct"?
-    MenuBarExtra {
+struct TrayMenuContent: View {
+    @ObservedObject var viewModel: TrayMenuModel
+
+    var body: some View {
         Text("Sagrada \(aeroSpaceAppVersion)")
         Divider()
 
@@ -30,6 +32,34 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                     }
                 }
             }.keyboardShortcut("E", modifiers: .command)
+            Menu("Workspaces") {
+                ForEach(viewModel.workspaces, id: \.name) { workspace in
+                    Menu("\(workspace.name)\(workspace.isFocused ? " ✓" : "") — \(workspace.windowMode.title)\(workspace.suffix)") {
+                        Button("Switch to Workspace") {
+                            guard let token: RunSessionGuard = .isServerEnabled else { return }
+                            Task.startUnstructured {
+                                try await runLightSession(.menuBarButton, token) {
+                                    _ = Workspace.get(byName: workspace.name).focusWorkspace()
+                                }
+                            }
+                        }
+                        Divider()
+                        ForEach(WorkspaceWindowMode.allCases, id: \.self) { mode in
+                            Toggle(mode.title, isOn: Binding(
+                                get: { workspace.windowMode == mode },
+                                set: { selected in
+                                    guard selected, let token: RunSessionGuard = .isServerEnabled else { return }
+                                    Task.startUnstructured {
+                                        try await runLightSession(.menuBarButton, token) {
+                                            try await Workspace.get(byName: workspace.name).setWindowMode(mode)
+                                        }
+                                    }
+                                },
+                            ))
+                        }
+                    }
+                }
+            }.disabled(!viewModel.isEnabled)
             Menu("Config") {
                 openConfigButton()
                 reloadConfigButton(warningsAsErrors: false)
@@ -49,6 +79,13 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                 terminateApp()
             }
         }.keyboardShortcut("Q", modifiers: .command)
+    }
+}
+
+@MainActor
+public func menuBar(viewModel: TrayMenuModel) -> some Scene {
+    MenuBarExtra(isInserted: .constant(!interactiveWorkspaceIndicatorsAvailable)) {
+        TrayMenuContent(viewModel: viewModel)
     } label: {
         switch (viewModel.axPermissionStatus, viewModel.isEnabled) {
             case (.granted, true):

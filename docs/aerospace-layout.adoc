@@ -35,7 +35,7 @@ include::./util/workspace-flag-desc.adoc[]
 
 --root::
 Instead of the focused window, change the layout of the workspace tiling root node.
-When you use this flag, `tiling` and `floating` become invalid values for `<target-layout>`.
+With only `tiling` and/or `floating` targets, change the entire workspace's persistent window mode instead, even on an empty workspace. These policy targets cannot be mixed with tree layouts. Floating applies to newly detected and restored windows as well; Tiling continues to allow dialogs and explicit per-window floating.
 
 --fail-if-noop::
 Exit with non-zero exit code if already in the requested layout.

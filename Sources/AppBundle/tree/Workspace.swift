@@ -32,6 +32,7 @@ private func getStubWorkspace(forPoint point: CGPoint) -> Workspace {
 
 final class Workspace: TreeNode, NonLeafTreeNodeObject, Hashable, Comparable {
     let name: String
+    @MainActor var windowMode: WorkspaceWindowMode
     nonisolated private let nameLogicalSegments: StringLogicalSegments
     /// `assignedMonitorPoint` must be interpreted only when the workspace is invisible
     fileprivate var assignedMonitorPoint: CGPoint? = nil
@@ -39,6 +40,8 @@ final class Workspace: TreeNode, NonLeafTreeNodeObject, Hashable, Comparable {
     @MainActor
     private init(_ name: String) {
         self.name = name
+        let savedModes = isUnitTest ? [:] : UserDefaults.standard.dictionary(forKey: "workspaceWindowModes") as? [String: String] ?? [:]
+        self.windowMode = WorkspaceWindowMode(rawValue: savedModes[name] ?? "") ?? .tiling
         self.nameLogicalSegments = name.toLogicalSegments()
         super.init(parent: NilTreeNode.instance, adaptiveWeight: 0, index: 0)
     }

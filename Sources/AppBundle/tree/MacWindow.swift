@@ -224,6 +224,9 @@ private func unbindAndGetBindingDataForNewWindow(_ windowId: UInt32, _ macApp: M
 @MainActor
 func unbindAndGetBindingDataForNewTilingWindow(_ workspace: Workspace, window: Window?) -> BindingData {
     window?.unbindFromParent() // It's important to unbind to get correct data from below
+    if workspace.windowMode == .floating {
+        return BindingData(parent: workspace.floatingWindowsContainer, adaptiveWeight: WEIGHT_AUTO, index: INDEX_BIND_LAST)
+    }
     let mruWindow = config.enableDwindle
         ? workspace.rootTilingContainer.mostRecentWindowRecursive
         : workspace.mostRecentWindowRecursive

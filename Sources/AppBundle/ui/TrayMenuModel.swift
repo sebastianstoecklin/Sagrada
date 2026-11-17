@@ -49,6 +49,8 @@ enum AxPermissionStatus: Equatable {
             isPersistent: config.persistentWorkspaces.contains($0.name),
             isVisible: $0.isVisible,
             hasFullscreenWindows: hasFullscreenWindows,
+            windowMode: $0.windowMode,
+            hasWindows: !$0.allLeafWindowsRecursive.isEmpty,
         )
     }
     var items = sortedMonitors.map {
@@ -77,6 +79,8 @@ struct WorkspaceViewModel: Hashable {
     let isPersistent: Bool
     let isVisible: Bool
     let hasFullscreenWindows: Bool
+    let windowMode: WorkspaceWindowMode
+    let hasWindows: Bool
 }
 
 enum TrayItemType: String, Hashable {
