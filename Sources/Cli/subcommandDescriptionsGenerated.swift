@@ -15,6 +15,7 @@ let subcommandDescriptions = [
     ["  focus-back-and-forth", "Switch between the current and previously focused elements back and forth"],
     ["  focus-monitor", "Focus monitor by relative direction, by order, or by pattern"],
     ["  focus", "Set focus to a window."],
+    ["  float-window", "Snap, center or resize a window in a Floating workspace"],
     ["  fullscreen", "Toggle the fullscreen mode for the focused window"],
     ["  join-with", "Put the focused window and the nearest node in the specified direction under a common parent container"],
     ["  layout", "Change layout of the focused node to the given layout"],

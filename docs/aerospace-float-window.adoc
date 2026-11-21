@@ -1,0 +1,27 @@
+= aerospace-float-window(1)
+include::util/man-attributes.adoc[]
+:manname: aerospace-float-window
+// tag::purpose[]
+:manpurpose: Snap, center or resize a window in a Floating workspace
+// end::purpose[]
+
+== Synopsis
+[verse]
+// tag::synopsis[]
+aerospace float-window [-h|--help] <action>
+
+// end::synopsis[]
+
+== Description
+// tag::body[]
+{manpurpose}. Requires a focused, managed floating window in a workspace whose root mode is Floating. Tiling workspaces and native fullscreen/minimized windows are not changed.
+
+Actions: `top-left`, `top-right`, `bottom-left`, `bottom-right` (quadrants); `left`, `right`, `top`, `bottom` (halves); `third-left`, `third-center`, `third-right`; `maximize`, `center`, `grow`, `shrink`.
+
+Frames use the workspace monitor's usable area with configured outer gaps. Grow/shrink change both dimensions by 40 points, centered and clamped to the usable area, with a 100-point minimum. Application minimum sizes can override requested sizes. Maximize is not macOS fullscreen.
+
+== Options
+-h, --help:: Print help
+// end::body[]
+
+include::util/man-footer.adoc[]

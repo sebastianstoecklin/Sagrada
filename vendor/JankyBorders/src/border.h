@@ -29,6 +29,8 @@ struct color_style {
 };
 
 struct settings {
+  // Sagrada-managed workspace exclusions, comma-delimited window IDs.
+  char excluded_windows[32768];
   bool enabled;
   uint32_t apply_to;
 

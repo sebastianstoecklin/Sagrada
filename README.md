@@ -21,7 +21,8 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 
 - **Native dwindle:** new tiled windows split the most recently focused tile equally, alternating split directions. Existing outer split sizes and manually edited layouts stay intact; floating windows and accordion containers keep their behavior.
 - **Workspace indicators:** Circled Numbers with a circle for active Floating, a lightly rounded rectangle for active Tiling, and bold numbers for occupied workspaces (macOS 14+).
-- **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+).
+- **Floating window snapping:** arrange windows manually in quadrants, thirds, halves or maximized with Cmd–Control shortcuts. Center, grow and shrink without enabling automatic tiling.
+- **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+). Borders are automatically hidden for Floating workspaces, independently on each display.
 - **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
 - **Keep awake:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
 - **Reverse scrolling:** optional mouse-wheel reversal with independent axis controls and continuous gesture passthrough.
@@ -44,6 +45,15 @@ Requires **macOS 13+** on **Apple Silicon or Intel**. No Xcode is needed for the
 **Update:** quit Sagrada, replace the app with the new download, and reopen it. Your configuration is not overwritten. This fork does not receive upstream Homebrew updates.
 
 **Uninstall:** disable `start-at-login` in your config, reload, and quit. Move the app to the Trash and remove any remaining login item in System Settings. Keep or remove your configuration and helper state as desired.
+
+## New in 0.6
+
+- **Manual window arrangement in Floating workspaces:** `⌘⌃U/I/J/K` for top-left/top-right/bottom-left/bottom-right quadrants; `⌘⌃F/G/H` for left/center/right thirds; `⌘⌃` + arrows for halves; `⌘⌃Enter` to maximize within the usable display area.
+- `⌘⌃C` centers; `⌘⌃+` grows and `⌘⌃-` shrinks by 40 points per dimension, centered and constrained to the display. App minimum sizes still apply.
+- **`⌘⌃Space` toggles workspace Tiling / Floating**, while `⌘⌥F` still toggles a single window. Snapping actions only apply in Floating workspaces.
+- Floating workspaces have **no JankyBorders**, even alongside a tiled workspace on another display. Returning to Tiling restores borders.
+- Existing users: update your shortcuts from the bundled config; configuration files are not overwritten on app update. Join now uses `⌘⌥` + arrows in all four directions; `⌘⌃` + arrows arrange Floating halves. Service-mode joins remain available.
+- See [0.6 release notes](docs/release-notes/0.6.0.md).
 
 ## New in 0.5.6
 
@@ -180,8 +190,14 @@ These are the main shortcuts in the [bundled config](docs/config-examples/defaul
 | `⌘ ⇧ -` | Select tiles layout; cycle orientation |
 | `⌘ ⇧ ,` | Select accordion layout; cycle orientation |
 | `⌘ ⌥ F` | Toggle floating for the focused window |
-| `⌘ ⌥ ⇧ F` | Toggle native Tiling / Floating for the workspace |
-| `⌘ ⌃ ←` / `⌘ ⌃ →` | Join with the nearest node on that side |
+| `⌘ ⌃ Space` | Toggle native Tiling / Floating for the workspace |
+| `⌘ ⌃ U/I/J/K` | Floating: top-left / top-right / bottom-left / bottom-right quadrant |
+| `⌘ ⌃ F/G/H` | Floating: left / center / right third |
+| `⌘ ⌃` + arrow | Floating: corresponding half |
+| `⌘ ⌃ Enter` | Floating: maximize (not macOS fullscreen) |
+| `⌘ ⌃ C` | Floating: center |
+| `⌘ ⌃ +` / `⌘ ⌃ -` | Floating: grow / shrink |
+| `⌘ ⌥` + arrow | Join with the nearest node in that direction |
 | `⌘ ⇧ ;` | Enter service mode |
 
 In service mode, `Esc` reloads config, `R` flattens the tree, `F` toggles floating, and `Backspace` closes all other windows. These return to main mode. See the config for launchers, join commands, and volume controls. `⌘ Backspace` is deliberately unbound to preserve Finder’s Move to Trash shortcut.

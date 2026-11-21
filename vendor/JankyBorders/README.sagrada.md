@@ -12,6 +12,10 @@ Modified by Sebastian Stoecklin for Sagrada on 2026-10-31:
 - Private Mach service `com.sebastianstoecklin.sagrada.borders`, independent of a Homebrew instance.
 - Parent-process watcher exits when Sagrada terminates unexpectedly.
 
+Additional Sagrada 0.6 modification (2026-11-21):
+
+- `excluded_windows=,ID,ID,` IPC/startup setting suppresses borders for native Floating workspaces, including newly created windows. Updating the list recreates borders; tiled windows on other displays remain eligible.
+
 Built as a universal arm64/x86_64 helper by script/build-borders.sh.
 Sagrada passes explicit settings, so no external bordersrc is executed.
 Do not enable another border service at the same time (it would draw duplicate borders).

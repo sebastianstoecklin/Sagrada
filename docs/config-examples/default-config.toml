@@ -131,7 +131,7 @@ automatically-unhide-macos-hidden-apps = false
     cmd-shift-minus = 'layout tiles horizontal vertical'
     cmd-shift-comma = 'layout accordion horizontal vertical'
     cmd-alt-f = 'layout floating tiling' # Toggle floating for the focused window
-    cmd-alt-shift-f = 'layout --root floating tiling'
+    cmd-ctrl-space = 'layout --root floating tiling' # Toggle the whole workspace
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-left = 'focus left'
@@ -140,12 +140,35 @@ automatically-unhide-macos-hidden-apps = false
     cmd-right = 'focus right'
 
     # Join to summarize and display vertically:
-    cmd-ctrl-left ='join-with left'
-    cmd-ctrl-right ='join-with right'
+    # Manual window arrangement in Floating workspaces (no effect in Tiling).
+    cmd-ctrl-u = 'float-window top-left'
+    cmd-ctrl-i = 'float-window top-right'
+    cmd-ctrl-j = 'float-window bottom-left'
+    cmd-ctrl-k = 'float-window bottom-right'
+    cmd-ctrl-f = 'float-window third-left'
+    cmd-ctrl-g = 'float-window third-center'
+    cmd-ctrl-h = 'float-window third-right'
+    cmd-ctrl-left = 'float-window left'
+    cmd-ctrl-right = 'float-window right'
+    cmd-ctrl-up = 'float-window top'
+    cmd-ctrl-down = 'float-window bottom'
+    cmd-ctrl-enter = 'float-window maximize'
+    cmd-ctrl-c = 'float-window center'
+    cmd-ctrl-equal = 'float-window grow'
+    cmd-ctrl-shift-equal = 'float-window grow'
+    cmd-ctrl-minus = 'float-window shrink'
+    # Physical +/- keys on German QWERTZ keyboards with the qwerty preset.
+    cmd-ctrl-rightSquareBracket = 'float-window grow'
+    cmd-ctrl-slash = 'float-window shrink'
 
     # Omarchy's SUPER SHIFT + arrows uses swapwindow; Cmd replaces SUPER here.
     # Swap tiles without pulling windows out of Dwindle splits or adding columns.
     # The tree-editing `move` command remains available through the CLI.
+    cmd-alt-left = 'join-with left'
+    cmd-alt-down = 'join-with down'
+    cmd-alt-up = 'join-with up'
+    cmd-alt-right = 'join-with right'
+
     cmd-shift-left = 'swap left'
     cmd-shift-down = 'swap down'
     cmd-shift-up = 'swap up'

@@ -29,6 +29,9 @@ static bool app_allowed(struct settings* settings, char* app_name) {
 }
 
 bool windows_window_create(struct table* windows, uint32_t wid, uint64_t sid) {
+  char excluded_id[32];
+  snprintf(excluded_id, sizeof(excluded_id), ",%u,", wid);
+  if (strstr(g_settings.excluded_windows, excluded_id)) return false;
   bool window_created = false;
   int cid = SLSMainConnectionID();
   int wid_cid = 0;

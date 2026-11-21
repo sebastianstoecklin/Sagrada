@@ -26,6 +26,22 @@ final class DesktopHelpers: ObservableObject {
     private var caffeinate: Process?
     private var borders: Process?
     private var appliedBorders: BordersConfig?
+    private var excludedBorderWindows = ""
+
+    func syncBorderWorkspaces() {
+        guard !isUnitTest, borders?.isRunning == true,
+              let executable = Bundle.main.url(forResource: "sagrada-borders", withExtension: nil) else { return }
+        let ids = Workspace.all.filter { $0.windowMode == .floating }
+            .flatMap { $0.allLeafWindowsRecursive.map(\.windowId) }.sorted()
+        let excluded = "," + ids.map(String.init).joined(separator: ",") + ","
+        guard excluded != excludedBorderWindows else { return }
+        do {
+            _ = try launch(executable, ["excluded_windows=\(excluded)"])
+            excludedBorderWindows = excluded
+        } catch {
+            errorMessage = "JankyBorders: \(error.localizedDescription)"
+        }
+    }
 
     func setCaffeinate(_ mode: CaffeinateMode) {
         stop(caffeinate)
@@ -57,7 +73,12 @@ final class DesktopHelpers: ObservableObject {
             return
         }
         do {
-            borders = try launch(executable, settings.arguments)
+            excludedBorderWindows = ""
+            let ids = Workspace.all.filter { $0.windowMode == .floating }
+                .flatMap { $0.allLeafWindowsRecursive.map(\.windowId) }.sorted()
+            let excluded = "," + ids.map(String.init).joined(separator: ",") + ","
+            borders = try launch(executable, settings.arguments + ["excluded_windows=\(excluded)"])
+            excludedBorderWindows = excluded
             appliedBorders = settings
             errorMessage = nil
         } catch {

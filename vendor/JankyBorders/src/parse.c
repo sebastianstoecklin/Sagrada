@@ -99,6 +99,10 @@ uint32_t parse_settings(struct settings* settings, int count, char** arguments) 
                                                + strlen(whitelist));
       update_mask |= BORDER_UPDATE_MASK_RECREATE_ALL;
     }
+    else if (str_starts_with(arguments[i], "excluded_windows=")) {
+      snprintf(settings->excluded_windows, sizeof(settings->excluded_windows), "%s", arguments[i] + strlen("excluded_windows="));
+      update_mask |= BORDER_UPDATE_MASK_RECREATE_ALL;
+    }
     else if (sscanf(arguments[i], "width=%f", &settings->border_width) == 1) {
       update_mask |= BORDER_UPDATE_MASK_ALL;
     }
