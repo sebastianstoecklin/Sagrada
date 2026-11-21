@@ -26,8 +26,8 @@ func initTerminationHandler() {
 private struct AppServerTerminationHandler: TerminationHandler {
     @MainActor
     func beforeTermination() {
-        Screenshots.shared.shutdown()
         DesktopHelpers.shared.shutdown()
+        Screenshots.shared.shutdown()
         ScrollReverser.shared.shutdown()
         // Make all windows fullscreen before Quit
         for window in MacWindow.allWindowsMap.values {

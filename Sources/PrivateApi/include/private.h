@@ -25,7 +25,4 @@
 // func _AXUIElementGetWindow(_ axUiElement: AXUIElement, _ id: inout CGWindowID) -> AXError
 AXError _AXUIElementGetWindow(AXUIElementRef element, uint32_t *identifier);
 
-bool sagradaSuspendScreenshotHotkeys(void);
-void sagradaRestoreScreenshotHotkeys(void);
-
 #endif

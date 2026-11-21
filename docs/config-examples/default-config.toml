@@ -62,10 +62,10 @@ automatically-unhide-macos-hidden-apps = false
     blacklist = ''
     whitelist = ''
 
-# Opt-in reversal for classic mouse wheels. Trackpad/Magic Mouse gestures pass through.
+# Reversal for classic mouse wheels. Trackpad/Magic Mouse gestures pass through.
 # Menu changes last until config reload/restart; edit this table to persist them.
 [scroll-reverser]
-    enabled = false
+    enabled = true
     reverse-vertical = true
     reverse-horizontal = false
 

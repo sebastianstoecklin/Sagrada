@@ -1,7 +1,7 @@
 import Common
 
 struct ScrollReverserConfig: ConvenienceMutable, Equatable {
-    var enabled = false
+    var enabled = true
     var reverseVertical = true
     var reverseHorizontal = false
 }

@@ -23,9 +23,9 @@ Built on [AeroSpace](https://github.com/nikitabobko/AeroSpace).
 - **Workspace indicators:** Circled Numbers with a circle for active Floating, a lightly rounded rectangle for active Tiling, and bold numbers for occupied workspaces (macOS 14+).
 - **Floating window snapping:** arrange windows manually in quadrants, thirds, halves or maximized with Cmd–Control shortcuts. Center, grow and shrink without enabling automatic tiling.
 - **Integrated borders:** bundled JankyBorders, configured in TOML and managed with the app (macOS 14+). Borders are automatically hidden for Floating workspaces, independently on each display.
-- **Screenshots:** Option–Shift–3/4/5 and a Screenshots menu keep macOS capture tools available without triggering the bundled Command-based workspace shortcuts.
+- **Screenshots:** the menu triggers macOS’s own screenshot shortcuts. Sagrada does not capture the screen and needs no Screen Recording permission.
 - **Keep awake:** menu controls to prevent idle sleep or keep the display awake. Off by default; quitting releases the sleep assertions.
-- **Reverse scrolling:** optional mouse-wheel reversal with independent axis controls and continuous gesture passthrough.
+- **Reverse scrolling:** vertical mouse-wheel reversal is on by default, with independent axis controls and continuous gesture passthrough.
 - **AeroSpace controls:** virtual workspaces, multiple displays, a scriptable CLI, and plain-text configuration without disabling SIP.
 
 This is a personal fork, not an official AeroSpace release.
@@ -149,11 +149,9 @@ Workspace-wide floating is native; no helper or detection callback is required. 
 
 ### Screenshots
 
-While Sagrada runs, screenshot shortcuts move to **Option–Shift–3** (entire screen), **Option–Shift–4** (selection/window), and **Option–Shift–5** (screenshot and recording controls). The **Screenshots** menu offers the same actions without memorizing shortcuts. Captures use macOS's configured destination.
+Use your usual macOS screenshot shortcuts (by default **⌘⇧3/4/5**) or the **Screenshots** menu. The menu invokes the enabled shortcuts configured in **System Settings → Keyboard → Keyboard Shortcuts → Screenshots** using Sagrada's existing Accessibility permission. macOS handles capture and the configured destination; Sagrada neither changes system shortcuts nor needs Screen Recording permission.
 
-This frees Command–Shift–3/4/5 for moving windows without also taking screenshots. Sagrada temporarily disables the corresponding macOS screenshot hotkeys (including the clipboard variants) and restores their previous enabled states on normal quit; it does not edit your saved keyboard preferences. Touch Bar capture is unchanged. Option–Shift–3/4/5 will not type their usual special characters while Sagrada is running.
-
-The temporary override uses a dynamically loaded private macOS API. If unavailable, the menu reports the failure and the original macOS shortcuts remain active. Force-quitting or a crash can skip cleanup; logging out and back in restores the saved system configuration.
+The existing **⌥⇧3/4/5** aliases also forward to macOS. Workspace bindings remain unchanged: the bundled **⌘⇧3/4/5** bindings may conflict with the standard macOS screenshot shortcuts. If they do, choose non-conflicting screenshot shortcuts in macOS or adjust your own Sagrada config.
 
 ### Borders
 
@@ -161,7 +159,7 @@ Configure `[borders]` in TOML; set `enabled = true` to enable. Options include `
 
 ### Reverse scrolling
 
-Disabled by default. Choose **Reverse scrolling → Enabled** in the menu to reverse classic mouse-wheel scrolling without changing macOS’s Natural Scrolling preference. Menu changes last until a config reload or app restart. To persist them:
+Vertical reversal for classic mouse wheels is enabled by default; horizontal reversal is off. Sagrada does not change macOS’s Natural Scrolling preference. Menu changes last until a config reload or app restart. To turn reversal off persistently, set `enabled = false` in `[scroll-reverser]`. The defaults are:
 
 ```toml
 [scroll-reverser]

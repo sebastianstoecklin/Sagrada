@@ -20,13 +20,13 @@ final class ScrollReverserTest: XCTestCase {
         return event
     }
 
-    func testDefaultsAreOptIn() {
+    func testEnabledByDefault() {
         for toml in ["config-version = 2", "config-version = 2\n[scroll-reverser]"] {
             let result = parseConfig(toml)
             XCTAssertTrue(result.errors.isEmpty)
             XCTAssertTrue(result.warnings.isEmpty)
             XCTAssertEqual(result.config.scrollReverser, ScrollReverserConfig())
-            XCTAssertFalse(result.config.scrollReverser.enabled)
+            XCTAssertTrue(result.config.scrollReverser.enabled)
             XCTAssertTrue(result.config.scrollReverser.reverseVertical)
             XCTAssertFalse(result.config.scrollReverser.reverseHorizontal)
         }
@@ -43,6 +43,12 @@ final class ScrollReverserTest: XCTestCase {
         XCTAssertTrue(result.errors.isEmpty)
         XCTAssertTrue(result.warnings.isEmpty)
         XCTAssertEqual(result.config.scrollReverser, ScrollReverserConfig(enabled: true, reverseVertical: false, reverseHorizontal: true))
+    }
+
+    func testExplicitOptOut() {
+        let result = parseConfig("config-version = 2\n[scroll-reverser]\nenabled = false")
+        XCTAssertTrue(result.errors.isEmpty)
+        XCTAssertFalse(result.config.scrollReverser.enabled)
     }
 
     func testInvalidConfiguration() {
@@ -87,7 +93,7 @@ final class ScrollReverserTest: XCTestCase {
     }
 
     func testDisabledAndNoAxesAreUnchanged() {
-        for settings in [ScrollReverserConfig(), ScrollReverserConfig(enabled: true, reverseVertical: false)] {
+        for settings in [ScrollReverserConfig(enabled: false), ScrollReverserConfig(enabled: true, reverseVertical: false)] {
             let event = event()
             reverseDiscreteScroll(event, settings: settings)
             for field in vertical { XCTAssertEqual(event.getIntegerValueField(field), 3) }
@@ -131,7 +137,7 @@ final class ScrollReverserTest: XCTestCase {
         XCTAssertFalse(reverser.isActive)
         XCTAssertNil(reverser.errorMessage)
         reverser.shutdown()
-        reverser.apply(ScrollReverserConfig())
+        reverser.apply(ScrollReverserConfig(enabled: false))
         XCTAssertFalse(reverser.isActive)
         XCTAssertFalse(reverser.settings.enabled)
     }

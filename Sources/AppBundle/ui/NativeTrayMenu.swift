@@ -57,16 +57,12 @@ final class NativeTrayMenu: NSMenu {
         }
         let screenshots = submenu("Screenshots")
         for capture in Screenshots.Capture.allCases {
-            add("\(capture.rawValue)    \(capture.shortcut)", to: screenshots) {
-                Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(250))
-                    Screenshots.shared.capture(capture)
-                }
+            add(capture.rawValue, to: screenshots) {
+                Screenshots.shared.captureAfterMenuCloses(capture)
             }
         }
         if let error = Screenshots.shared.errorMessage {
             screenshots.addItem(withTitle: error, action: nil, keyEquivalent: "").isEnabled = false
-            add("Retry", to: screenshots) { Screenshots.shared.start() }
         }
         let awake = submenu("Keep awake")
         for mode in DesktopHelpers.CaffeinateMode.allCases {
